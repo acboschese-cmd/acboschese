@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Store — Audace Club Boschese 1928</title>
+<meta name="description" content="Le maglie ufficiali dell'Audace Club Boschese 1928: maglia home e maglia portiere. #sempreaudaci" />
+<meta name="theme-color" content="#1E4430" />
+<link rel="icon" href="assets/brand/monogram-green.svg" type="image/svg+xml" />
+
+<meta property="og:title" content="Store — Audace Club Boschese 1928" />
+<meta property="og:description" content="Le maglie ufficiali del club, verso il centenario del 2028." />
+<meta property="og:image" content="assets/photos/prod-maglia-home.webp" />
+<meta property="og:type" content="website" />
+
+<link rel="preload" href="assets/fonts/Cormorant-VF.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="assets/site.css" />
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__ring" id="ring"></div>
+  <div class="cursor__dot" id="dot"></div>
+</div>
+
+<div class="loader" id="loader">
+  <img class="loader__mark" id="loaderMark" src="assets/brand/monogram-gold.svg" alt="ACB" />
+  <div class="loader__count" id="count">0</div>
+  <div class="loader__bar" id="bar"></div>
+</div>
+
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="index.html">
+    <img src="assets/brand/monogram-white.svg" alt="Audace Club Boschese" />
+  </a>
+  <div class="nav__links">
+    <a href="club.html">Il Club</a>
+    <a href="store.html" class="active">Store</a>
+    <a href="contatti.html">Contatti</a>
+    <a class="nav__cta" href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati ↗</a>
+  </div>
+  <div class="nav__burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="menu" id="menu">
+  <a href="club.html">Il Club</a>
+  <a href="store.html">Store</a>
+  <a href="contatti.html">Contatti</a>
+  <a href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati</a>
+  <div class="menu__meta">
+    <a class="label" href="https://www.instagram.com/audaceclubboschese1928/" target="_blank" rel="noopener">Instagram</a>
+    <a class="label" href="https://www.tiktok.com/@acb1928" target="_blank" rel="noopener">TikTok</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- PAGE HERO -->
+  <header class="phero">
+    <div class="eyebrow label">Store — Drop 2026</div>
+    <h1 class="display phero__title">Vesti il<br /><em>verde</em></h1>
+    <p class="phero__sub">Le maglie ufficiali del club, verso il centenario del 2028. Scegli la taglia e paghi in modo sicuro con Stripe; ritiro al campo o spedizione.</p>
+  </header>
+
+  <!-- PRODOTTI -->
+  <section class="sec" style="padding-top: clamp(20px, 4vh, 60px);">
+    <div class="store-grid">
+
+      <article class="product" data-product="maglia-home">
+        <div class="product__media ph-reveal">
+          <img src="assets/photos/prod-maglia-home.webp" alt="Maglia home Audace Club Boschese: trama verde con scudetto" />
+        </div>
+        <h2 class="product__name">Maglia <em>Home</em></h2>
+        <p class="product__desc">La prima maglia: verde Bosco, trama jacquard e scudetto con il gelso sul petto.</p>
+        <p class="product__price" data-price>Prezzo al lancio</p>
+        <div class="sizes" role="radiogroup" aria-label="Taglia maglia home">
+          <button class="size" type="button" data-size="S">S</button>
+          <button class="size active" type="button" data-size="M">M</button>
+          <button class="size" type="button" data-size="L">L</button>
+          <button class="size" type="button" data-size="XL">XL</button>
+          <button class="size" type="button" data-size="XXL">XXL</button>
+        </div>
+        <a class="btn" href="#" data-buy>Acquista →</a>
+      </article>
+
+      <article class="product" data-product="maglia-portiere">
+        <div class="product__media ph-reveal">
+          <img src="assets/photos/prod-maglia-portiere.webp" alt="Maglia portiere Audace Club Boschese a maniche lunghe" />
+        </div>
+        <h2 class="product__name">Maglia <em>Portiere</em></h2>
+        <p class="product__desc">Maniche lunghe e monogramma tono su tono: la maglia di chi difende la porta di Bosco.</p>
+        <p class="product__price" data-price>Prezzo al lancio</p>
+        <div class="sizes" role="radiogroup" aria-label="Taglia maglia portiere">
+          <button class="size" type="button" data-size="S">S</button>
+          <button class="size active" type="button" data-size="M">M</button>
+          <button class="size" type="button" data-size="L">L</button>
+          <button class="size" type="button" data-size="XL">XL</button>
+          <button class="size" type="button" data-size="XXL">XXL</button>
+        </div>
+        <a class="btn" href="#" data-buy>Acquista →</a>
+      </article>
+
+    </div>
+
+    <p class="store-note">I pagamenti sono gestiti da Stripe: carta, Apple Pay e Google Pay. Per taglie diverse, richieste speciali o ritiro al campo scrivici a <a href="mailto:info@acboschese.it" style="color:var(--gold);">info@acboschese.it</a>.</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2 class="display cta__big">Portala in<br /><em>tribuna</em></h2>
+    <p class="cta__sub label">Ogni maglia sostiene il club verso il centenario</p>
+    <a class="cta__mail" href="diventa-partner.html">Oppure diventa partner →</a>
+  </section>
+
+  <footer>
+    <div class="foot__col foot__brand">
+      <img src="assets/brand/oval-gold.svg" alt="Audace Club Boschese 1928" />
+      <div>
+        <p style="font-family:'Cormorant',serif;font-size:16px;">Audace Club Boschese</p>
+        <p class="label" style="color:var(--gold);">#sempreaudaci</p>
+      </div>
+    </div>
+    <div class="foot__col">
+      <h4>Vieni allo stadio</h4>
+      <p>Via delle Ghiare, 1</p>
+      <p>15062 Bosco Marengo (AL)</p>
+    </div>
+    <div class="foot__col">
+      <h4>Segui</h4>
+      <a href="https://www.instagram.com/audaceclubboschese1928/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="https://www.tiktok.com/@acb1928" target="_blank" rel="noopener">TikTok ↗</a>
+      <a href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati ↗</a>
+    </div>
+    <div class="foot__legal">
+      <span>© 1928–2026 SSD Audace Club Boschese ARL</span>
+      <span>Bosco Marengo · Alessandria · Piemonte</span>
+    </div>
+  </footer>
+
+</main>
+
+<script src="assets/site.js"></script>
+<script>
+/* ============================================================
+   STORE — Stripe Payment Links
+   Come attivare l'acquisto:
+   1. Su dashboard.stripe.com crea i 2 prodotti (Maglia Home, Maglia Portiere).
+   2. Per ogni prodotto crea un Payment Link PER TAGLIA
+      (oppure uno solo e mettilo in "_default": vale per tutte le taglie).
+   3. Incolla gli URL qui sotto. Aggiungi anche i prezzi in PRICES.
+   Finché un link è vuoto, il bottone mostra "Presto disponibile".
+   ============================================================ */
+const STRIPE_LINKS = {
+  'maglia-home':     { S: '', M: '', L: '', XL: '', XXL: '', _default: '' },
+  'maglia-portiere': { S: '', M: '', L: '', XL: '', XXL: '', _default: '' }
+};
+const PRICES = {
+  'maglia-home': '',      /* es. '45 €' */
+  'maglia-portiere': ''
+};
+
+document.querySelectorAll('.product').forEach((card) => {
+  const id = card.dataset.product;
+  const links = STRIPE_LINKS[id] || {};
+  const buy = card.querySelector('[data-buy]');
+  const priceEl = card.querySelector('[data-price]');
+  if (PRICES[id]) priceEl.textContent = PRICES[id];
+
+  function currentSize() {
+    const a = card.querySelector('.size.active');
+    return a ? a.dataset.size : 'M';
+  }
+  function refresh() {
+    const url = links[currentSize()] || links._default || '';
+    if (url) {
+      buy.href = url;
+      buy.textContent = 'Acquista — taglia ' + currentSize() + ' →';
+      buy.removeAttribute('aria-disabled');
+    } else {
+      buy.href = '#';
+      buy.textContent = 'Presto disponibile';
+      buy.setAttribute('aria-disabled', 'true');
+    }
+  }
+  card.querySelectorAll('.size').forEach((b) => {
+    b.addEventListener('click', () => {
+      card.querySelectorAll('.size').forEach((x) => x.classList.remove('active'));
+      b.classList.add('active');
+      refresh();
+    });
+  });
+  buy.addEventListener('click', (e) => {
+    if (buy.getAttribute('aria-disabled') === 'true') e.preventDefault();
+  });
+  refresh();
+});
+</script>
+</body>
+</html>

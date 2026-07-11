@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diventa Partner — Audace Club Boschese 1928</title>
+<meta name="description" content="Porta il tuo marchio sulla maglia verde: diventa partner dell'Audace Club Boschese verso il centenario del 2028." />
+<meta name="theme-color" content="#1E4430" />
+<link rel="icon" href="assets/brand/monogram-green.svg" type="image/svg+xml" />
+
+<meta property="og:title" content="Diventa Partner — Audace Club Boschese 1928" />
+<meta property="og:description" content="Il tuo marchio sulla maglia verde, verso il centenario del 2028." />
+<meta property="og:image" content="assets/photos/otp-sciarpa.webp" />
+<meta property="og:type" content="website" />
+
+<link rel="preload" href="assets/fonts/Cormorant-VF.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="assets/site.css" />
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__ring" id="ring"></div>
+  <div class="cursor__dot" id="dot"></div>
+</div>
+
+<div class="loader" id="loader">
+  <img class="loader__mark" id="loaderMark" src="assets/brand/monogram-gold.svg" alt="ACB" />
+  <div class="loader__count" id="count">0</div>
+  <div class="loader__bar" id="bar"></div>
+</div>
+
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="index.html">
+    <img src="assets/brand/monogram-white.svg" alt="Audace Club Boschese" />
+  </a>
+  <div class="nav__links">
+    <a href="club.html">Il Club</a>
+    <a href="contatti.html">Contatti</a>
+    <a class="nav__cta" href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati ↗</a>
+  </div>
+  <div class="nav__burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="menu" id="menu">
+  <a href="club.html">Il Club</a>
+  <a href="contatti.html">Contatti</a>
+  <a href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati</a>
+  <div class="menu__meta">
+    <a class="label" href="https://www.instagram.com/audaceclubboschese1928/" target="_blank" rel="noopener">Instagram</a>
+    <a class="label" href="https://www.tiktok.com/@acb1928" target="_blank" rel="noopener">TikTok</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- PAGE HERO -->
+  <header class="phero">
+    <div class="eyebrow label">Sponsorship</div>
+    <h1 class="display phero__title">Diventa<br /><em>partner</em></h1>
+    <p class="phero__sub">Il tuo marchio sulla maglia verde, a bordocampo e sui nostri canali, verso il centenario del 2028. Raccontaci chi sei: ti ricontattiamo noi.</p>
+  </header>
+
+  <!-- FORM -->
+  <section class="sec" style="padding-top: clamp(20px, 4vh, 60px);">
+    <form class="form" name="diventa-partner" method="POST" action="/grazie.html" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="diventa-partner" />
+      <p style="display:none;"><label>Non compilare: <input name="bot-field" /></label></p>
+
+      <div class="field">
+        <label class="label" for="dp-nome">Nome *</label>
+        <input type="text" id="dp-nome" name="nome" required autocomplete="given-name" />
+      </div>
+      <div class="field">
+        <label class="label" for="dp-cognome">Cognome *</label>
+        <input type="text" id="dp-cognome" name="cognome" required autocomplete="family-name" />
+      </div>
+
+      <div class="field">
+        <label class="label" for="dp-azienda">Azienda *</label>
+        <input type="text" id="dp-azienda" name="azienda" required autocomplete="organization" />
+      </div>
+      <div class="field">
+        <label class="label" for="dp-email">Email *</label>
+        <input type="email" id="dp-email" name="email" required autocomplete="email" />
+      </div>
+
+      <div class="field">
+        <span class="label">Hai un logo vettoriale?</span>
+        <div class="radio-row">
+          <label><input type="radio" name="logo-vettoriale" value="Sì" checked /> Sì</label>
+          <label><input type="radio" name="logo-vettoriale" value="No" /> No</label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="dp-budget">Che budget hai a disposizione?</label>
+        <select id="dp-budget" name="budget">
+          <option value="Da definire">Da definire</option>
+          <option value="Fino a 500 €">Fino a 500 €</option>
+          <option value="500 – 1.000 €">500 – 1.000 €</option>
+          <option value="1.000 – 2.500 €">1.000 – 2.500 €</option>
+          <option value="Oltre 2.500 €">Oltre 2.500 €</option>
+        </select>
+      </div>
+
+      <div class="field field--full">
+        <label class="label" for="dp-msg">Vuoi dirci qualcosa? (facoltativo)</label>
+        <textarea id="dp-msg" name="messaggio" placeholder="La tua attività, cosa ti piacerebbe fare insieme al club…"></textarea>
+      </div>
+
+      <div class="form__actions">
+        <button class="btn" type="submit">Invia la richiesta →</button>
+        <a class="btn btn--ghost" href="assets/docs/ACB_Sponsorship.pdf" download>Scarica il doc sulle sponsorship ↓</a>
+      </div>
+    </form>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2 class="display cta__big">Verso il<br /><em>2028</em></h2>
+    <p class="cta__sub label">Il centenario si costruisce insieme · Bosco Marengo (AL)</p>
+    <a class="cta__mail" href="mailto:info@acboschese.it">info@acboschese.it</a>
+  </section>
+
+  <footer>
+    <div class="foot__col foot__brand">
+      <img src="assets/brand/oval-gold.svg" alt="Audace Club Boschese 1928" />
+      <div>
+        <p style="font-family:'Cormorant',serif;font-size:16px;">Audace Club Boschese</p>
+        <p class="label" style="color:var(--gold);">#sempreaudaci</p>
+      </div>
+    </div>
+    <div class="foot__col">
+      <h4>Vieni allo stadio</h4>
+      <p>Via delle Ghiare, 1</p>
+      <p>15062 Bosco Marengo (AL)</p>
+    </div>
+    <div class="foot__col">
+      <h4>Segui</h4>
+      <a href="https://www.instagram.com/audaceclubboschese1928/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="https://www.tiktok.com/@acb1928" target="_blank" rel="noopener">TikTok ↗</a>
+      <a href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati ↗</a>
+    </div>
+    <div class="foot__legal">
+      <span>© 1928–2026 SSD Audace Club Boschese ARL</span>
+      <span>Bosco Marengo · Alessandria · Piemonte</span>
+    </div>
+  </footer>
+
+</main>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

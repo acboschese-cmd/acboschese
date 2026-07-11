@@ -1,0 +1,39 @@
+# Decap CMS — configurazione
+# NOTA: sostituire TODO_GITHUB_USER con il proprio username GitHub dopo aver creato il repo.
+backend:
+  name: github
+  repo: TODO_GITHUB_USER/acboschese
+  branch: main
+
+locale: it
+site_url: https://acboschese.netlify.app
+logo_url: https://acboschese.netlify.app/assets/brand/oval-gold.svg
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "articoli"
+    label: "Off the Pitch — Articoli"
+    folder: "content/articoli"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Categoria", name: "categoria", widget: "select", options: ["Storia", "Campo", "Cultura", "Paese", "Squadra", "Merch"] }
+      - { label: "Etichetta (es. anno, hashtag)", name: "kicker", widget: "string", required: false }
+      - { label: "Immagine di copertina", name: "cover", widget: "image", required: false }
+      - { label: "Estratto", name: "excerpt", widget: "text", required: false }
+      - { label: "Testo", name: "body", widget: "markdown" }
+
+  - name: "pagine"
+    label: "Pagine libere"
+    folder: "content/pagine"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Sottotitolo", name: "sottotitolo", widget: "text", required: false }
+      - { label: "Immagine di apertura", name: "cover", widget: "image", required: false }
+      - { label: "Testo", name: "body", widget: "markdown" }

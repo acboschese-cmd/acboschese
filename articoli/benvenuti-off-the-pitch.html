@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Benvenuti su Off the Pitch — Off the Pitch — Audace Club Boschese 1928</title>
+<meta name="description" content="Il journal dell'Audace Club Boschese. Articolo di esempio — modificalo o cancellalo dal pannello /admin." />
+<meta name="theme-color" content="#1E4430" />
+<link rel="icon" href="/assets/brand/monogram-green.svg" type="image/svg+xml" />
+
+<link rel="preload" href="/assets/fonts/Cormorant-VF.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/site.css" />
+<style>
+  .article-body { max-width: 760px; }
+  .article-body p { font-size: 16px; line-height: 1.75; color: var(--cream-dim); margin-bottom: 22px; }
+  .article-body h2, .article-body h3, .article-body h4 { font-family: 'Cormorant', serif; font-weight: 500; color: var(--cream); text-transform: uppercase; line-height: 1.05; margin: 44px 0 18px; }
+  .article-body h2 { font-size: clamp(28px, 3.4vw, 46px); }
+  .article-body h3 { font-size: clamp(24px, 2.8vw, 36px); }
+  .article-body h4 { font-size: clamp(20px, 2.2vw, 28px); }
+  .article-body img { margin: 34px 0; }
+  .article-body blockquote { font-family: 'Cormorant', serif; font-weight: 500; font-size: clamp(22px, 2.6vw, 34px); line-height: 1.25; color: var(--cream); border-left: 2px solid var(--gold); padding-left: 24px; margin: 38px 0; }
+  .article-body ul { margin: 0 0 22px 20px; color: var(--cream-dim); line-height: 1.75; }
+  .article-body a { color: var(--gold); border-bottom: 1px solid rgba(189,163,96,0.4); }
+</style>
+
+<script src="/assets/vendor/gsap.min.js"></script>
+<script src="/assets/vendor/ScrollTrigger.min.js"></script>
+<script src="/assets/vendor/lenis.min.js"></script>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__ring" id="ring"></div>
+  <div class="cursor__dot" id="dot"></div>
+</div>
+
+<div class="loader" id="loader">
+  <img class="loader__mark" id="loaderMark" src="/assets/brand/monogram-gold.svg" alt="ACB" />
+  <div class="loader__count" id="count">0</div>
+  <div class="loader__bar" id="bar"></div>
+</div>
+
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="/index.html">
+    <img src="/assets/brand/monogram-white.svg" alt="Audace Club Boschese" />
+  </a>
+  <div class="nav__links">
+    <a href="/club.html">Il Club</a>
+    <a href="/contatti.html">Contatti</a>
+    <a class="nav__cta" href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati ↗</a>
+  </div>
+  <div class="nav__burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="menu" id="menu">
+  <a href="/club.html">Il Club</a>
+  <a href="/contatti.html">Contatti</a>
+  <a href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati</a>
+  <div class="menu__meta">
+    <a class="label" href="https://www.instagram.com/audaceclubboschese1928/" target="_blank" rel="noopener">Instagram</a>
+    <a class="label" href="https://www.tiktok.com/@acb1928" target="_blank" rel="noopener">TikTok</a>
+  </div>
+</div>
+
+<main>
+
+  <header class="phero">
+    <div class="eyebrow label">Cultura — #sempreaudaci</div>
+    <h1 class="display phero__title">Benvenuti su Off the Pitch</h1>
+    <p class="phero__sub">11 luglio 2026</p>
+  </header>
+  
+  <section class="break break--short">
+    <div class="break__media"><img src="/assets/photos/otp-blur.webp" alt="Benvenuti su Off the Pitch" /></div>
+  </section>
+  <section class="sec article-body" style="padding-top: clamp(30px, 6vh, 80px);">
+    <p>Questo è un <strong>articolo di esempio</strong> creato per collaudare il sistema di pubblicazione. Puoi modificarlo o cancellarlo dal pannello di amministrazione su `/admin`.</p>
+<h3>Come funziona</h3>
+<p>Scrivi dal pannello, salvi, e il sito si aggiorna da solo in un paio di minuti. Niente codice, niente file: solo le storie del club.</p>
+<blockquote>Il calcio dura novanta minuti; tutto il resto è Off the Pitch.</blockquote>
+<p>Cosa puoi inserire in un articolo:</p>
+<ul><li>Titoli e paragrafi</li><li><strong>Grassetti</strong> e <a href="https://acboschese.netlify.app">link</a></li><li>Fotografie dalla libreria del sito o caricate al momento</li></ul>
+  </section>
+  <section class="cta">
+    <a class="cta__mail" href="/offthepitch.html">← Tutti gli articoli</a>
+  </section>
+
+  <footer>
+    <div class="foot__col foot__brand">
+      <img src="/assets/brand/oval-gold.svg" alt="Audace Club Boschese 1928" />
+      <div>
+        <p style="font-family:'Cormorant',serif;font-size:16px;">Audace Club Boschese</p>
+        <p class="label" style="color:var(--gold);">#sempreaudaci</p>
+      </div>
+    </div>
+    <div class="foot__col">
+      <h4>Vieni allo stadio</h4>
+      <p>Via delle Ghiare, 1</p>
+      <p>15062 Bosco Marengo (AL)</p>
+    </div>
+    <div class="foot__col">
+      <h4>Segui</h4>
+      <a href="https://www.instagram.com/audaceclubboschese1928/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="https://www.tiktok.com/@acb1928" target="_blank" rel="noopener">TikTok ↗</a>
+      <a href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati ↗</a>
+    </div>
+    <div class="foot__legal">
+      <span>© 1928–2026 SSD Audace Club Boschese ARL</span>
+      <span>Bosco Marengo · Alessandria · Piemonte</span>
+    </div>
+  </footer>
+
+</main>
+
+<script src="/assets/site.js"></script>
+</body>
+</html>

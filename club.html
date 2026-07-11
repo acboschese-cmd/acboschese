@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Il Club — Audace Club Boschese 1928</title>
+<meta name="description" content="Verde come il Bosco: la storia dell'Audace Club Boschese, dal 1928 a un passo dal centenario. Bosco Marengo, Alessandria." />
+<meta name="theme-color" content="#1E4430" />
+<link rel="icon" href="assets/brand/monogram-green.svg" type="image/svg+xml" />
+
+<meta property="og:title" content="Il Club — Audace Club Boschese 1928" />
+<meta property="og:description" content="Verde come il Bosco: quasi un secolo di storia a Bosco Marengo." />
+<meta property="og:image" content="assets/photos/club-tribuna.webp" />
+<meta property="og:type" content="website" />
+
+<link rel="preload" href="assets/fonts/Cormorant-VF.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="assets/site.css" />
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__ring" id="ring"></div>
+  <div class="cursor__dot" id="dot"></div>
+</div>
+
+<div class="loader" id="loader">
+  <img class="loader__mark" id="loaderMark" src="assets/brand/monogram-gold.svg" alt="ACB" />
+  <div class="loader__count" id="count">0</div>
+  <div class="loader__bar" id="bar"></div>
+</div>
+
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="index.html">
+    <img src="assets/brand/monogram-white.svg" alt="Audace Club Boschese" />
+  </a>
+  <div class="nav__links">
+    <a href="club.html" class="active">Il Club</a>
+    <a href="contatti.html">Contatti</a>
+    <a class="nav__cta" href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati ↗</a>
+  </div>
+  <div class="nav__burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="menu" id="menu">
+  <a href="club.html">Il Club</a>
+  <a href="contatti.html">Contatti</a>
+  <a href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati</a>
+  <div class="menu__meta">
+    <a class="label" href="https://www.instagram.com/audaceclubboschese1928/" target="_blank" rel="noopener">Instagram</a>
+    <a class="label" href="https://www.tiktok.com/@acb1928" target="_blank" rel="noopener">TikTok</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- PAGE HERO -->
+  <header class="phero">
+    <div class="eyebrow label">Il Club — Est. 1928</div>
+    <h1 class="display phero__title">Verde come<br />il <em>Bosco</em></h1>
+    <p class="phero__sub">L'Audace Club Boschese nasce biancoverde e porta da sempre con sé l'iconografia di un albero: la stilizzazione del Bosco. Questa è la nostra storia.</p>
+  </header>
+
+  <!-- FULL BLEED: la tribuna -->
+  <section class="break break--short">
+    <div class="break__media">
+      <img src="assets/photos/club-tribuna.webp" alt="La tribuna in legno del campo di Bosco Marengo con i tifosi" />
+    </div>
+  </section>
+
+  <!-- STORIA -->
+  <section class="sec">
+    <div class="eyebrow label">01 — Le radici</div>
+    <p class="manifest-text">Qui, dove nel 1566 nasceva il Complesso di <em>Santa Croce</em>, dal 1928 si gioca un calcio che unisce sport, storia e cultura.</p>
+    <div class="manifesto__foot">
+      <p>Bosco Marengo non è un paese qualunque: qui Antonio Ghislieri divenne Papa Pio V e, con l'architetto Giorgio Vasari, diede vita al Complesso Monumentale di Santa Croce. Colori, architetture e tipografie rinascimentali sono le radici della nostra identità visiva.</p>
+      <p>L'Audace Club Boschese affonda le radici in questa identità culturale: un club di provincia che porta nel nome il coraggio e nel simbolo il proprio paese.</p>
+    </div>
+  </section>
+
+  <!-- TIMELINE STATS -->
+  <section class="sec" style="padding-top:0;">
+    <div class="stats">
+      <div class="stat"><div class="stat__num" data-count="1566">1566</div><div class="stat__label">Santa Croce — Vasari e Pio V</div></div>
+      <div class="stat"><div class="stat__num" data-count="1928">1928</div><div class="stat__label">Fondazione dell'Audace</div></div>
+      <div class="stat"><div class="stat__num" data-count="2028">2028</div><div class="stat__label">Il centenario</div></div>
+      <div class="stat"><div class="stat__num">∞</div><div class="stat__label">Sempre audaci</div></div>
+    </div>
+  </section>
+
+  <!-- L'ALBERO -->
+  <section class="sec">
+    <div class="eyebrow label">02 — L'albero</div>
+    <div class="split">
+      <div class="split__media split__media--tall">
+        <img src="assets/photos/club-fascia.webp" alt="Il capitano stringe la fascia con il crest dell'albero" />
+      </div>
+      <div class="split__body">
+        <h3>Il gelso ci<br /><em>rappresenta</em></h3>
+        <p>L'albero di gelso ci rappresenta sin dalla nascita. Racconta le nostre origini, le origini del nome. È iconico e simbolico, e descrive i nostri valori: siamo retti, solidi, eleganti.</p>
+        <p>Il vento ci può piegare, ma non ci abbatte. Nonostante le vicissitudini e le annate storte, giocare a Bosco non è mai semplice, per nessuno. E quella pianta è qui per ricordarcelo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LO SPOGLIATOIO -->
+  <section class="sec" style="padding-top:0;">
+    <div class="split split--rev">
+      <div class="split__media split__media--wide">
+        <img src="assets/photos/club-spogliatoio.webp" alt="Lo spogliatoio prima della partita" />
+      </div>
+      <div class="split__body">
+        <h3>La domenica<br />comincia <em>qui</em></h3>
+        <p>Prima del fischio d'inizio c'è uno spogliatoio che si riempie di scarpe, fasce e silenzi. La Seconda Categoria non ha telecamere: ha famiglie in tribuna, il bar del paese e novanta minuti che valgono una settimana.</p>
+        <p>Ogni maglia verde racconta quasi un secolo di sfide vinte e di ripartenze. Un club piccolo per categoria, grande per cuore.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BREAK: insegna / centenario -->
+  <section class="break">
+    <div class="break__media">
+      <img src="assets/photos/club-insegna.webp" alt="L'insegna ovale Audace Club Boschese 1928 retroilluminata" />
+    </div>
+    <div class="break__text">
+      <p class="display">A un passo dal<br /><em>centenario</em></p>
+    </div>
+  </section>
+
+  <!-- CENTENARIO -->
+  <section class="sec">
+    <div class="eyebrow label">03 — Verso il 2028</div>
+    <p class="manifest-text">Festeggeremo il centenario nel 2028: <em>cento anni</em> passati sotto lo stesso nome. Non sono in tanti a poterlo dire.</p>
+    <div class="manifesto__foot">
+      <p>Una data che significa molto per noi e che ci posiziona come una realtà storica del calcio di provincia. Per questo abbiamo fatto del nostro anno di fondazione un brand nel brand: un monogramma che ci ricorda ogni giorno quanta strada abbiamo fatto per arrivare fin qui.</p>
+      <p>Il futuro è dei giovani e del territorio: i prossimi cento anni si costruiscono adesso, una domenica alla volta.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2 class="display cta__big">Dal <em>1928</em></h2>
+    <p class="cta__sub label">Vieni a vederci giocare · Via delle Ghiare, 1 — Bosco Marengo (AL)</p>
+    <a class="cta__mail" href="contatti.html">Contattaci →</a>
+  </section>
+
+  <footer>
+    <div class="foot__col foot__brand">
+      <img src="assets/brand/oval-gold.svg" alt="Audace Club Boschese 1928" />
+      <div>
+        <p style="font-family:'Cormorant',serif;font-size:16px;">Audace Club Boschese</p>
+        <p class="label" style="color:var(--gold);">#sempreaudaci</p>
+      </div>
+    </div>
+    <div class="foot__col">
+      <h4>Vieni allo stadio</h4>
+      <p>Via delle Ghiare, 1</p>
+      <p>15062 Bosco Marengo (AL)</p>
+    </div>
+    <div class="foot__col">
+      <h4>Segui</h4>
+      <a href="https://www.instagram.com/audaceclubboschese1928/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="https://www.tiktok.com/@acb1928" target="_blank" rel="noopener">TikTok ↗</a>
+      <a href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati ↗</a>
+    </div>
+    <div class="foot__legal">
+      <span>© 1928–2026 SSD Audace Club Boschese ARL</span>
+      <span>Bosco Marengo · Alessandria · Piemonte</span>
+    </div>
+  </footer>
+
+</main>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

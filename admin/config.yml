@@ -2,7 +2,7 @@
 # NOTA: sostituire TODO_GITHUB_USER con il proprio username GitHub dopo aver creato il repo.
 backend:
   name: github
-  repo: TODO_GITHUB_USER/acboschese
+  repo: acboschese-md/acboschese
   branch: main
 
 locale: it

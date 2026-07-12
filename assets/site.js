@@ -206,19 +206,19 @@
         scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 
-    /* fluttuazione leggera: le immagini in-flow driftano rispetto alla pagina.
-       Overscan 14% (height 114%) così il drift non scopre mai i bordi. */
+    /* fluttuazione: le immagini in-flow driftano rispetto alla pagina.
+       Overscan 22% (height 122%) così il drift non scopre mai i bordi. */
     gsap.utils.toArray('.split__media, .otp__media, .carousel__slide').forEach((box) => {
       const img = box.querySelector('img');
       if (!img) return;
-      gsap.set(img, { height: '114%' });
-      gsap.fromTo(img, { yPercent: -12 }, { yPercent: -2, ease: 'none',
+      gsap.set(img, { height: '122%' });
+      gsap.fromTo(img, { yPercent: -18 }, { yPercent: 0, ease: 'none',
         scrollTrigger: { trigger: box, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 
     /* le maglie scontornate (object-fit contain) fluttuano senza bisogno di overscan */
     gsap.utils.toArray('.product__media img').forEach((img) => {
-      gsap.fromTo(img, { y: 26 }, { y: -26, ease: 'none',
+      gsap.fromTo(img, { y: 52 }, { y: -52, ease: 'none',
         scrollTrigger: { trigger: img.closest('.product__media'), start: 'top bottom', end: 'bottom top', scrub: true } });
     });
   }

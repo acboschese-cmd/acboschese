@@ -436,6 +436,16 @@ footer { border-top: 1px solid rgba(255,253,233,0.15); padding: 40px var(--pad);
 .foot__brand img { width: 54px; }
 .foot__legal { width: 100%; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; color: var(--cream-dim); font-size: 12px; padding-top: 30px; border-top: 1px solid rgba(255,253,233,0.1); margin-top: 20px; }
 
+/* torna all'inizio */
+.totop {
+  width: 56px; height: 56px; flex: 0 0 56px;
+  display: grid; place-items: center; align-self: center;
+  border: 1px solid rgba(255,253,233,0.3); border-radius: 50%;
+  color: var(--cream); font-size: 20px;
+  transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease), transform .35s var(--ease);
+}
+.totop:hover { background: var(--gold); border-color: var(--gold); color: var(--green); transform: translateY(-4px); }
+
 .magnetic { display: inline-block; will-change: transform; }
 
 @media (prefers-reduced-motion: reduce) {

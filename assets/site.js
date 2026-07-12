@@ -140,6 +140,15 @@
     });
   }
 
+  /* ---------- TORNA ALL'INIZIO ---------- */
+  document.querySelectorAll('.totop').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.lenis) window.lenis.scrollTo(0, { duration: 1.6 });
+      else window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
   /* ---------- NAV ---------- */
   const nav = document.getElementById('nav');
   let lastY = 0;

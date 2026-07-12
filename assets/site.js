@@ -156,7 +156,9 @@
     });
 
     /* fade-up generico */
-    gsap.utils.toArray('.eyebrow, .manifesto__foot p, .partners__row a, .card, .cta__big, .cta__sub, .cta__mail, .split__body, .contact-list, .contact-mail, .otp__k, .otp__t').forEach((el) => {
+    /* NB: gli .eyebrow dentro .phero sono animati dall'intro — qui solo quelli nelle sezioni,
+       altrimenti i due gsap.from si pestano i piedi e il label resta invisibile */
+    gsap.utils.toArray('.sec .eyebrow, .split__body .eyebrow, .manifesto__foot p, .partners__row a, .card, .cta__big, .cta__sub, .cta__mail, .split__body, .contact-list, .contact-mail, .otp__k, .otp__t').forEach((el) => {
       gsap.from(el, {
         y: 34, opacity: 0, duration: 1, ease: 'power3.out',
         scrollTrigger: { trigger: el, start: 'top 88%' }
@@ -202,7 +204,10 @@
     gsap.utils.toArray('.g-item').forEach((el) => {
       const speed = parseFloat(el.dataset.speed || 1);
       const img = el.querySelector('img');
-      gsap.fromTo(img, { yPercent: (speed - 1) * -60 - 8 }, { yPercent: (speed - 1) * 60 + 8, ease: 'none',
+      /* overscan 26% ricentrato (-13%): il drift non scopre mai i bordi del riquadro */
+      const amp = Math.abs((speed - 1) * 60) + 8;
+      gsap.set(img, { height: '126%' });
+      gsap.fromTo(img, { yPercent: -13 - amp }, { yPercent: -13 + amp, ease: 'none',
         scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 

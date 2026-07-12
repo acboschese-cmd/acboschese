@@ -13,6 +13,41 @@
   const bar = document.getElementById('bar');
   const mark = document.getElementById('loaderMark');
 
+  /* ---------- TIPOGRAFIA: niente vedove né orfane ----------
+     Lega le parole corte italiane alla parola successiva (È→appartenenza)
+     e le ultime due parole di ogni paragrafo, con spazi unificatori.
+     Le righe si spezzano sugli altri spazi: la responsiveness non cambia. */
+  (function fixTypography() {
+    const NBSP = '\u00A0';
+    const SHORT3 = /^(che|non|per|con|nel|del|dal|dei|sul|tra|fra|gli|una|uno|più|può|sin|due|tre|nei)$/i;
+    const bind = (s) => {
+      for (let k = 0; k < 2; k++) {
+        s = s.replace(/(^|[\s («"'])([A-Za-zÀ-ÖØ-öø-ÿ]{1,2}|[A-Za-zÀ-ÖØ-öø-ÿ']{3})([ \t]+)/g,
+          (m, pre, w, sp) => (w.length <= 2 || SHORT3.test(w)) ? pre + w + NBSP : m);
+      }
+      return s;
+    };
+    const walkBind = (node) => {
+      node.childNodes.forEach((child) => {
+        if (child.nodeType === 3) child.textContent = bind(child.textContent);
+        else walkBind(child);
+      });
+    };
+    const lastTextNode = (node) => {
+      for (let i = node.childNodes.length - 1; i >= 0; i--) {
+        const c = node.childNodes[i];
+        if (c.nodeType === 3 && c.textContent.trim()) return c;
+        if (c.nodeType === 1) { const r = lastTextNode(c); if (r) return r; }
+      }
+      return null;
+    };
+    document.querySelectorAll('.manifest-text, .manifesto__foot p, .phero__sub, .split__body p, .hero__tag, .product__desc, .store-note, .cta__sub, .contact-list p, .article-body p, .otp__t, .card__t').forEach((el) => {
+      walkBind(el);
+      const last = lastTextNode(el); /* vedove: le ultime due parole restano insieme */
+      if (last) last.textContent = last.textContent.replace(/[ \t]+(\S+)\s*$/, NBSP + '$1');
+    });
+  })();
+
   /* ---------- AVVIO ---------- */
   function startSite() {
     document.body.style.overflow = '';
@@ -135,7 +170,8 @@
         const out = document.createDocumentFragment();
         node.childNodes.forEach((child) => {
           if (child.nodeType === 3) {
-            child.textContent.split(/(\s+)/).forEach((word) => {
+            /* non spezzare sugli spazi unificatori: "È appartenenza" resta un blocco */
+            child.textContent.split(/([^\S\u00A0]+)/).forEach((word) => {
               if (word.trim() === '') { out.appendChild(document.createTextNode(word)); return; }
               const s = document.createElement('span'); s.className = 'w'; s.textContent = word; out.appendChild(s);
             });

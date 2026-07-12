@@ -62,6 +62,10 @@ img { display: block; max-width: 100%; }
 /* mai corsivi: gli em servono solo per l'accento oro */
 em, i { font-style: normal; color: var(--gold); }
 
+/* niente vedove/orfane dove il browser sa farlo da solo (progressive enhancement) */
+p { text-wrap: pretty; }
+.split__body h3, .otp__t, .card__t, .phero__sub { text-wrap: balance; }
+
 .display {
   font-family: 'Rector', 'Cormorant', serif;
   font-optical-sizing: auto;
@@ -192,7 +196,8 @@ section { position: relative; }
 
 /* ============ MANIFESTO ============ */
 .manifesto p, .manifest-text { font-family: 'Cormorant', serif; font-weight: 500; font-size: clamp(28px, 4.4vw, 68px); line-height: 1.12; max-width: 18ch; letter-spacing: 0; }
-.manifest-text .w { display: inline-block; will-change: transform, opacity; }
+/* inline (non inline-block): così i legami nbsp valgono anche tra span ed <em> */
+.manifest-text .w { display: inline; will-change: opacity; }
 .manifesto__foot { margin-top: clamp(40px, 6vw, 80px); display: flex; gap: clamp(30px, 6vw, 90px); flex-wrap: wrap; max-width: 760px; }
 .manifesto__foot p { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.65; color: var(--cream-dim); font-weight: 400; max-width: 36ch; }
 

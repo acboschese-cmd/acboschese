@@ -195,7 +195,7 @@ section { position: relative; }
 .eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
 
 /* ============ MANIFESTO ============ */
-.manifesto p, .manifest-text { font-family: 'Cormorant', serif; font-weight: 500; font-size: clamp(28px, 4.4vw, 68px); line-height: 1.12; max-width: 18ch; letter-spacing: 0; }
+.manifesto p, .manifest-text { font-family: 'Cormorant', serif; font-weight: 500; font-size: clamp(28px, 4.4vw, 68px); line-height: 1.12; max-width: 30ch; letter-spacing: 0; }
 /* inline (non inline-block): così i legami nbsp valgono anche tra span ed <em> */
 .manifest-text .w { display: inline; will-change: opacity; }
 .manifesto__foot { margin-top: clamp(40px, 6vw, 80px); display: flex; gap: clamp(30px, 6vw, 90px); flex-wrap: wrap; max-width: 760px; }

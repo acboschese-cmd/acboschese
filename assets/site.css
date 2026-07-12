@@ -198,7 +198,7 @@ section { position: relative; }
 .break { position: relative; height: 100svh; min-height: 560px; overflow: hidden; display: grid; place-items: center; }
 .break--short { height: 72svh; min-height: 460px; }
 .break__media { position: absolute; inset: -15% 0; will-change: transform; }
-.break__media img { width: 100%; height: 100%; object-fit: cover; }
+.break__media img, .break__media video { width: 100%; height: 100%; object-fit: cover; }
 .break__media::after { content: ''; position: absolute; inset: 0; background: rgba(30,68,48,0.35); }
 .break__text { position: relative; z-index: 2; text-align: center; padding: 0 var(--pad); }
 .break__text .display { font-size: clamp(50px, 11vw, 180px); text-transform: uppercase; }

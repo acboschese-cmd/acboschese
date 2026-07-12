@@ -226,6 +226,33 @@
     })();
   }
 
+  /* ---------- CAROSELLO ---------- */
+  (function initCarousel() {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+    const step = () => {
+      const slide = track.querySelector('.carousel__slide');
+      return slide ? slide.getBoundingClientRect().width + 20 : 400;
+    };
+    document.querySelectorAll('.carousel__btn').forEach((b) => {
+      b.addEventListener('click', () => track.scrollBy({ left: step() * parseInt(b.dataset.dir, 10), behavior: 'smooth' }));
+    });
+    /* drag con il mouse (su touch scorre nativamente) */
+    let down = false, startX = 0, startScroll = 0, moved = false;
+    track.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      down = true; moved = false; startX = e.clientX; startScroll = track.scrollLeft;
+      track.classList.add('is-dragging');
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 3) moved = true;
+      track.scrollLeft = startScroll - dx;
+    });
+    window.addEventListener('pointerup', () => { down = false; track.classList.remove('is-dragging'); });
+  })();
+
   /* ---------- CONTATORI ---------- */
   function initCounters() {
     if (!window.ScrollTrigger) return;

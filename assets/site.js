@@ -249,10 +249,11 @@
     gsap.utils.toArray('.g-item').forEach((el) => {
       const speed = parseFloat(el.dataset.speed || 1);
       const img = el.querySelector('img');
-      /* overscan 26% ricentrato (-13%): il drift non scopre mai i bordi del riquadro */
-      const amp = Math.abs((speed - 1) * 60) + 8;
-      gsap.set(img, { height: '126%' });
-      gsap.fromTo(img, { yPercent: -13 - amp }, { yPercent: -13 + amp, ease: 'none',
+      /* overscan 136% ricentrato: range massimo ±13.2% sempre dentro i bordi
+         (con h=136% la copertura regge fino a y = -26.4% dell'altezza immagine) */
+      const amp = Math.min(Math.abs((speed - 1) * 60) + 8, 13);
+      gsap.set(img, { height: '136%' });
+      gsap.fromTo(img, { yPercent: -13.2 - amp }, { yPercent: -13.2 + amp, ease: 'none',
         scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 

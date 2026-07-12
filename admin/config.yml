@@ -1,8 +1,8 @@
 # Decap CMS — configurazione
-# NOTA: sostituire TODO_GITHUB_USER con il proprio username GitHub dopo aver creato il repo.
+# Repo: acboschese-cmd/acboschese
 backend:
   name: github
-  repo: acboschese-md/acboschese
+  repo: acboschese-cmd/acboschese
   branch: main
 
 locale: it

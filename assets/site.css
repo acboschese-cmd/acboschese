@@ -163,6 +163,15 @@ p { text-wrap: pretty; }
 .hero__title .line { overflow: hidden; display: block; }
 .hero__title .line span { display: block; will-change: transform; }
 .hero__bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+
+/* scudetto WebGL: dimensioni e posizione calcolate dal JS sull'altezza del titolo */
+.hero__badge {
+  position: absolute;
+  display: none;
+  z-index: 2;
+  pointer-events: none;
+}
+.hero__badge canvas, .hero__badge img { width: 100%; height: 100%; display: block; }
 .hero__tag { max-width: 320px; font-size: 14px; line-height: 1.5; color: var(--cream); }
 .hero__scroll { display: flex; align-items: center; gap: 12px; }
 .hero__scroll .dotline { width: 60px; height: 1px; background: var(--cream); transform-origin: left; animation: pulse 2.4s var(--ease) infinite; }

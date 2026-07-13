@@ -118,8 +118,9 @@
         bevelEnabled: true,
         bevelThickness: 7,
         bevelSize: 6,
-        bevelSegments: 4,
-        curveSegments: 24
+        bevelSegments: 3,
+        curveSegments: 64,
+        steps: 1
       });
       geo.computeBoundingBox();
       const bb = geo.boundingBox;

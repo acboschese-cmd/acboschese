@@ -58,12 +58,12 @@
   mount.appendChild(renderer.domElement);
 
   /* luci: chiave calda + riempimento freddo + speculare oro */
-  scene.add(new THREE.AmbientLight(0xffffff, 0.75));
-  const key = new THREE.DirectionalLight(0xfff6dd, 0.9);
-  key.position.set(300, 260, 500);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const key = new THREE.DirectionalLight(0xfff6dd, 1.15);
+  key.position.set(-260, 340, 420);   /* radente dall'alto-sx: esalta il rilievo coniato */
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0xbda360, 0.5);
-  rim.position.set(-400, -150, 300);
+  const rim = new THREE.DirectionalLight(0xbda360, 0.6);
+  rim.position.set(380, -160, 260);
   scene.add(rim);
 
   const group = new THREE.Group();
@@ -78,12 +78,35 @@
   svgImg.onload = () => {
     const ctx = texCanvas.getContext('2d');
     ctx.drawImage(svgImg, 0, 0, texCanvas.width, texCanvas.height);
-    buildBadge(new THREE.CanvasTexture(texCanvas));
+
+    /* height-map per l'effetto "coniato": luminanza dell'artwork.
+       Chiaro (crema/oro) = rilievo, verde/scuro = inciso; fondo neutro. */
+    const bumpCanvas = document.createElement('canvas');
+    bumpCanvas.width = texCanvas.width;
+    bumpCanvas.height = texCanvas.height;
+    const bctx = bumpCanvas.getContext('2d');
+    const src = ctx.getImageData(0, 0, texCanvas.width, texCanvas.height);
+    const dst = bctx.createImageData(texCanvas.width, texCanvas.height);
+    const sd = src.data, dd = dst.data;
+    for (let i = 0; i < sd.length; i += 4) {
+      const a = sd[i + 3];
+      let v = 128;
+      if (a > 12) {
+        const lum = 0.299 * sd[i] + 0.587 * sd[i + 1] + 0.114 * sd[i + 2];
+        /* INVERTITO: gelso e scritte (verde/scuro) in rilievo, campo crema incavato */
+        const contrast = Math.max(0, Math.min(255, (lum - 90) * 1.9 + 90));
+        v = 255 - contrast;
+      }
+      dd[i] = dd[i + 1] = dd[i + 2] = v; dd[i + 3] = 255;
+    }
+    bctx.putImageData(dst, 0, 0);
+
+    buildBadge(new THREE.CanvasTexture(texCanvas), new THREE.CanvasTexture(bumpCanvas));
   };
   svgImg.onerror = fallback;
   svgImg.src = 'assets/brand/scudetto.svg';
 
-  function buildBadge(texture) {
+  function buildBadge(texture, bumpTex) {
     texture.encoding = THREE.sRGBEncoding;
     texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
@@ -111,7 +134,13 @@
       }
       uv.needsUpdate = true;
 
-      const front = new THREE.MeshStandardMaterial({ map: texture, metalness: 0.22, roughness: 0.42 });
+      const front = new THREE.MeshStandardMaterial({
+        map: texture,
+        bumpMap: bumpTex,
+        bumpScale: 8,     /* profondità del rilievo coniato */
+        metalness: 0.3,
+        roughness: 0.38
+      });
       const side = new THREE.MeshStandardMaterial({ color: 0xfffde9, metalness: 0.35, roughness: 0.38 });
       const mesh = new THREE.Mesh(geo, [front, side]);
 

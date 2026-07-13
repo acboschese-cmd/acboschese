@@ -246,14 +246,11 @@
         scrollTrigger: { trigger: el.closest('.break'), start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 
+    /* immagini intere (nessun crop): il parallasse muove il CONTENITORE, mai la foto dentro */
     gsap.utils.toArray('.g-item').forEach((el) => {
       const speed = parseFloat(el.dataset.speed || 1);
-      const img = el.querySelector('img');
-      /* overscan 136% ricentrato: range massimo ±13.2% sempre dentro i bordi
-         (con h=136% la copertura regge fino a y = -26.4% dell'altezza immagine) */
-      const amp = Math.min(Math.abs((speed - 1) * 60) + 8, 13);
-      gsap.set(img, { height: '136%' });
-      gsap.fromTo(img, { yPercent: -13.2 - amp }, { yPercent: -13.2 + amp, ease: 'none',
+      const amp = 30 + Math.abs(speed - 1) * 90;
+      gsap.fromTo(el, { y: amp }, { y: -amp, ease: 'none',
         scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 

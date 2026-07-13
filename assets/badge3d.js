@@ -34,7 +34,7 @@
   /* fallback statico se WebGL non c'è */
   function fallback() {
     const img = document.createElement('img');
-    img.src = 'assets/brand/scudetto.svg';
+    img.src = 'assets/brand/scudetto-sym.svg';
     img.alt = '';
     img.style.width = '100%';
     mount.appendChild(img);
@@ -104,13 +104,13 @@
     buildBadge(new THREE.CanvasTexture(texCanvas), new THREE.CanvasTexture(bumpCanvas));
   };
   svgImg.onerror = fallback;
-  svgImg.src = 'assets/brand/scudetto.svg';
+  svgImg.src = 'assets/brand/scudetto-sym.svg';
 
   function buildBadge(texture, bumpTex) {
     texture.encoding = THREE.sRGBEncoding;
     texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
-    new THREE.SVGLoader().load('assets/brand/scudetto.svg', (data) => {
+    new THREE.SVGLoader().load('assets/brand/scudetto-sym.svg', (data) => {
       /* primo path = sagoma dello scudetto */
       const shapes = data.paths[0].toShapes(true);
       const geo = new THREE.ExtrudeGeometry(shapes, {

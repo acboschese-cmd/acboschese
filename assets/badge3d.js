@@ -18,15 +18,21 @@
     const t = title.getBoundingClientRect();
     const h = hero.getBoundingClientRect();
     const pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 40;
-    const badgeH = t.height;
+    /* il canvas è più alto dello scudetto: dà margine per rotazione/fluttuazione
+       (lo scudetto vero riempie ~80% del canvas, vedi scala 3D) — così non si taglia mai */
+    const badgeH = t.height * 1.12;
     const badgeW = badgeH * RATIO;
-    const spazio = h.right - pad - (t.right + 40); /* spazio libero tra titolo e margine */
-    if (spazio < badgeW) { mount.style.display = 'none'; return false; }
+    const gap = Math.max(16, (h.right - h.left) * 0.015); /* vicino al testo */
+    let left = t.right + gap;
+    const maxLeft = h.right - pad - badgeW;          /* non oltre il margine destro */
+    if (left > maxLeft) left = maxLeft;
+    if (left < t.right - badgeW * 0.15) { mount.style.display = 'none'; return false; }
     mount.style.display = 'block';
     mount.style.height = badgeH + 'px';
     mount.style.width = badgeW + 'px';
-    mount.style.top = (t.top - h.top) + 'px';
-    mount.style.right = pad + 'px';
+    mount.style.top = (t.top - h.top - t.height * 0.06) + 'px'; /* centrato sul titolo */
+    mount.style.left = (left - h.left) + 'px';
+    mount.style.right = 'auto';
     mount.style.transform = 'none';
     return true;
   }
@@ -151,8 +157,8 @@
       const holder = new THREE.Group();
       holder.add(mesh);
 
-      /* lo scudetto riempie ~92% dell'altezza del canvas */
-      const s = 528 / h;
+      /* lo scudetto riempie ~78% del canvas: il resto è margine anti-taglio */
+      const s = 448 / h;
       holder.scale.set(s, s, s);
       group.add(holder);
 
@@ -198,9 +204,9 @@
       group.rotation.set(0, 0, 0);
     } else {
       /* rotazione pigra ± tilt dal mouse, senza mai mostrare il retro */
-      group.rotation.y = Math.sin(tt * 0.5) * 0.34 + mx * 0.3;
-      group.rotation.x = Math.sin(tt * 0.33) * 0.08 + my * 0.18;
-      group.position.y = Math.sin(tt * 0.8) * 9;
+      group.rotation.y = Math.sin(tt * 0.5) * 0.28 + mx * 0.2;
+      group.rotation.x = Math.sin(tt * 0.33) * 0.06 + my * 0.12;
+      group.position.y = Math.sin(tt * 0.8) * 5;
     }
     renderer.render(scene, camera);
   }

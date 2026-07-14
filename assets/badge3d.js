@@ -11,13 +11,35 @@
   /* dimensiono il badge sull'altezza del titolo "SEMPRE AUDACI"
      e lo piazzo nello spazio libero a destra: mai sovrapposto a nulla */
   const RATIO = 346 / 442; /* proporzioni dello scudetto */
+  const titleWrap = document.querySelector('.hero__title');
   function layout() {
     const title = document.querySelector('.hero__title .display');
     const hero = document.querySelector('.hero');
     if (!title || !hero) return false;
-    const t = title.getBoundingClientRect();
     const h = hero.getBoundingClientRect();
     const pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 40;
+    const mobile = h.width < 860;
+
+    if (mobile) {
+      /* mobile: scudetto sopra il titolo, centrato; il titolo scende per non sovrapporsi mai */
+      const badgeH = Math.min(h.width * 0.34, 190);
+      const badgeW = badgeH * RATIO;
+      mount.style.display = 'block';
+      mount.style.height = badgeH + 'px';
+      mount.style.width = badgeW + 'px';
+      mount.style.left = (h.width / 2 - badgeW / 2) + 'px';
+      mount.style.right = 'auto';
+      mount.style.transform = 'none';
+      if (titleWrap) {
+        const bt = title.getBoundingClientRect();
+        mount.style.top = (bt.top - h.top - badgeH * 0.94) + 'px';
+        titleWrap.style.marginTop = (badgeH * 0.72) + 'px';
+      }
+      return true;
+    }
+    if (titleWrap) titleWrap.style.marginTop = '';
+
+    const t = title.getBoundingClientRect();
     /* il canvas è più alto dello scudetto: dà margine per rotazione/fluttuazione
        (lo scudetto vero riempie ~80% del canvas, vedi scala 3D) — così non si taglia mai */
     const badgeH = t.height * 1.12;

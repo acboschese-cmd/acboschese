@@ -177,6 +177,15 @@ p { text-wrap: pretty; }
 .hero__scroll .dotline { width: 60px; height: 1px; background: var(--cream); transform-origin: left; animation: pulse 2.4s var(--ease) infinite; }
 @keyframes pulse { 0%,100% { transform: scaleX(0.4); opacity: .5; } 50% { transform: scaleX(1); opacity: 1; } }
 
+/* mobile: tutto centrato (badge + testo), non solo allineato a sinistra */
+@media (max-width: 860px) {
+  .hero__top { justify-content: center; text-align: center; }
+  .hero__title { align-self: center; text-align: center; }
+  .hero__bottom { flex-direction: column; align-items: center; text-align: center; }
+  .hero__tag { max-width: 90%; }
+  .hero__scroll { flex-direction: column-reverse; gap: 8px; }
+}
+
 /* ============ PAGE HERO (pagine interne) ============ */
 .phero { padding: calc(var(--pad) + 14vh) var(--pad) clamp(50px, 8vh, 110px); }
 .phero__title { font-size: clamp(52px, 11vw, 170px); text-transform: uppercase; max-width: 12ch; }

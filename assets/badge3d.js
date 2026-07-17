@@ -1,38 +1,56 @@
 /* ============================================================
    SCUDETTO 3D — badge WebGL nel hero della home
    Corpo estruso dalla sagoma SVG + artwork come texture frontale.
-   Rotazione pigra, tilt col mouse, pausa fuori viewport.
+   Desktop: parte a fianco di "SEMPRE AUDACI", poi a scroll scende
+   in verticale (stessa X) compiendo un giro completo e si posa
+   di fianco al testo "01 — Il Club". Mobile: resta in hero, sopra
+   il titolo, senza viaggio (nessuna sezione abbastanza larga).
    ============================================================ */
 (function () {
   const mount = document.getElementById('badge3d');
   if (!mount || typeof THREE === 'undefined') return;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* dimensiono il badge sull'altezza del titolo "SEMPRE AUDACI"
-     e lo piazzo nello spazio libero a destra: mai sovrapposto a nulla */
   const RATIO = 346 / 442; /* proporzioni dello scudetto */
   const titleWrap = document.querySelector('.hero__title');
+
+  /* stato condiviso tra layout() (misura) e applyProgress() (scroll-travel) */
+  let isMobile = false;
+  let badgeH = 0;
+  let travelStartY = 0, travelEndY = 0, travelLeft = 0;
+  let scrollSpin = 0;
+
+  function computeLandDocY() {
+    const eyebrow = document.querySelector('#club .eyebrow');
+    const text = document.querySelector('#club .manifest-text');
+    if (!eyebrow || !text) return null;
+    const a = eyebrow.getBoundingClientRect();
+    const b = text.getBoundingClientRect();
+    return (a.top + b.bottom) / 2 + window.scrollY; /* centro verticale del blocco, coordinate documento */
+  }
+
   function layout() {
     const title = document.querySelector('.hero__title .display');
     const hero = document.querySelector('.hero');
     if (!title || !hero) return false;
     const h = hero.getBoundingClientRect();
     const pad = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pad')) || 40;
-    const mobile = h.width < 860;
+    isMobile = h.width < 860;
 
-    if (mobile) {
-      /* mobile: scudetto sopra il titolo, centrato; il titolo scende per non sovrapporsi mai */
-      const badgeH = Math.min(h.width * 0.34, 190);
+    if (isMobile) {
+      /* mobile: scudetto sopra il titolo, centrato; il titolo scende per non sovrapporsi mai.
+         Nessun viaggio a scroll: coordinate documento, si scrolla via naturalmente con l'hero. */
+      badgeH = Math.min(h.width * 0.34, 190);
       const badgeW = badgeH * RATIO;
       mount.style.display = 'block';
       mount.style.height = badgeH + 'px';
       mount.style.width = badgeW + 'px';
-      mount.style.left = (h.width / 2 - badgeW / 2) + 'px';
+      mount.style.left = (h.left + window.scrollX + h.width / 2 - badgeW / 2) + 'px';
       mount.style.right = 'auto';
       mount.style.transform = 'none';
       if (titleWrap) {
         const bt = title.getBoundingClientRect();
-        mount.style.top = (bt.top - h.top - badgeH * 0.94) + 'px';
+        mount.style.top = (bt.top + window.scrollY - badgeH * 0.94) + 'px';
         titleWrap.style.marginTop = (badgeH * 0.72) + 'px';
       }
       return true;
@@ -42,7 +60,7 @@
     const t = title.getBoundingClientRect();
     /* il canvas è più alto dello scudetto: dà margine per rotazione/fluttuazione
        (lo scudetto vero riempie ~80% del canvas, vedi scala 3D) — così non si taglia mai */
-    const badgeH = t.height * 1.12;
+    badgeH = t.height * 1.12;
     const badgeW = badgeH * RATIO;
     const gap = Math.max(16, (h.right - h.left) * 0.015); /* vicino al testo */
     let left = t.right + gap;
@@ -52,10 +70,18 @@
     mount.style.display = 'block';
     mount.style.height = badgeH + 'px';
     mount.style.width = badgeW + 'px';
-    mount.style.top = (t.top - h.top - t.height * 0.06) + 'px'; /* centrato sul titolo */
-    mount.style.left = (left - h.left) + 'px';
     mount.style.right = 'auto';
     mount.style.transform = 'none';
+
+    /* coordinate DOCUMENTO (rect + scroll corrente): invarianti rispetto allo scroll,
+       così valgono sia per il punto di partenza (hero) sia per quello di arrivo (Il Club) */
+    travelLeft = left + window.scrollX;
+    travelStartY = t.top + window.scrollY - t.height * 0.06; /* centrato sul titolo, come prima */
+    const land = computeLandDocY();
+    travelEndY = land !== null ? land - badgeH / 2 : travelStartY;
+
+    mount.style.left = travelLeft + 'px';
+    mount.style.top = travelStartY + 'px'; /* valore iniziale; lo scroll-travel lo aggiorna da qui in poi */
     return true;
   }
 
@@ -203,19 +229,42 @@
   }, { threshold: 0 });
   io.observe(mount);
 
+  /* ---------- scroll-travel (solo desktop): hero -> "01 — Il Club" ---------- */
+  function applyProgress(p) {
+    if (isMobile || reduce) return;
+    mount.style.top = (travelStartY + (travelEndY - travelStartY) * p) + 'px';
+    mount.style.left = travelLeft + 'px';
+    scrollSpin = p * Math.PI * 2; /* un giro completo lungo il tragitto, congruo a 0 all'arrivo */
+  }
+
+  let scrollST = null;
+  function setupScrollTravel() {
+    if (reduce || typeof ScrollTrigger === 'undefined' || scrollST) return;
+    scrollST = ScrollTrigger.create({
+      trigger: '.hero',
+      start: 'top top',
+      endTrigger: '#club',
+      end: 'center center',
+      scrub: true,
+      onUpdate: (self) => applyProgress(self.progress)
+    });
+    applyProgress(scrollST.progress);
+  }
+
   function resize() {
     if (!layout()) return;
     if (W() === 0 || H() === 0) return; /* viewport non ancora dimensionato (tab in background) */
     renderer.setSize(W(), H());
     camera.aspect = W() / H();
     camera.updateProjectionMatrix();
+    if (scrollST) { ScrollTrigger.refresh(); applyProgress(scrollST.progress); }
   }
   window.addEventListener('resize', resize, { passive: true });
   new ResizeObserver(() => resize()).observe(document.querySelector('.hero__title') || mount);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize); /* Rector cambia l'altezza del titolo */
 
   let started = false;
-  function start() { started = true; resize(); loop(performance.now()); }
+  function start() { started = true; resize(); setupScrollTravel(); loop(performance.now()); }
 
   function loop(t) {
     if (!vis || document.hidden) { raf = null; return; }
@@ -225,8 +274,8 @@
     if (reduce) {
       group.rotation.set(0, 0, 0);
     } else {
-      /* rotazione pigra ± tilt dal mouse, senza mai mostrare il retro */
-      group.rotation.y = Math.sin(tt * 0.5) * 0.28 + mx * 0.2;
+      /* rotazione pigra ± tilt dal mouse ± giro dato dallo scroll-travel, senza mai mostrare il retro a riposo */
+      group.rotation.y = Math.sin(tt * 0.5) * 0.28 + mx * 0.2 + scrollSpin;
       group.rotation.x = Math.sin(tt * 0.33) * 0.06 + my * 0.12;
       group.position.y = Math.sin(tt * 0.8) * 5;
     }

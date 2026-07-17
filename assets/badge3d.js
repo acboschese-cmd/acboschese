@@ -21,12 +21,10 @@
   let scrollSpin = 0;
 
   function computeLandDocY() {
-    const eyebrow = document.querySelector('#club .eyebrow');
     const text = document.querySelector('#club .manifest-text');
-    if (!eyebrow || !text) return null;
-    const a = eyebrow.getBoundingClientRect();
-    const b = text.getBoundingClientRect();
-    return (a.top + b.bottom) / 2 + window.scrollY; /* centro verticale del blocco, coordinate documento */
+    if (!text) return null;
+    /* la cima del badge si allinea con l'inizio del testo "Non è..." */
+    return text.getBoundingClientRect().top + window.scrollY;
   }
 
   function layout() {
@@ -78,7 +76,7 @@
     travelLeft = left + window.scrollX;
     travelStartY = t.top + window.scrollY - t.height * 0.06; /* centrato sul titolo, come prima */
     const land = computeLandDocY();
-    travelEndY = land !== null ? land - badgeH / 2 : travelStartY;
+    travelEndY = land !== null ? land : travelStartY; /* cima del badge = cima del testo */
 
     mount.style.left = travelLeft + 'px';
     mount.style.top = travelStartY + 'px'; /* valore iniziale; lo scroll-travel lo aggiorna da qui in poi */

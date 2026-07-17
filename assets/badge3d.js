@@ -228,11 +228,15 @@
   io.observe(mount);
 
   /* ---------- scroll-travel (solo desktop): hero -> "01 — Il Club" ---------- */
+  /* ease-out: la discesa rallenta avvicinandosi all'atterraggio invece di fermarsi di scatto */
+  const landEase = typeof gsap !== 'undefined' ? gsap.parseEase('power2.out') : (p) => p;
+
   function applyProgress(p) {
     if (isMobile || reduce) return;
-    mount.style.top = (travelStartY + (travelEndY - travelStartY) * p) + 'px';
+    const eased = landEase(p);
+    mount.style.top = (travelStartY + (travelEndY - travelStartY) * eased) + 'px';
     mount.style.left = travelLeft + 'px';
-    scrollSpin = p * Math.PI * 2; /* un giro completo lungo il tragitto, congruo a 0 all'arrivo */
+    scrollSpin = eased * Math.PI * 2; /* un giro completo lungo il tragitto, congruo a 0 all'arrivo */
   }
 
   let scrollST = null;
@@ -243,7 +247,7 @@
       start: 'top top',
       endTrigger: '#club',
       end: 'center center',
-      scrub: true,
+      scrub: 0.8, /* piccolo ritardo elastico: il movimento insegue lo scroll invece di essere rigido */
       onUpdate: (self) => applyProgress(self.progress)
     });
     applyProgress(scrollST.progress);

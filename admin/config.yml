@@ -75,11 +75,11 @@ collections:
           - label: "Blocchi di contenuto"
             name: "blocchi"
             widget: "list"
-            summary: "{{fields.type}} — {{fields.eyebrow}}"
             types:
               - label: "Testo (manifesto)"
                 name: "manifesto"
                 widget: "object"
+                summary: "Testo — {{fields.eyebrow}}"
                 fields:
                   - { label: "Etichetta", name: "eyebrow", widget: "string" }
                   - { label: "Testo principale", name: "testo", widget: "text", hint: "*parola* per il colore oro" }
@@ -101,6 +101,7 @@ collections:
               - label: "Testo + immagine (split)"
                 name: "split"
                 widget: "object"
+                summary: "Split — {{fields.eyebrow}}"
                 fields:
                   - { label: "Immagine", name: "immagine", widget: "image" }
                   - { label: "Testo alternativo immagine", name: "immagineAlt", widget: "string", required: false }
@@ -122,6 +123,7 @@ collections:
               - label: "Statistiche"
                 name: "stats"
                 widget: "object"
+                summary: "Statistiche"
                 fields:
                   - label: "Voci"
                     name: "voci"
@@ -133,6 +135,7 @@ collections:
               - label: "Galleria (carosello)"
                 name: "galleria"
                 widget: "object"
+                summary: "Galleria — {{fields.eyebrow}}"
                 fields:
                   - { label: "Etichetta", name: "eyebrow", widget: "string", required: false }
                   - label: "Immagini"

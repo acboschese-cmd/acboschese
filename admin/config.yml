@@ -5,6 +5,8 @@ backend:
   repo: acboschese-cmd/acboschese
   branch: main
 
+local_backend: true
+
 locale: it
 site_url: https://acboschese.netlify.app
 logo_url: https://acboschese.netlify.app/assets/brand/oval-gold.svg

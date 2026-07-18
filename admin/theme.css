@@ -1,0 +1,147 @@
+/* ============================================================
+   Tema del pannello /admin (Decap CMS) — riprende i colori e i
+   font del sito principale. Le classi di Decap sono generate
+   (css-hash-NomeComponente): puntiamo alla parte leggibile del
+   nome con [class*="NomeComponente"], stabile tra le versioni;
+   l'hash davanti può cambiare senza rompere queste regole.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Cormorant';
+  src: url('/assets/fonts/Cormorant-VF.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  --acb-green: #1E4430;
+  --acb-green-2: #185A3A;
+  --acb-gold: #BDA360;
+  --acb-cream: #FFFDE9;
+  --acb-cream-dim: #D3D2C4;
+  --acb-bg: #F6F5EF;
+  --acb-card: #FFFFFF;
+  --acb-border: #E4E1D6;
+}
+
+/* ---------- sfondo generale ---------- */
+body, [class*="AppMainContainer"] {
+  background: var(--acb-bg) !important;
+}
+
+/* ---------- login ---------- */
+[class*="StyledAuthenticationPage"] {
+  background: radial-gradient(120% 140% at 50% 0%, var(--acb-green-2) 0%, var(--acb-green) 55%, #12301F 100%) !important;
+}
+[class*="StyledAuthenticationPage"] [class*="CustomIconWrapper"] img { filter: drop-shadow(0 4px 24px rgba(0,0,0,.25)); }
+[class*="LoginButton"] {
+  background: var(--acb-gold) !important;
+  border-color: var(--acb-gold) !important;
+  color: var(--acb-green) !important;
+  font-weight: 700 !important;
+  border-radius: 999px !important;
+  transition: filter .2s ease, transform .2s ease;
+}
+[class*="LoginButton"]:hover { filter: brightness(1.08); transform: translateY(-1px); }
+[class*="GoBackButtonStyle"] { color: var(--acb-cream-dim) !important; }
+[class*="GoBackButtonStyle"]:hover { color: var(--acb-cream) !important; }
+
+/* ---------- header applicazione (Contenuti / Media) ---------- */
+[class*="AppHeader-css"], header[class*="AppHeader"] {
+  background: var(--acb-green) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(189,163,96,.25) !important;
+}
+[class*="AppHeaderContent"] { color: var(--acb-cream) !important; }
+[class*="AppHeaderNavList"] a, [class*="AppHeaderNavList"] button,
+[class*="AppHeaderButton"] {
+  color: var(--acb-cream-dim) !important;
+  font-weight: 600 !important;
+}
+[class*="AppHeaderButton"][aria-current="page"],
+[class*="AppHeaderButton"]:hover {
+  color: var(--acb-cream) !important;
+}
+[class*="AppHeaderQuickNewButton"] {
+  background: var(--acb-gold) !important;
+  color: var(--acb-green) !important;
+  border-radius: 999px !important;
+}
+
+/* ---------- barra laterale "Raccolte" ---------- */
+[class*="SidebarContainer"] {
+  background: var(--acb-green-2) !important;
+  border-right: 1px solid rgba(189,163,96,.2) !important;
+}
+[class*="SidebarHeading"] {
+  color: var(--acb-cream) !important;
+  font-family: 'Cormorant', serif !important;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 600 !important;
+}
+[class*="SidebarContainer"] a, [class*="SidebarContainer"] li, [class*="SidebarContainer"] span {
+  color: var(--acb-cream-dim) !important;
+}
+[class*="SidebarContainer"] input {
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.15) !important;
+  color: var(--acb-cream) !important;
+  border-radius: 8px !important;
+}
+[class*="SidebarContainer"] a[class*="active"],
+[class*="SidebarContainer"] [aria-current="page"] {
+  color: var(--acb-cream) !important;
+  border-left: 3px solid var(--acb-gold) !important;
+  background: rgba(189,163,96,.12) !important;
+}
+
+/* ---------- toolbar dell'editor (voce singola) ---------- */
+[class*="ToolbarContainer"] {
+  background: var(--acb-green) !important;
+  border-bottom: 1px solid rgba(189,163,96,.25) !important;
+}
+[class*="ToolbarContainer"] * { color: var(--acb-cream-dim); }
+[class*="ToolbarSectionBackLink"] { color: var(--acb-cream) !important; }
+[class*="PublishedButton"], [class*="publishedButton"] {
+  background: var(--acb-gold) !important;
+  color: var(--acb-green) !important;
+  border: none !important;
+  font-weight: 700 !important;
+  border-radius: 999px !important;
+}
+
+/* ---------- card di collezione ---------- */
+[class*="CollectionContainer"] { background: transparent !important; }
+[class*="CollectionTop"], h2 { font-family: 'Cormorant', serif; }
+
+/* ---------- etichette dei campi, in stile "eyebrow" del sito ---------- */
+[class*="FieldLabel"] {
+  color: var(--acb-green) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  font-size: 11px !important;
+}
+[class*="ControlTopbar"] { border-bottom-color: var(--acb-border) !important; }
+[class*="ControlContainer"] {
+  background: var(--acb-card) !important;
+  border: 1px solid var(--acb-border) !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+/* ---------- campi di input ---------- */
+input[type="text"], input[type="search"], input[type="url"], input[type="email"],
+textarea, select {
+  border-radius: 8px !important;
+  border: 1px solid var(--acb-border) !important;
+}
+input[type="text"]:focus, input[type="search"]:focus, textarea:focus, select:focus {
+  border-color: var(--acb-gold) !important;
+  box-shadow: 0 0 0 3px rgba(189,163,96,.25) !important;
+  outline: none !important;
+}
+
+/* ---------- bottoni generici dei widget (aggiungi blocco, ecc.) ---------- */
+button[class*="Button"] { border-radius: 8px; }

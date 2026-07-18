@@ -1,0 +1,112 @@
+{
+  "seo": {
+    "titolo": "Il Club — Audace Club Boschese 1928",
+    "descrizione": "La nuova brand identity dell'Audace Club Boschese: tradizione e innovazione verso il centenario del 2028. Bosco Marengo, Alessandria.",
+    "immagine": "assets/photos/club-scudetto-verde.webp"
+  },
+  "hero": {
+    "eyebrow": "Il Club — Est. 1928",
+    "titolo": "Il nostro\nnuovo *volto*",
+    "sottotitolo": "Vi presentiamo il nuovo volto del nostro brand: un'evoluzione che nasce dal desiderio di raccontare chi siamo e dove vogliamo andare."
+  },
+  "video": {
+    "src": "assets/video/boschese169.mp4",
+    "poster": "assets/photos/club-video-poster.webp"
+  },
+  "blocchi": [
+    {
+      "type": "manifesto",
+      "eyebrow": "01 — Identità visiva",
+      "testo": "Un linguaggio visivo più chiaro, forte e inclusivo: *tradizione* e *innovazione* che convivono.",
+      "paragrafi": [
+        "La nuova brand identity unisce tradizione e innovazione, valorizza le nostre radici e le proietta nel futuro. L'Audace Club Boschese festeggerà nel 2028 il suo centenario: un traguardo unico nella storia calcistica locale.",
+        "Per rafforzare la stabilità del club e renderlo più attrattivo per sponsor e giovani giocatori, è nato un rebranding che affonda le radici nell'identità culturale di Bosco Marengo."
+      ]
+    },
+    {
+      "type": "manifesto",
+      "eyebrow": "02 — Il contesto",
+      "testo": "Qui, dove nel 1566 nasceva il Complesso di *Santa Croce*, costruiamo un'identità che unisce sport, storia e cultura.",
+      "immagine": "assets/photos/club-wordmark.webp",
+      "immagineAlt": "Il wordmark Audace Club Boschese 1928 con la griglia di costruzione",
+      "aspetto": "quadrata",
+      "invertito": true,
+      "titoloSplit": "Le nostre due\n*anime*",
+      "paragrafiSplit": [
+        "Bosco Marengo custodisce un patrimonio storico che affonda le radici nel Rinascimento. Qui, nel 1566, Antonio Ghislieri divenne Papa Pio V e, insieme a Giorgio Vasari, diede vita al Complesso Monumentale di Santa Croce. Da questa eredità nascono i riferimenti visivi del brand, che reinterpretano colori, architetture e linguaggi tipografici del territorio in chiave contemporanea.",
+        "L'identità tipografica è costruita su tre caratteri che rappresentano le diverse anime del club. Rector, scelto per il logotipo, richiama la tipografia a caratteri mobili dell'epoca vasariana e valorizza il legame con il tardo Rinascimento. Ortus, ispirato ai caratteri blackletter dei sigilli papali, dà forma al monogramma, fondendo il richiamo storico con un'estetica capace di dialogare anche con l'immaginario contemporaneo. Avant-Garde, infine, proietta l'identità verso il futuro, rappresentando il settore giovanile e l'ambizione di una società in continua evoluzione."
+      ]
+    },
+    {
+      "type": "split",
+      "immagine": "assets/photos/club-palette.webp",
+      "immagineAlt": "La palette colori del club: verdi, neutri e oro",
+      "aspetto": "quadrata",
+      "invertito": false,
+      "eyebrow": "03 — La palette",
+      "titolo": "Verde come\nil *Bosco*",
+      "paragrafi": [
+        "La palette di colori è legata alla nostra storia: l'Audace Boschese nasce biancoverde e porta da sempre con sé l'iconografia di un albero, la stilizzazione del… Bosco.",
+        "L'abbiamo arricchita con altre sfumature di verde, due colori più neutri e una tonalità di oro, che nobilita il brand e ci prepara al centenario."
+      ]
+    },
+    {
+      "type": "stats",
+      "voci": [
+        { "numero": "1566", "etichetta": "Santa Croce — Vasari e Pio V" },
+        { "numero": "1928", "etichetta": "Fondazione dell'Audace" },
+        { "numero": "2028", "etichetta": "Il centenario" },
+        { "numero": "∞", "etichetta": "Sempre audaci" }
+      ]
+    },
+    {
+      "type": "split",
+      "spazioExtra": true,
+      "eyebrow": "04 — L'albero",
+      "eyebrowFuoriSplit": true,
+      "immagine": "assets/photos/club-crest.webp",
+      "immagineAlt": "Lo scudetto ricamato con il gelso sulla maglia verde",
+      "aspetto": "alta",
+      "invertito": false,
+      "titolo": "Il gelso ci\n*rappresenta*",
+      "paragrafi": [
+        "L'albero di gelso ci rappresenta sin dalla nascita. Racconta le nostre origini, le origini del nome. È iconico e simbolico, e descrive i nostri valori: siamo retti, solidi, eleganti.",
+        "Il vento ci può piegare, ma non ci abbatte. Nonostante le vicissitudini e le annate storte, giocare a Bosco non è mai semplice, per nessuno. E quella pianta è qui per ricordarcelo."
+      ]
+    },
+    {
+      "type": "split",
+      "immagine": "assets/photos/club-1928.webp",
+      "immagineAlt": "Il monogramma 1928 dedicato al centenario",
+      "aspetto": "quadrata",
+      "invertito": true,
+      "eyebrow": "05 — A un passo dal centenario",
+      "titolo": "Un brand\nnel *brand*",
+      "paragrafi": [
+        "Festeggeremo il centenario nel 2028: una data che significa molto per noi e che ci posiziona come una realtà storica del calcio di provincia. Non sono in tanti i club che possono festeggiare cento anni passati sotto lo stesso nome.",
+        "Per questo grande traguardo l'anno di fondazione è diventato un brand nel brand: un monogramma dedicato che ci ricorda ogni giorno quanta strada abbiamo fatto per arrivare fin qui."
+      ]
+    },
+    {
+      "type": "galleria",
+      "eyebrow": "Il sistema visivo",
+      "immagini": [
+        { "immagine": "assets/photos/club-sketches.webp", "alt": "Gli schizzi di studio del monogramma ACB" },
+        { "immagine": "assets/photos/club-strips.webp", "alt": "Il wordmark declinato sui colori della palette" },
+        { "immagine": "assets/photos/club-due-loghi.webp", "alt": "Lo scudetto storico e il nuovo sigillo a confronto" },
+        { "immagine": "assets/photos/club-poster-audaci.webp", "alt": "Il manifesto Sempre Audaci affisso in strada" },
+        { "immagine": "assets/photos/club-poster-stagione.webp", "alt": "Il manifesto della stagione 25/26 con maglia e sigillo" },
+        { "immagine": "assets/photos/club-sigilli.webp", "alt": "Il sigillo ACB declinato sui colori della palette" },
+        { "immagine": "assets/photos/club-seats.webp", "alt": "Il sigillo sui seggiolini verdi della tribuna" },
+        { "immagine": "assets/photos/club-badge-knit.webp", "alt": "Il badge del club sulla maglia knit" },
+        { "immagine": "assets/photos/club-matchday.webp", "alt": "La grafica matchday delle partite casalinghe" }
+      ]
+    }
+  ],
+  "cta": {
+    "titolo": "Dal *1928*",
+    "sottotitolo": "Vieni a vederci giocare · Via delle Ghiare, 1 — Bosco Marengo (AL)",
+    "link": "contatti.html",
+    "testoLink": "Contattaci →"
+  }
+}

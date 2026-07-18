@@ -37,3 +37,115 @@ collections:
       - { label: "Sottotitolo", name: "sottotitolo", widget: "text", required: false }
       - { label: "Immagine di apertura", name: "cover", widget: "image", required: false }
       - { label: "Testo", name: "body", widget: "markdown" }
+
+  - name: "sito"
+    label: "Pagine del sito"
+    files:
+      - name: "club"
+        label: "Il Club"
+        file: "content/club.json"
+        format: "json"
+        fields:
+          - label: "SEO"
+            name: "seo"
+            widget: "object"
+            fields:
+              - { label: "Titolo scheda browser", name: "titolo", widget: "string" }
+              - { label: "Descrizione", name: "descrizione", widget: "text" }
+              - { label: "Immagine di condivisione", name: "immagine", widget: "image", required: false }
+
+          - label: "Apertura pagina"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Etichetta", name: "eyebrow", widget: "string" }
+              - { label: "Titolo", name: "titolo", widget: "text", hint: "Vai a capo per la seconda riga, *parola* per il colore oro" }
+              - { label: "Sottotitolo", name: "sottotitolo", widget: "text" }
+
+          - label: "Video di apertura"
+            name: "video"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "File video", name: "src", widget: "file" }
+              - { label: "Immagine di anteprima (poster)", name: "poster", widget: "image", required: false }
+
+          - label: "Blocchi di contenuto"
+            name: "blocchi"
+            widget: "list"
+            summary: "{{fields.type}} — {{fields.eyebrow}}"
+            types:
+              - label: "Testo (manifesto)"
+                name: "manifesto"
+                widget: "object"
+                fields:
+                  - { label: "Etichetta", name: "eyebrow", widget: "string" }
+                  - { label: "Testo principale", name: "testo", widget: "text", hint: "*parola* per il colore oro" }
+                  - { label: "Paragrafi", name: "paragrafi", widget: "list", required: false, hint: "Usati solo se non c'è immagine qui sotto" }
+                  - { label: "Immagine (opzionale, apre uno split)", name: "immagine", widget: "image", required: false }
+                  - { label: "Testo alternativo immagine", name: "immagineAlt", widget: "string", required: false }
+                  - label: "Proporzioni immagine"
+                    name: "aspetto"
+                    widget: "select"
+                    required: false
+                    default: "quadrata"
+                    options:
+                      - { label: "Quadrata", value: "quadrata" }
+                      - { label: "Verticale", value: "alta" }
+                  - { label: "Immagine a sinistra (invertito)", name: "invertito", widget: "boolean", required: false, default: false }
+                  - { label: "Titolo dello split", name: "titoloSplit", widget: "text", required: false, hint: "Vai a capo per la seconda riga, *parola* per il colore oro" }
+                  - { label: "Paragrafi dello split", name: "paragrafiSplit", widget: "list", required: false }
+
+              - label: "Testo + immagine (split)"
+                name: "split"
+                widget: "object"
+                fields:
+                  - { label: "Immagine", name: "immagine", widget: "image" }
+                  - { label: "Testo alternativo immagine", name: "immagineAlt", widget: "string", required: false }
+                  - label: "Proporzioni immagine"
+                    name: "aspetto"
+                    widget: "select"
+                    required: false
+                    default: "quadrata"
+                    options:
+                      - { label: "Quadrata", value: "quadrata" }
+                      - { label: "Verticale", value: "alta" }
+                  - { label: "Immagine a sinistra (invertito)", name: "invertito", widget: "boolean", required: false, default: false }
+                  - { label: "Etichetta", name: "eyebrow", widget: "string", required: false }
+                  - { label: "Etichetta sopra l'immagine (invece che nel testo)", name: "eyebrowFuoriSplit", widget: "boolean", required: false, default: false }
+                  - { label: "Titolo", name: "titolo", widget: "text", hint: "Vai a capo per la seconda riga, *parola* per il colore oro" }
+                  - { label: "Paragrafi", name: "paragrafi", widget: "list" }
+                  - { label: "Spazio extra sopra questo blocco", name: "spazioExtra", widget: "boolean", required: false, default: false }
+
+              - label: "Statistiche"
+                name: "stats"
+                widget: "object"
+                fields:
+                  - label: "Voci"
+                    name: "voci"
+                    widget: "list"
+                    fields:
+                      - { label: "Numero (o simbolo, es. ∞)", name: "numero", widget: "string" }
+                      - { label: "Etichetta", name: "etichetta", widget: "string" }
+
+              - label: "Galleria (carosello)"
+                name: "galleria"
+                widget: "object"
+                fields:
+                  - { label: "Etichetta", name: "eyebrow", widget: "string", required: false }
+                  - label: "Immagini"
+                    name: "immagini"
+                    widget: "list"
+                    fields:
+                      - { label: "Immagine", name: "immagine", widget: "image" }
+                      - { label: "Testo alternativo", name: "alt", widget: "string", required: false }
+
+          - label: "Chiamata all'azione finale"
+            name: "cta"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Titolo", name: "titolo", widget: "text", hint: "*parola* per il colore oro" }
+              - { label: "Sottotitolo", name: "sottotitolo", widget: "string", required: false }
+              - { label: "Testo del link", name: "testoLink", widget: "string" }
+              - { label: "Link", name: "link", widget: "string" }

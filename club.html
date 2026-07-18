@@ -6,19 +6,31 @@
 <title>Il Club — Audace Club Boschese 1928</title>
 <meta name="description" content="La nuova brand identity dell'Audace Club Boschese: tradizione e innovazione verso il centenario del 2028. Bosco Marengo, Alessandria." />
 <meta name="theme-color" content="#1E4430" />
-<link rel="icon" href="assets/brand/monogram-green.svg" type="image/svg+xml" />
+<link rel="icon" href="/assets/brand/monogram-green.svg" type="image/svg+xml" />
 
 <meta property="og:title" content="Il Club — Audace Club Boschese 1928" />
-<meta property="og:description" content="La nuova brand identity del club: tradizione e innovazione verso il centenario." />
+<meta property="og:description" content="La nuova brand identity dell'Audace Club Boschese: tradizione e innovazione verso il centenario del 2028. Bosco Marengo, Alessandria." />
 <meta property="og:image" content="assets/photos/club-scudetto-verde.webp" />
 <meta property="og:type" content="website" />
 
-<link rel="preload" href="assets/fonts/Cormorant-VF.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="assets/site.css?v=21" />
+<link rel="preload" href="/assets/fonts/Cormorant-VF.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/site.css?v=21" />
+<style>
+  .article-body { max-width: 760px; }
+  .article-body p { font-size: 16px; line-height: 1.75; color: var(--cream-dim); margin-bottom: 22px; }
+  .article-body h2, .article-body h3, .article-body h4 { font-family: 'Cormorant', serif; font-weight: 500; color: var(--cream); text-transform: uppercase; line-height: 1.05; margin: 44px 0 18px; }
+  .article-body h2 { font-size: clamp(28px, 3.4vw, 46px); }
+  .article-body h3 { font-size: clamp(24px, 2.8vw, 36px); }
+  .article-body h4 { font-size: clamp(20px, 2.2vw, 28px); }
+  .article-body img { margin: 34px 0; }
+  .article-body blockquote { font-family: 'Cormorant', serif; font-weight: 500; font-size: clamp(22px, 2.6vw, 34px); line-height: 1.25; color: var(--cream); border-left: 2px solid var(--gold); padding-left: 24px; margin: 38px 0; }
+  .article-body ul { margin: 0 0 22px 20px; color: var(--cream-dim); line-height: 1.75; }
+  .article-body a { color: var(--gold); border-bottom: 1px solid rgba(189,163,96,0.4); }
+</style>
 
-<script src="assets/vendor/gsap.min.js"></script>
-<script src="assets/vendor/ScrollTrigger.min.js"></script>
-<script src="assets/vendor/lenis.min.js"></script>
+<script src="/assets/vendor/gsap.min.js"></script>
+<script src="/assets/vendor/ScrollTrigger.min.js"></script>
+<script src="/assets/vendor/lenis.min.js"></script>
 </head>
 <body>
 
@@ -31,29 +43,29 @@
 </div>
 
 <div class="loader" id="loader">
-  <img class="loader__mark" id="loaderMark" src="assets/brand/monogram-gold.svg" alt="ACB" />
+  <img class="loader__mark" id="loaderMark" src="/assets/brand/monogram-gold.svg" alt="ACB" />
   <div class="loader__count" id="count">0</div>
   <div class="loader__bar" id="bar"></div>
 </div>
 
 <nav class="nav" id="nav">
-  <a class="nav__brand" href="index.html">
-    <img src="assets/brand/monogram-white.svg" alt="Audace Club Boschese" />
+  <a class="nav__brand" href="/index.html">
+    <img src="/assets/brand/monogram-white.svg" alt="Audace Club Boschese" />
   </a>
   <div class="nav__links">
-    <a href="club.html" class="active">Il Club</a>
-    <a href="contatti.html">Contatti</a>
+    <a href="/club.html" class="active">Il Club</a>
+    <a href="/contatti.html">Contatti</a>
     <a href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati ↗</a>
-    <a class="nav__cta" href="diventa-partner.html">Diventa Partner</a>
+    <a class="nav__cta" href="/diventa-partner.html">Diventa Partner</a>
   </div>
   <div class="nav__burger" id="burger"><span></span><span></span><span></span></div>
 </nav>
 
 <div class="menu" id="menu">
-  <a href="club.html">Il Club</a>
-  <a href="contatti.html">Contatti</a>
+  <a href="/club.html">Il Club</a>
+  <a href="/contatti.html">Contatti</a>
   <a href="https://www.tuttocampo.it/" target="_blank" rel="noopener">Risultati</a>
-  <a href="diventa-partner.html">Diventa Partner</a>
+  <a href="/diventa-partner.html">Diventa Partner</a>
   <div class="menu__meta">
     <a class="label" href="https://www.instagram.com/audaceclubboschese1928/" target="_blank" rel="noopener">Instagram</a>
     <a class="label" href="https://www.tiktok.com/@acb1928" target="_blank" rel="noopener">TikTok</a>
@@ -62,21 +74,16 @@
 
 <main>
 
-  <!-- PAGE HERO -->
   <header class="phero">
     <div class="eyebrow label">Il Club — Est. 1928</div>
     <h1 class="display phero__title">Il nostro<br />nuovo <em>volto</em></h1>
     <p class="phero__sub">Vi presentiamo il nuovo volto del nostro brand: un'evoluzione che nasce dal desiderio di raccontare chi siamo e dove vogliamo andare.</p>
   </header>
-
-  <!-- FULL BLEED: video -->
   <section class="break break--short">
     <div class="break__media">
       <video src="assets/video/boschese169.mp4" autoplay muted loop playsinline preload="metadata" poster="assets/photos/club-video-poster.webp" aria-label="Video dell'Audace Club Boschese"></video>
     </div>
   </section>
-
-  <!-- 01 IDENTITÀ VISIVA -->
   <section class="sec">
     <div class="eyebrow label">01 — Identità visiva</div>
     <p class="manifest-text">Un linguaggio visivo più chiaro, forte e inclusivo: <em>tradizione</em> e <em>innovazione</em> che convivono.</p>
@@ -85,8 +92,6 @@
       <p>Per rafforzare la stabilità del club e renderlo più attrattivo per sponsor e giovani giocatori, è nato un rebranding che affonda le radici nell'identità culturale di Bosco Marengo.</p>
     </div>
   </section>
-
-  <!-- 02 IL CONTESTO -->
   <section class="sec" style="padding-top:0;">
     <div class="eyebrow label">02 — Il contesto</div>
     <p class="manifest-text">Qui, dove nel 1566 nasceva il Complesso di <em>Santa Croce</em>, costruiamo un'identità che unisce sport, storia e cultura.</p>
@@ -101,8 +106,6 @@
       </div>
     </div>
   </section>
-
-  <!-- 03 LA PALETTE -->
   <section class="sec" style="padding-top:0;">
     <div class="split">
       <div class="split__media" style="aspect-ratio: 1/1;">
@@ -116,8 +119,6 @@
       </div>
     </div>
   </section>
-
-  <!-- TIMELINE STATS -->
   <section class="sec" style="padding-top:0;">
     <div class="stats">
       <div class="stat"><div class="stat__num" data-count="1566">1566</div><div class="stat__label">Santa Croce — Vasari e Pio V</div></div>
@@ -126,8 +127,6 @@
       <div class="stat"><div class="stat__num">∞</div><div class="stat__label">Sempre audaci</div></div>
     </div>
   </section>
-
-  <!-- 04 L'ALBERO -->
   <section class="sec">
     <div class="eyebrow label">04 — L'albero</div>
     <div class="split">
@@ -141,8 +140,6 @@
       </div>
     </div>
   </section>
-
-  <!-- 05 UN BRAND NEL BRAND -->
   <section class="sec" style="padding-top:0;">
     <div class="split split--rev">
       <div class="split__media" style="aspect-ratio: 1/1;">
@@ -156,8 +153,6 @@
       </div>
     </div>
   </section>
-
-  <!-- CAROSELLO: il sistema visivo -->
   <section class="sec" style="padding-top:0;">
     <div class="eyebrow label">Il sistema visivo</div>
     <div class="carousel" id="carousel">
@@ -178,8 +173,6 @@
       </div>
     </div>
   </section>
-
-  <!-- CTA -->
   <section class="cta">
     <h2 class="display cta__big">Dal <em>1928</em></h2>
     <p class="cta__sub label">Vieni a vederci giocare · Via delle Ghiare, 1 — Bosco Marengo (AL)</p>
@@ -188,7 +181,7 @@
 
   <footer>
     <div class="foot__col foot__brand">
-      <img src="assets/brand/oval-gold.svg" alt="Audace Club Boschese 1928" />
+      <img src="/assets/brand/oval-gold.svg" alt="Audace Club Boschese 1928" />
       <div>
         <p style="font-family:'Cormorant',serif;font-size:16px;">Audace Club Boschese</p>
         <p class="label" style="color:var(--gold);">#sempreaudaci</p>
@@ -214,6 +207,6 @@
 
 </main>
 
-<script src="assets/site.js?v=20"></script>
+<script src="/assets/site.js?v=20"></script>
 </body>
 </html>

@@ -21,8 +21,10 @@
   --acb-gold: #BDA360;
   --acb-cream: #FFFDE9;
   --acb-cream-dim: #D3D2C4;
-  --acb-bg: #F3F1E9;
+  --acb-bg: #F5F3EB;
   --acb-card: #FFFFFF;
+  --acb-ink: #221F1A;
+  --acb-ink-dim: #8A8577;
   --acb-border: #E7E3D4;
   --acb-teal: #3B6E71;
   --acb-clay: #A85C3B;
@@ -30,6 +32,12 @@
   --acb-shadow-md: 0 6px 20px rgba(30,68,48,.10), 0 2px 6px rgba(30,68,48,.06);
   --acb-shadow-lg: 0 16px 40px rgba(30,68,48,.16), 0 4px 12px rgba(30,68,48,.08);
   --acb-radius: 12px;
+  /* easing "morbido": accelera piano, arriva con un filo di rimbalzo */
+  --acb-ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
 }
 
 * { scrollbar-color: var(--acb-gold) transparent; }
@@ -175,8 +183,11 @@ body, [class*="AppMainContainer"] {
   font-weight: 600 !important;
   border: none !important;
   box-shadow: var(--acb-shadow-sm) !important;
+  padding: 10px 20px !important;
+  white-space: nowrap !important;
+  transition: background .15s var(--acb-ease), transform .15s var(--acb-ease), box-shadow .15s var(--acb-ease);
 }
-[class*="CollectionTopNewButton"]:hover { background: var(--acb-green-2) !important; transform: translateY(-1px); }
+[class*="CollectionTopNewButton"]:hover { background: var(--acb-green-2) !important; transform: translateY(-1px); box-shadow: var(--acb-shadow-md) !important; }
 
 /* righe della lista voci (es. "Il Club") come card con rilievo */
 [class*="CardsGrid"] { gap: 12px !important; }
@@ -198,35 +209,98 @@ body, [class*="AppMainContainer"] {
   color: var(--acb-green) !important;
 }
 
-/* ---------- etichette dei campi: tag pieno, non più il chip grigio di default ---------- */
-[class*="FieldLabel"] {
-  background: var(--acb-green) !important;
-  color: var(--acb-cream) !important;
-  font-weight: 700 !important;
+/* ============================================================
+   Gerarchia dei campi: un GRUPPO (contiene altri campi: SEO,
+   Apertura pagina, Blocchi...) è una vera sezione con badge a
+   icona e titolo in Cormorant; una FOGLIA (Titolo, Data, un
+   singolo testo) è leggera — nessuna cornice, solo un'etichetta
+   minuta sopra il campo, per lasciare risaltare il contenuto.
+   La distinzione è :has() puro (niente JS, niente timing da
+   inseguire: è sempre corretta a ogni re-render di Decap).
+   ============================================================ */
+[class*="ControlContainer"] {
+  transition: box-shadow .2s var(--acb-ease), border-color .2s var(--acb-ease);
+}
+
+/* -- foglia: quasi nessuna chrome, solo ritmo verticale -- */
+[class*="ControlContainer"]:not(:has([class*="ControlContainer"])) {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 22px !important;
+}
+[class*="ControlContainer"]:not(:has([class*="ControlContainer"])) > [class*="ControlTopbar"] {
+  border-bottom: none !important;
+  padding: 0 0 7px !important;
+  background: none !important;
+}
+[class*="ControlContainer"]:not(:has([class*="ControlContainer"])) > [class*="ControlTopbar"] [class*="FieldLabel"] {
+  background: none !important;
+  color: var(--acb-ink-dim) !important;
+  font-weight: 600 !important;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: .06em;
   font-size: 10.5px !important;
+  padding: 0 !important;
+  box-shadow: none !important;
   display: inline-flex !important;
   align-items: center;
-  gap: 7px;
-  padding: 5px 11px !important;
-  border-radius: 999px !important;
-  box-shadow: var(--acb-shadow-sm);
+  gap: 6px;
 }
-[class*="ControlTopbar"] [class*="FieldLabel"] .acb-field-icon { color: var(--acb-gold); width: 14px; height: 14px; }
-[class*="ControlTopbar"] {
-  border-bottom: none !important;
-  padding: 16px 16px 10px !important;
-  background: linear-gradient(180deg, rgba(189,163,96,.07), transparent) !important;
+[class*="ControlContainer"]:not(:has([class*="ControlContainer"])) > [class*="ControlTopbar"] [class*="FieldLabel"]::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--acb-gold);
+  flex: none;
 }
-[class*="ControlContainer"] {
+
+/* -- gruppo: vera card di sezione -- */
+[class*="ControlContainer"]:has([class*="ControlContainer"]) {
   background: var(--acb-card) !important;
   border: 1px solid var(--acb-border) !important;
-  border-top: 3px solid var(--acb-gold) !important;
   border-radius: var(--acb-radius) !important;
   overflow: hidden;
+  box-shadow: var(--acb-shadow-sm) !important;
+  margin-bottom: 20px !important;
+}
+[class*="ControlContainer"]:has([class*="ControlContainer"]):focus-within {
   box-shadow: var(--acb-shadow-md) !important;
-  margin-bottom: 18px !important;
+  border-color: rgba(189,163,96,.4) !important;
+}
+[class*="ControlContainer"]:has([class*="ControlContainer"]) > [class*="ControlTopbar"] {
+  border-bottom: 1px solid var(--acb-border) !important;
+  padding: 15px 18px !important;
+  background: linear-gradient(180deg, rgba(189,163,96,.06), transparent) !important;
+}
+[class*="ControlContainer"]:has([class*="ControlContainer"]) > [class*="ControlTopbar"] [class*="FieldLabel"] {
+  background: none !important;
+  color: var(--acb-green) !important;
+  font-family: 'Cormorant', serif !important;
+  font-weight: 600 !important;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 18px !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+}
+[class*="ControlContainer"]:has([class*="ControlContainer"]) > [class*="ControlTopbar"] .acb-field-icon {
+  width: 28px; height: 28px; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(189,163,96,.14); color: var(--acb-gold);
+  border-radius: 8px; padding: 6px;
+}
+/* i campi dentro un gruppo respirano un po' di più ai lati */
+[class*="ControlContainer"]:has([class*="ControlContainer"]) > div > [class*="ControlContainer"] { padding-left: 18px !important; padding-right: 18px !important; }
+[class*="ControlContainer"]:has([class*="ControlContainer"]) > div > [class*="ControlContainer"]:last-child { padding-bottom: 18px !important; }
+[class*="ControlContainer"]:has([class*="ControlContainer"]) > div > [class*="ControlContainer"]:first-child { padding-top: 6px !important; }
+
+/* freccia di collapse: ruota morbida invece di scattare */
+[class*="ControlContainer"] svg[class*="Icon"], [class*="ExpandButton"] svg {
+  transition: transform .25s var(--acb-ease);
 }
 
 /* ---------- campi di input ---------- */
@@ -234,7 +308,11 @@ input[type="text"], input[type="search"], input[type="url"], input[type="email"]
 textarea, select {
   border-radius: 8px !important;
   border: 1px solid var(--acb-border) !important;
-  transition: border-color .15s ease, box-shadow .15s ease;
+  color: var(--acb-ink) !important;
+  transition: border-color .2s var(--acb-ease), box-shadow .2s var(--acb-ease), background .2s var(--acb-ease);
+}
+input[type="text"]:hover, input[type="search"]:hover, textarea:hover, select:hover {
+  border-color: rgba(189,163,96,.5) !important;
 }
 input[type="text"]:focus, input[type="search"]:focus, textarea:focus, select:focus {
   border-color: var(--acb-gold) !important;
@@ -243,25 +321,53 @@ input[type="text"]:focus, input[type="search"]:focus, textarea:focus, select:foc
 }
 
 /* ---------- bottoni generici dei widget (aggiungi blocco, ecc.) ---------- */
-button[class*="Button"] { border-radius: 8px; transition: transform .12s ease, box-shadow .12s ease; }
+button[class*="Button"] {
+  border-radius: 8px;
+  transition: transform .15s var(--acb-ease), box-shadow .15s var(--acb-ease), filter .15s var(--acb-ease), background .15s var(--acb-ease);
+}
+button[class*="Button"]:active { transform: scale(.96); }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--acb-gold) !important;
+  outline-offset: 2px;
+}
+/* azioni distruttive: discrete finché non ci passi sopra */
+[class*="DeleteButton"], button[class*="Delete"] {
+  background: transparent !important;
+  color: #B84A3A !important;
+  border: 1px solid rgba(184,74,58,.35) !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  transition: background .15s var(--acb-ease), color .15s var(--acb-ease);
+}
+[class*="DeleteButton"]:hover, button[class*="Delete"]:hover {
+  background: #B84A3A !important;
+  color: #fff !important;
+  border-color: #B84A3A !important;
+}
 
 /* ============================================================
    Lista "Blocchi di contenuto": badge colorato + icona per tipo,
    card con bordo di accento invece della riga bianca piatta.
    ============================================================ */
+@keyframes acbRise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
 [class*="SortableListItem"] {
   border: 1px solid var(--acb-border) !important;
   border-radius: 10px !important;
   overflow: hidden;
   margin-bottom: 10px !important;
   box-shadow: var(--acb-shadow-sm);
-  transition: box-shadow .15s ease, border-color .15s ease;
+  transition: box-shadow .2s var(--acb-ease), border-color .2s var(--acb-ease), transform .2s var(--acb-ease);
+  animation: acbRise .35s var(--acb-ease) both;
 }
-[class*="SortableListItem"]:hover { box-shadow: var(--acb-shadow-md); }
+[class*="SortableListItem"]:hover { box-shadow: var(--acb-shadow-md); transform: translateY(-1px); }
 [class*="SortableListItem"][data-acb-block="testo"]        { border-left: 4px solid var(--acb-green-2) !important; }
 [class*="SortableListItem"][data-acb-block="split"]        { border-left: 4px solid var(--acb-gold) !important; }
 [class*="SortableListItem"][data-acb-block="statistiche"]  { border-left: 4px solid var(--acb-teal) !important; }
 [class*="SortableListItem"][data-acb-block="galleria"]     { border-left: 4px solid var(--acb-clay) !important; }
+/* l'etichetta col nome tecnico del tipo ("Testo (manifesto)") è ridondante:
+   badge + titolo qui sotto dicono già la stessa cosa in modo più leggibile */
+[class*="SortableListItem"] > [class*="FieldLabel"] { display: none !important; }
 
 [class*="NestedObjectLabel"] {
   display: flex !important;
@@ -274,7 +380,9 @@ button[class*="Button"] { border-radius: 8px; transition: transform .12s ease, b
   display: inline-flex; align-items: center; justify-content: center;
   width: 26px; height: 26px; border-radius: 8px; flex: none;
   background: rgba(24,90,58,.10); color: var(--acb-green-2);
+  transition: transform .2s var(--acb-ease);
 }
+[class*="SortableListItem"]:hover .acb-badge { transform: scale(1.08) rotate(-4deg); }
 .acb-badge svg { width: 15px; height: 15px; }
 [data-acb-block="split"] .acb-badge       { background: rgba(189,163,96,.18); color: #8a723f; }
 [data-acb-block="statistiche"] .acb-badge { background: rgba(59,110,113,.14); color: var(--acb-teal); }
@@ -282,7 +390,8 @@ button[class*="Button"] { border-radius: 8px; transition: transform .12s ease, b
 .acb-block-title { font-family: 'Cormorant', serif; font-size: 16px; font-weight: 600; letter-spacing: .01em; }
 
 [class*="StyledListItemTopBar"] { background: var(--acb-card) !important; }
-[class*="DragIconContainer"] { opacity: .45; }
+[class*="DragIconContainer"] { opacity: .45; transition: opacity .15s ease; cursor: grab; }
+[class*="SortableListItem"]:hover [class*="DragIconContainer"] { opacity: .8; }
 
 /* ============================================================
    Cornice "browser" attorno all'anteprima + toggle desktop/mobile

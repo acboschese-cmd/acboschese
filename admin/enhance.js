@@ -50,7 +50,8 @@
     'APERTURA PAGINA': 'apertura',
     'VIDEO DI APERTURA (OPZIONALE)': 'video',
     'BLOCCHI DI CONTENUTO': 'testo',
-    "CHIAMATA ALL'AZIONE FINALE": 'cta'
+    "CHIAMATA ALL'AZIONE FINALE": 'cta',
+    "CHIAMATA ALL'AZIONE FINALE (OPZIONALE)": 'cta'
   };
   function enhanceFieldGroups(root) {
     root.querySelectorAll('[class*="ControlTopbar"] [class*="FieldLabel"]:not([data-acb-done])').forEach(function (el) {
@@ -105,6 +106,9 @@
       });
     });
   }
+
+  /* la distinzione campo-gruppo/campo-foglia è :has() puro in theme.css,
+     niente JS: sempre corretta a ogni re-render, senza rincorrere i timing */
 
   function run() {
     enhanceBlockItems(document);

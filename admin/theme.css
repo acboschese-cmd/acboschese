@@ -198,26 +198,35 @@ body, [class*="AppMainContainer"] {
   color: var(--acb-green) !important;
 }
 
-/* ---------- etichette dei campi, in stile "eyebrow" del sito ---------- */
+/* ---------- etichette dei campi: tag pieno, non più il chip grigio di default ---------- */
 [class*="FieldLabel"] {
-  color: var(--acb-green) !important;
+  background: var(--acb-green) !important;
+  color: var(--acb-cream) !important;
   font-weight: 700 !important;
   text-transform: uppercase;
-  letter-spacing: .07em;
-  font-size: 11px !important;
-  display: flex !important;
+  letter-spacing: .08em;
+  font-size: 10.5px !important;
+  display: inline-flex !important;
   align-items: center;
   gap: 7px;
+  padding: 5px 11px !important;
+  border-radius: 999px !important;
+  box-shadow: var(--acb-shadow-sm);
 }
-[class*="ControlTopbar"] [class*="FieldLabel"] .acb-field-icon { color: var(--acb-gold); width: 16px; height: 16px; }
-[class*="ControlTopbar"] { border-bottom-color: var(--acb-border) !important; padding: 14px 16px !important; }
+[class*="ControlTopbar"] [class*="FieldLabel"] .acb-field-icon { color: var(--acb-gold); width: 14px; height: 14px; }
+[class*="ControlTopbar"] {
+  border-bottom: none !important;
+  padding: 16px 16px 10px !important;
+  background: linear-gradient(180deg, rgba(189,163,96,.07), transparent) !important;
+}
 [class*="ControlContainer"] {
   background: var(--acb-card) !important;
   border: 1px solid var(--acb-border) !important;
+  border-top: 3px solid var(--acb-gold) !important;
   border-radius: var(--acb-radius) !important;
   overflow: hidden;
-  box-shadow: var(--acb-shadow-sm);
-  margin-bottom: 14px !important;
+  box-shadow: var(--acb-shadow-md) !important;
+  margin-bottom: 18px !important;
 }
 
 /* ---------- campi di input ---------- */

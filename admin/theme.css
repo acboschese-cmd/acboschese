@@ -1,11 +1,10 @@
 /* ============================================================
-   Tema del pannello /admin (Decap CMS) — riprende i colori e i
-   font del sito principale. Le classi di Decap sono generate
-   (css-hash-NomeComponente): puntiamo alla parte leggibile del
-   nome con [class*="NomeComponente"], stabile tra le versioni;
-   l'hash davanti può cambiare senza rompere queste regole.
-   Le classi "acb-*" sono aggiunte da admin/enhance.js (icone,
-   badge di tipo blocco, cornice dell'anteprima).
+   Tema del pannello /admin (Decap CMS) — dark, a bento. Le classi
+   di Decap sono generate (css-hash-NomeComponente): puntiamo alla
+   parte leggibile del nome con [class*="NomeComponente"], stabile
+   tra le versioni; l'hash davanti può cambiare senza rompere
+   queste regole. Le classi "acb-*" sono aggiunte da enhance.js
+   (icone, badge di tipo blocco, cornice dell'anteprima).
    ============================================================ */
 
 @font-face {
@@ -15,23 +14,31 @@
   font-display: swap;
 }
 
+html { color-scheme: dark; }
 :root {
   --acb-green: #1E4430;
-  --acb-green-2: #185A3A;
-  --acb-gold: #BDA360;
-  --acb-cream: #FFFDE9;
-  --acb-cream-dim: #D3D2C4;
-  --acb-bg: #F5F3EB;
-  --acb-card: #FFFFFF;
-  --acb-ink: #221F1A;
-  --acb-ink-dim: #8A8577;
-  --acb-border: #E7E3D4;
-  --acb-teal: #3B6E71;
-  --acb-clay: #A85C3B;
-  --acb-shadow-sm: 0 1px 2px rgba(30,68,48,.06), 0 1px 1px rgba(30,68,48,.04);
-  --acb-shadow-md: 0 6px 20px rgba(30,68,48,.10), 0 2px 6px rgba(30,68,48,.06);
-  --acb-shadow-lg: 0 16px 40px rgba(30,68,48,.16), 0 4px 12px rgba(30,68,48,.08);
-  --acb-radius: 12px;
+  --acb-green-2: #2A6B47;
+  --acb-gold: #CDB27C;
+  --acb-cream: #F4F1E7;
+  --acb-cream-dim: #A6A395;
+
+  /* superfici scure — canvas quasi nero, card un filo più chiare */
+  --acb-chrome: #12140E;
+  --acb-bg: #0F110C;
+  --acb-card: #191C15;
+  --acb-card-hi: #20241B;
+  --acb-ink: #F1EEE3;
+  --acb-ink-dim: #8C8B7D;
+  --acb-border: rgba(255,255,255,.08);
+  --acb-border-hi: rgba(255,255,255,.16);
+
+  --acb-teal: #5B9C9F;
+  --acb-clay: #D08659;
+
+  --acb-shadow-sm: 0 1px 2px rgba(0,0,0,.35);
+  --acb-shadow-md: 0 10px 28px rgba(0,0,0,.45);
+  --acb-shadow-lg: 0 24px 60px rgba(0,0,0,.55);
+  --acb-radius: 16px;
   /* easing "morbido": accelera piano, arriva con un filo di rimbalzo */
   --acb-ease: cubic-bezier(.22, .61, .36, 1);
 }
@@ -42,24 +49,29 @@
 
 * { scrollbar-color: var(--acb-gold) transparent; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-thumb { background: rgba(189,163,96,.45); border-radius: 999px; border: 2px solid transparent; background-clip: padding-box; }
-::-webkit-scrollbar-thumb:hover { background: rgba(189,163,96,.7); background-clip: padding-box; }
+::-webkit-scrollbar-thumb { background: rgba(205,178,124,.35); border-radius: 999px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: rgba(205,178,124,.55); background-clip: padding-box; }
 
 /* ---------- sfondo generale ---------- */
 body, [class*="AppMainContainer"] {
   background: var(--acb-bg) !important;
+  color-scheme: dark;
 }
-[class*="AppMainContainer"] { background-image: radial-gradient(rgba(30,68,48,.045) 1px, transparent 1px) !important; background-size: 22px 22px !important; }
+[class*="AppMainContainer"] { background-image: radial-gradient(rgba(255,255,255,.03) 1px, transparent 1px) !important; background-size: 22px 22px !important; }
+/* pannelli interni dell'editor con sfondo chiaro proprio (Decap non lo eredita
+   dal canvas): container generico, e il riquadro "nessuna anteprima" per le
+   collezioni senza template custom (tutte tranne "Il Club") */
+[class*="EditorContainer"], [class*="NoPreviewContainer"] { background: var(--acb-bg) !important; }
 
 /* ---------- login ---------- */
 [class*="StyledAuthenticationPage"] {
-  background: radial-gradient(120% 140% at 50% 0%, var(--acb-green-2) 0%, var(--acb-green) 55%, #12301F 100%) !important;
+  background: radial-gradient(120% 140% at 50% 0%, #182a1e 0%, #0F110C 60%) !important;
 }
-[class*="StyledAuthenticationPage"] [class*="CustomIconWrapper"] img { filter: drop-shadow(0 4px 24px rgba(0,0,0,.25)); }
+[class*="StyledAuthenticationPage"] [class*="CustomIconWrapper"] img { filter: drop-shadow(0 4px 24px rgba(0,0,0,.4)); }
 [class*="LoginButton"] {
   background: var(--acb-gold) !important;
   border-color: var(--acb-gold) !important;
-  color: var(--acb-green) !important;
+  color: #201A0C !important;
   font-weight: 700 !important;
   border-radius: 999px !important;
   box-shadow: var(--acb-shadow-md) !important;
@@ -71,20 +83,21 @@ body, [class*="AppMainContainer"] {
 
 /* ---------- header applicazione (Contenuti / Media) ---------- */
 [class*="AppHeader-css"], header[class*="AppHeader"] {
-  background: var(--acb-green) !important;
-  box-shadow: 0 2px 12px rgba(0,0,0,.15) !important;
-  border-bottom: 1px solid rgba(189,163,96,.25) !important;
+  background: var(--acb-chrome) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--acb-border) !important;
   position: relative;
   z-index: 20;
 }
 [class*="AppHeaderContent"] { color: var(--acb-cream) !important; }
 [class*="AppHeaderNavList"] a, [class*="AppHeaderNavList"] button,
 [class*="AppHeaderButton"] {
-  color: var(--acb-cream-dim) !important;
+  color: var(--acb-ink-dim) !important;
   font-weight: 600 !important;
   display: inline-flex !important;
   align-items: center;
   gap: 6px;
+  transition: color .15s var(--acb-ease);
 }
 [class*="AppHeaderButton"][aria-current="page"],
 [class*="AppHeaderButton"]:hover {
@@ -92,7 +105,7 @@ body, [class*="AppMainContainer"] {
 }
 [class*="AppHeaderQuickNewButton"] {
   background: var(--acb-gold) !important;
-  color: var(--acb-green) !important;
+  color: #201A0C !important;
   border-radius: 999px !important;
   font-weight: 700 !important;
   box-shadow: var(--acb-shadow-sm) !important;
@@ -102,24 +115,23 @@ body, [class*="AppMainContainer"] {
 
 /* ---------- barra laterale "Raccolte" ---------- */
 [class*="SidebarContainer"] {
-  background: linear-gradient(180deg, var(--acb-green-2), var(--acb-green) 60%) !important;
-  border-right: none !important;
-  box-shadow: 4px 0 20px rgba(0,0,0,.10);
+  background: var(--acb-chrome) !important;
+  border-right: 1px solid var(--acb-border) !important;
+  box-shadow: none;
   position: relative;
   z-index: 15;
   padding-top: 4px !important;
 }
 .acb-sidebar-brand { display: flex; justify-content: center; padding: 22px 0 6px; }
-.acb-sidebar-brand img { width: 46px; height: 46px; opacity: .92; filter: drop-shadow(0 2px 8px rgba(0,0,0,.3)); }
+.acb-sidebar-brand img { width: 40px; height: 40px; opacity: .95; }
 [class*="SidebarHeading"] {
-  color: var(--acb-cream) !important;
+  color: var(--acb-ink-dim) !important;
   font-family: 'Cormorant', serif !important;
   text-transform: uppercase;
-  letter-spacing: .12em;
+  letter-spacing: .14em;
   font-weight: 600 !important;
   text-align: center;
-  font-size: 13px !important;
-  opacity: .75;
+  font-size: 12px !important;
 }
 [class*="SidebarContainer"] a, [class*="SidebarContainer"] li, [class*="SidebarContainer"] span {
   color: var(--acb-cream-dim) !important;
@@ -128,41 +140,51 @@ body, [class*="AppMainContainer"] {
   display: flex !important;
   align-items: center;
   gap: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin: 2px 10px;
-  padding: 9px 10px !important;
-  transition: background .15s ease, color .15s ease;
+  padding: 9px 11px !important;
+  transition: background .15s var(--acb-ease), color .15s var(--acb-ease);
 }
-[class*="SidebarContainer"] a:hover { background: rgba(255,255,255,.06) !important; color: var(--acb-cream) !important; }
+[class*="SidebarContainer"] a:hover { background: rgba(255,255,255,.05) !important; color: var(--acb-cream) !important; }
 [class*="SidebarContainer"] input {
-  background: rgba(255,255,255,.08) !important;
-  border: 1px solid rgba(255,255,255,.15) !important;
+  background: rgba(255,255,255,.05) !important;
+  border: 1px solid var(--acb-border) !important;
   color: var(--acb-cream) !important;
   border-radius: 999px !important;
 }
 [class*="SidebarContainer"] a[class*="active"],
 [class*="SidebarContainer"] [aria-current="page"] {
   color: var(--acb-cream) !important;
-  background: rgba(189,163,96,.16) !important;
-  box-shadow: inset 3px 0 0 var(--acb-gold);
+  background: rgba(205,178,124,.12) !important;
+  box-shadow: inset 2px 0 0 var(--acb-gold);
 }
-.acb-field-icon { display: inline-flex; flex: none; width: 17px; height: 17px; opacity: .85; }
+.acb-field-icon { display: inline-flex; flex: none; width: 17px; height: 17px; opacity: .8; }
 .acb-field-icon svg { width: 100%; height: 100%; }
-[class*="SidebarContainer"] .acb-field-icon { width: 18px; height: 18px; }
+[class*="SidebarContainer"] .acb-field-icon { width: 17px; height: 17px; }
 
 /* ---------- toolbar dell'editor (voce singola) ---------- */
 [class*="ToolbarContainer"] {
-  background: var(--acb-green) !important;
-  border-bottom: 1px solid rgba(189,163,96,.25) !important;
-  box-shadow: 0 2px 12px rgba(0,0,0,.15) !important;
+  background: var(--acb-chrome) !important;
+  border-bottom: 1px solid var(--acb-border) !important;
+  box-shadow: none !important;
   position: relative;
   z-index: 20;
 }
-[class*="ToolbarContainer"] * { color: var(--acb-cream-dim); }
-[class*="ToolbarSectionBackLink"] { color: var(--acb-cream) !important; }
+[class*="ToolbarContainer"] * { color: var(--acb-ink-dim); }
+/* la freccia "indietro" e il nome della raccolta erano illeggibili: colore scuro
+   di Decap sopra sfondo scuro nostro, con specificità pari alla nostra regola
+   universale — qui vinciamo esplicitamente */
+[class*="ToolbarContainer"] [class*="BackArrow"],
+[class*="ToolbarContainer"] [class*="BackCollection"],
+[class*="ToolbarSectionBackLink"] {
+  color: var(--acb-cream) !important;
+}
+[class*="ToolbarContainer"] [class*="BackCollection"] { opacity: .7; }
+[class*="ToolbarSectionBackLink"]:hover [class*="BackCollection"] { opacity: 1; }
+[class*="BackStatus"] { color: #7FD68A !important; }
 [class*="PublishedButton"], [class*="publishedButton"] {
   background: var(--acb-gold) !important;
-  color: var(--acb-green) !important;
+  color: #201A0C !important;
   border: none !important;
   font-weight: 700 !important;
   border-radius: 999px !important;
@@ -174,45 +196,46 @@ body, [class*="AppMainContainer"] {
 /* ---------- card di collezione ---------- */
 [class*="CollectionContainer"] { background: transparent !important; }
 [class*="CollectionTop"], h2 { font-family: 'Cormorant', serif; }
-[class*="CollectionTop"] { padding: 28px 0 18px !important; }
-[class*="CollectionTop"] h2 { font-size: 32px !important; color: var(--acb-green); }
+[class*="CollectionTopContainer"] { background: transparent !important; padding: 28px 0 18px !important; box-shadow: none !important; }
+[class*="CollectionTopHeading"] { font-size: 32px !important; color: var(--acb-cream) !important; }
 [class*="CollectionTopNewButton"] {
-  background: var(--acb-green) !important;
-  color: var(--acb-cream) !important;
+  background: var(--acb-gold) !important;
+  color: #201A0C !important;
   border-radius: 999px !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   border: none !important;
   box-shadow: var(--acb-shadow-sm) !important;
   padding: 10px 20px !important;
   white-space: nowrap !important;
-  transition: background .15s var(--acb-ease), transform .15s var(--acb-ease), box-shadow .15s var(--acb-ease);
+  transition: filter .15s var(--acb-ease), transform .15s var(--acb-ease), box-shadow .15s var(--acb-ease);
 }
-[class*="CollectionTopNewButton"]:hover { background: var(--acb-green-2) !important; transform: translateY(-1px); box-shadow: var(--acb-shadow-md) !important; }
+[class*="CollectionTopNewButton"]:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: var(--acb-shadow-md) !important; }
 
-/* righe della lista voci (es. "Il Club") come card con rilievo */
-[class*="CardsGrid"] { gap: 12px !important; }
+/* righe della lista voci (es. "Il Club") — bento: card scure con angoli morbidi */
+[class*="CardsGrid"] { gap: 14px !important; }
 [class*="ListCard-card"] {
+  background: var(--acb-card) !important;
   border: 1px solid var(--acb-border) !important;
   border-radius: var(--acb-radius) !important;
   box-shadow: var(--acb-shadow-sm) !important;
-  transition: transform .15s ease, box-shadow .15s ease;
+  transition: transform .15s var(--acb-ease), box-shadow .15s var(--acb-ease), border-color .15s var(--acb-ease);
   overflow: hidden;
 }
 [class*="ListCard-card"]:hover {
   transform: translateY(-2px);
   box-shadow: var(--acb-shadow-md) !important;
-  border-color: rgba(189,163,96,.4) !important;
+  border-color: var(--acb-border-hi) !important;
 }
-[class*="ListCard-card"] [class*="CardHeading"] {
+[class*="ListCard-card"] * {
+  color: var(--acb-cream) !important;
   font-family: 'Cormorant', serif !important;
   font-weight: 600 !important;
-  color: var(--acb-green) !important;
 }
 
 /* ============================================================
    Gerarchia dei campi: un GRUPPO (contiene altri campi: SEO,
-   Apertura pagina, Blocchi...) è una vera sezione con badge a
-   icona e titolo in Cormorant; una FOGLIA (Titolo, Data, un
+   Apertura pagina, Blocchi...) è una vera sezione bento con badge
+   a icona e titolo in Cormorant; una FOGLIA (Titolo, Data, un
    singolo testo) è leggera — nessuna cornice, solo un'etichetta
    minuta sopra il campo, per lasciare risaltare il contenuto.
    La distinzione è :has() puro (niente JS, niente timing da
@@ -255,7 +278,7 @@ body, [class*="AppMainContainer"] {
   flex: none;
 }
 
-/* -- gruppo: vera card di sezione -- */
+/* -- gruppo: vera card bento -- */
 [class*="ControlContainer"]:has([class*="ControlContainer"]) {
   background: var(--acb-card) !important;
   border: 1px solid var(--acb-border) !important;
@@ -266,16 +289,16 @@ body, [class*="AppMainContainer"] {
 }
 [class*="ControlContainer"]:has([class*="ControlContainer"]):focus-within {
   box-shadow: var(--acb-shadow-md) !important;
-  border-color: rgba(189,163,96,.4) !important;
+  border-color: var(--acb-border-hi) !important;
 }
 [class*="ControlContainer"]:has([class*="ControlContainer"]) > [class*="ControlTopbar"] {
   border-bottom: 1px solid var(--acb-border) !important;
   padding: 15px 18px !important;
-  background: linear-gradient(180deg, rgba(189,163,96,.06), transparent) !important;
+  background: rgba(205,178,124,.05) !important;
 }
 [class*="ControlContainer"]:has([class*="ControlContainer"]) > [class*="ControlTopbar"] [class*="FieldLabel"] {
   background: none !important;
-  color: var(--acb-green) !important;
+  color: var(--acb-cream) !important;
   font-family: 'Cormorant', serif !important;
   font-weight: 600 !important;
   text-transform: none;
@@ -288,10 +311,8 @@ body, [class*="AppMainContainer"] {
   gap: 10px;
 }
 [class*="ControlContainer"]:has([class*="ControlContainer"]) > [class*="ControlTopbar"] .acb-field-icon {
-  width: 28px; height: 28px; flex: none;
-  display: inline-flex; align-items: center; justify-content: center;
-  background: rgba(189,163,96,.14); color: var(--acb-gold);
-  border-radius: 8px; padding: 6px;
+  width: 16px; height: 16px; flex: none;
+  color: var(--acb-gold);
 }
 /* i campi dentro un gruppo respirano un po' di più ai lati */
 [class*="ControlContainer"]:has([class*="ControlContainer"]) > div > [class*="ControlContainer"] { padding-left: 18px !important; padding-right: 18px !important; }
@@ -301,24 +322,78 @@ body, [class*="AppMainContainer"] {
 /* freccia di collapse: ruota morbida invece di scattare */
 [class*="ControlContainer"] svg[class*="Icon"], [class*="ExpandButton"] svg {
   transition: transform .25s var(--acb-ease);
+  color: var(--acb-ink-dim);
 }
 
 /* ---------- campi di input ---------- */
 input[type="text"], input[type="search"], input[type="url"], input[type="email"],
 textarea, select {
-  border-radius: 8px !important;
+  background: var(--acb-card-hi) !important;
+  border-radius: 9px !important;
   border: 1px solid var(--acb-border) !important;
   color: var(--acb-ink) !important;
   transition: border-color .2s var(--acb-ease), box-shadow .2s var(--acb-ease), background .2s var(--acb-ease);
 }
 input[type="text"]:hover, input[type="search"]:hover, textarea:hover, select:hover {
-  border-color: rgba(189,163,96,.5) !important;
+  border-color: var(--acb-border-hi) !important;
 }
 input[type="text"]:focus, input[type="search"]:focus, textarea:focus, select:focus {
   border-color: var(--acb-gold) !important;
-  box-shadow: 0 0 0 3px rgba(189,163,96,.22) !important;
+  box-shadow: 0 0 0 3px rgba(205,178,124,.18) !important;
   outline: none !important;
 }
+input::placeholder, textarea::placeholder { color: #6E6C60 !important; }
+
+/* editor markdown "Testo formattato" (rich text): superficie propria, bianca
+   di default — .cms-editor-visual è la classe stabile che espone Decap */
+.cms-editor-visual {
+  background: var(--acb-card-hi) !important;
+  color: var(--acb-ink) !important;
+  border-radius: 9px !important;
+  border: 1px solid var(--acb-border) !important;
+}
+.cms-editor-visual div { background: transparent !important; }
+/* Slate avvolge ogni porzione di testo in <span> col proprio colore scuro
+   esplicito: l'ereditarietà da .cms-editor-visual non basta, va forzato qui */
+.cms-editor-visual span, .cms-editor-visual p, .cms-editor-visual li { color: var(--acb-ink) !important; }
+.cms-editor-visual h1, .cms-editor-visual h2, .cms-editor-visual h3, .cms-editor-visual h4 { color: var(--acb-cream) !important; }
+.cms-editor-visual h1 span, .cms-editor-visual h2 span, .cms-editor-visual h3 span, .cms-editor-visual h4 span { color: inherit !important; }
+.cms-editor-visual a { color: var(--acb-gold) !important; }
+.cms-editor-visual code { background: rgba(255,255,255,.08) !important; color: var(--acb-ink) !important; }
+.cms-editor-visual blockquote { border-color: var(--acb-border-hi) !important; color: var(--acb-ink-dim) !important; }
+.cms-editor-visual hr { border-color: var(--acb-border) !important; }
+input[type="datetime-local"], input[type="date"], input[type="time"] {
+  background: var(--acb-card-hi) !important;
+  color: var(--acb-ink) !important;
+  color-scheme: dark;
+}
+/* i segmenti data/ora e l'icona calendario sono chrome nativo del browser:
+   color-scheme li orienta al dark, ma su alcuni motori serve forzarli */
+input[type="datetime-local"]::-webkit-datetime-edit,
+input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper,
+input[type="datetime-local"]::-webkit-datetime-edit-text,
+input[type="datetime-local"]::-webkit-datetime-edit-month-field,
+input[type="datetime-local"]::-webkit-datetime-edit-day-field,
+input[type="datetime-local"]::-webkit-datetime-edit-year-field,
+input[type="datetime-local"]::-webkit-datetime-edit-hour-field,
+input[type="datetime-local"]::-webkit-datetime-edit-minute-field {
+  background: transparent !important;
+  color: var(--acb-ink) !important;
+}
+input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter: invert(0.8); }
+/* select "Categoria" ecc. è react-select: classi proprie (-control/-menu/...),
+   non quelle di Decap — le agganciamo dal suffisso */
+[class$="-control"] {
+  background: var(--acb-card-hi) !important;
+  border-color: var(--acb-border) !important;
+}
+[class$="-singleValue"], [class$="-input"] input { color: var(--acb-ink) !important; }
+[class$="-placeholder"] { color: #57564C !important; }
+[class$="-menu"] { background: var(--acb-card-hi) !important; border: 1px solid var(--acb-border-hi) !important; }
+[class$="-option"] { background: transparent !important; color: var(--acb-ink) !important; }
+[class*="-option"][class*="Focused"], [class$="-option"]:hover { background: rgba(205,178,124,.14) !important; }
+[class$="-indicatorSeparator"] { background: var(--acb-border) !important; }
+[class$="-dropdownIndicator"], [class$="-indicatorContainer"] { color: var(--acb-ink-dim) !important; }
 
 /* ---------- bottoni generici dei widget (aggiungi blocco, ecc.) ---------- */
 button[class*="Button"] {
@@ -333,65 +408,91 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 /* azioni distruttive: discrete finché non ci passi sopra */
 [class*="DeleteButton"], button[class*="Delete"] {
   background: transparent !important;
-  color: #B84A3A !important;
-  border: 1px solid rgba(184,74,58,.35) !important;
+  color: #E38066 !important;
+  border: 1px solid rgba(227,128,102,.35) !important;
   border-radius: 999px !important;
   font-weight: 600 !important;
   transition: background .15s var(--acb-ease), color .15s var(--acb-ease);
 }
 [class*="DeleteButton"]:hover, button[class*="Delete"]:hover {
-  background: #B84A3A !important;
+  background: #C0503A !important;
   color: #fff !important;
-  border-color: #B84A3A !important;
+  border-color: #C0503A !important;
 }
 
 /* ============================================================
-   Lista "Blocchi di contenuto": badge colorato + icona per tipo,
-   card con bordo di accento invece della riga bianca piatta.
+   Lista "Blocchi di contenuto" — griglia bento (2 colonne da
+   tablet in su), badge piatto (icona colorata, niente cerchietti
+   pastello) + bordo di accento sul lato.
    ============================================================ */
 @keyframes acbRise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
+[class*="ControlContainer"]:has(> div > [class*="SortableListItem"]) > div:has([class*="SortableListItem"]) {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  [class*="ControlContainer"]:has(> div > [class*="SortableListItem"]) > div:has([class*="SortableListItem"]) {
+    grid-template-columns: 1fr;
+  }
+}
+
 [class*="SortableListItem"] {
+  background: var(--acb-card-hi) !important;
   border: 1px solid var(--acb-border) !important;
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   overflow: hidden;
-  margin-bottom: 10px !important;
+  margin-bottom: 0 !important;
   box-shadow: var(--acb-shadow-sm);
   transition: box-shadow .2s var(--acb-ease), border-color .2s var(--acb-ease), transform .2s var(--acb-ease);
   animation: acbRise .35s var(--acb-ease) both;
 }
-[class*="SortableListItem"]:hover { box-shadow: var(--acb-shadow-md); transform: translateY(-1px); }
-[class*="SortableListItem"][data-acb-block="testo"]        { border-left: 4px solid var(--acb-green-2) !important; }
-[class*="SortableListItem"][data-acb-block="split"]        { border-left: 4px solid var(--acb-gold) !important; }
-[class*="SortableListItem"][data-acb-block="statistiche"]  { border-left: 4px solid var(--acb-teal) !important; }
-[class*="SortableListItem"][data-acb-block="galleria"]     { border-left: 4px solid var(--acb-clay) !important; }
+[class*="SortableListItem"]:hover { box-shadow: var(--acb-shadow-md); transform: translateY(-2px); border-color: var(--acb-border-hi) !important; }
+[class*="SortableListItem"][data-acb-block="testo"]        { border-left: 3px solid var(--acb-green-2) !important; }
+[class*="SortableListItem"][data-acb-block="split"]        { border-left: 3px solid var(--acb-gold) !important; }
+[class*="SortableListItem"][data-acb-block="statistiche"]  { border-left: 3px solid var(--acb-teal) !important; }
+[class*="SortableListItem"][data-acb-block="galleria"]     { border-left: 3px solid var(--acb-clay) !important; }
 /* l'etichetta col nome tecnico del tipo ("Testo (manifesto)") è ridondante:
    badge + titolo qui sotto dicono già la stessa cosa in modo più leggibile */
 [class*="SortableListItem"] > [class*="FieldLabel"] { display: none !important; }
 
 [class*="NestedObjectLabel"] {
+  background: transparent !important;
   display: flex !important;
   align-items: center;
   gap: 10px;
+  padding: 12px 14px !important;
   font-weight: 600 !important;
-  color: var(--acb-green) !important;
+  color: var(--acb-cream) !important;
 }
+/* il pannello che Decap mostra/nasconde per le sezioni espandibili (gruppi,
+   blocchi, editor di testo) porta sempre uno sfondo bianco proprio, a
+   profondità diverse rispetto al genitore — la classe è generata ma stabile
+   per la versione di decap-cms pinnata in index.html (3.14.1) */
+[class*="ControlContainer"] .css-lshhuz,
+[class*="SortableListItem"] .css-lshhuz,
+.css-lshhuz {
+  background: transparent !important;
+}
+/* badge piatto: solo icona colorata, niente cerchio pastello */
 .acb-badge {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 26px; height: 26px; border-radius: 8px; flex: none;
-  background: rgba(24,90,58,.10); color: var(--acb-green-2);
+  width: 20px; height: 20px; flex: none;
+  color: var(--acb-green-2);
   transition: transform .2s var(--acb-ease);
 }
-[class*="SortableListItem"]:hover .acb-badge { transform: scale(1.08) rotate(-4deg); }
-.acb-badge svg { width: 15px; height: 15px; }
-[data-acb-block="split"] .acb-badge       { background: rgba(189,163,96,.18); color: #8a723f; }
-[data-acb-block="statistiche"] .acb-badge { background: rgba(59,110,113,.14); color: var(--acb-teal); }
-[data-acb-block="galleria"] .acb-badge    { background: rgba(168,92,59,.14); color: var(--acb-clay); }
+[class*="SortableListItem"]:hover .acb-badge { transform: scale(1.1); }
+.acb-badge svg { width: 100%; height: 100%; }
+[data-acb-block="split"] .acb-badge       { color: var(--acb-gold); }
+[data-acb-block="statistiche"] .acb-badge { color: var(--acb-teal); }
+[data-acb-block="galleria"] .acb-badge    { color: var(--acb-clay); }
 .acb-block-title { font-family: 'Cormorant', serif; font-size: 16px; font-weight: 600; letter-spacing: .01em; }
 
-[class*="StyledListItemTopBar"] { background: var(--acb-card) !important; }
-[class*="DragIconContainer"] { opacity: .45; transition: opacity .15s ease; cursor: grab; }
-[class*="SortableListItem"]:hover [class*="DragIconContainer"] { opacity: .8; }
+[class*="StyledListItemTopBar"] { background: transparent !important; border-bottom: 1px solid var(--acb-border) !important; }
+[class*="DragIconContainer"] { opacity: .4; transition: opacity .15s ease; cursor: grab; color: var(--acb-ink-dim); }
+[class*="SortableListItem"]:hover [class*="DragIconContainer"] { opacity: .75; }
 
 /* ============================================================
    Cornice "browser" attorno all'anteprima + toggle desktop/mobile
@@ -399,7 +500,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .acb-preview-pane { background: var(--acb-bg) !important; padding: 0 !important; }
 .acb-preview-chrome {
   display: flex; align-items: center; gap: 12px;
-  padding: 10px 14px; background: #2A2A28; border-bottom: 1px solid rgba(255,255,255,.06);
+  padding: 10px 14px; background: #060705; border-bottom: 1px solid rgba(255,255,255,.06);
   position: sticky; top: 0; z-index: 5;
 }
 .acb-dots { display: inline-flex; gap: 6px; }
@@ -408,16 +509,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .acb-dots i:nth-child(2) { background: #f4bf4f; }
 .acb-dots i:nth-child(3) { background: #61c454; }
 .acb-preview-label {
-  color: rgba(255,255,255,.55); font-size: 12px; font-weight: 600;
+  color: rgba(255,255,255,.5); font-size: 12px; font-weight: 600;
   text-transform: uppercase; letter-spacing: .08em;
 }
 .acb-preview-tools { margin-left: auto; display: flex; gap: 4px; }
 .acb-view-btn {
   width: 30px; height: 26px; display: inline-flex; align-items: center; justify-content: center;
   background: transparent; border: 1px solid rgba(255,255,255,.12); border-radius: 6px;
-  color: rgba(255,255,255,.5); cursor: pointer; transition: all .15s ease;
+  color: rgba(255,255,255,.45); cursor: pointer; transition: all .15s ease;
 }
 .acb-view-btn svg { width: 15px; height: 15px; }
 .acb-view-btn:hover { color: rgba(255,255,255,.85); border-color: rgba(255,255,255,.3); }
-.acb-view-btn.is-active { background: var(--acb-gold); border-color: var(--acb-gold); color: var(--acb-green); }
+.acb-view-btn.is-active { background: var(--acb-gold); border-color: var(--acb-gold); color: #201A0C; }
 .acb-preview-pane iframe { transition: width .25s ease; display: block; box-shadow: var(--acb-shadow-lg); }

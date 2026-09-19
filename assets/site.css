@@ -195,12 +195,12 @@ p { text-wrap: pretty; }
 .phero__title em { color: var(--gold); }
 .phero__sub { margin-top: 30px; max-width: 44ch; font-size: 15px; line-height: 1.65; color: var(--cream-dim); }
 
-/* ============ MARQUEE — Helvetica ALL CAPS BOLD ============ */
+/* ============ MARQUEE — Helvetica ALL CAPS REGULAR ============ */
 .marquee { border-top: 1px solid rgba(255,253,233,0.15); border-bottom: 1px solid rgba(255,253,233,0.15); overflow: hidden; padding: 22px 0; background: var(--green); }
 .marquee__track { display: flex; gap: 60px; white-space: nowrap; width: max-content; will-change: transform; }
 .marquee__track span {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   font-size: clamp(22px, 3.4vw, 46px);
@@ -371,7 +371,7 @@ section { position: relative; }
   transition: border-color .3s var(--ease), background .3s var(--ease), color .3s var(--ease);
 }
 .pill:hover span { border-color: var(--cream); }
-.pill input:checked + span { background: var(--gold); border-color: var(--gold); color: var(--green); font-weight: 700; }
+.pill input:checked + span { background: var(--gold); border-color: var(--gold); color: var(--green); font-weight: 500; }
 .pill input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 3px; }
 
 .btn {
@@ -436,7 +436,7 @@ section { position: relative; }
   transition: border-color .3s, background .3s, color .3s;
 }
 .size:hover { border-color: var(--cream); }
-.size.active { background: var(--gold); border-color: var(--gold); color: var(--green); font-weight: 700; }
+.size.active { background: var(--gold); border-color: var(--gold); color: var(--green); font-weight: 500; }
 .product .btn { margin-top: 26px; }
 .product .btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
 .product .btn[aria-disabled="true"]:hover { background: transparent; color: var(--cream); }

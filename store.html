@@ -80,13 +80,7 @@
         <h2 class="product__name">Maglia <em>Home</em></h2>
         <p class="product__desc">Verde petrolio con inserti smeraldo su fianchi e maniche: monogramma ACB e gelso in oro, cuciture a contrasto.</p>
         <p class="product__price" data-price>Prezzo al lancio</p>
-        <div class="sizes" role="radiogroup" aria-label="Taglia maglia home">
-          <button class="size" type="button" data-size="S">S</button>
-          <button class="size active" type="button" data-size="M">M</button>
-          <button class="size" type="button" data-size="L">L</button>
-          <button class="size" type="button" data-size="XL">XL</button>
-          <button class="size" type="button" data-size="XXL">XXL</button>
-        </div>
+        <p class="product__desc" style="margin-top:22px;font-size:13px;opacity:.8;">Taglie S – XXL · la scegli al checkout</p>
         <a class="btn" href="#" data-buy>Acquista →</a>
       </article>
 
@@ -97,13 +91,7 @@
         <h2 class="product__name">Maglia <em>Portiere</em></h2>
         <p class="product__desc">Corallo acceso, collo e polsini neri, maniche bordeaux: la maglia audace di chi difende la porta di Bosco.</p>
         <p class="product__price" data-price>Prezzo al lancio</p>
-        <div class="sizes" role="radiogroup" aria-label="Taglia maglia portiere">
-          <button class="size" type="button" data-size="S">S</button>
-          <button class="size active" type="button" data-size="M">M</button>
-          <button class="size" type="button" data-size="L">L</button>
-          <button class="size" type="button" data-size="XL">XL</button>
-          <button class="size" type="button" data-size="XXL">XXL</button>
-        </div>
+        <p class="product__desc" style="margin-top:22px;font-size:13px;opacity:.8;">Taglie S – XXL · la scegli al checkout</p>
         <a class="btn" href="#" data-buy>Acquista →</a>
       </article>
 
@@ -153,8 +141,9 @@
    STORE — Stripe Payment Links
    Come attivare l'acquisto:
    1. Su dashboard.stripe.com crea i 2 prodotti (Maglia Home, Maglia Portiere).
-   2. Per ogni prodotto crea un Payment Link PER TAGLIA
-      (oppure uno solo e mettilo in "_default": vale per tutte le taglie).
+   2. Per ogni prodotto crea UN Payment Link con un campo personalizzato
+      "Taglia" (menu a tendina S–XXL) e raccolta dell'indirizzo di spedizione;
+      mettilo in "_default".
    3. Incolla gli URL qui sotto. Aggiungi anche i prezzi in PRICES.
    Finché un link è vuoto, il bottone mostra "Presto disponibile".
    ============================================================ */
@@ -163,8 +152,8 @@ const STRIPE_LINKS = {
   'maglia-portiere': { S: '', M: '', L: '', XL: '', XXL: '', _default: '' }
 };
 const PRICES = {
-  'maglia-home': '',      /* es. '45 €' */
-  'maglia-portiere': ''
+  'maglia-home': '39 €',
+  'maglia-portiere': '39 €'
 };
 
 document.querySelectorAll('.product').forEach((card) => {
@@ -182,7 +171,7 @@ document.querySelectorAll('.product').forEach((card) => {
     const url = links[currentSize()] || links._default || '';
     if (url) {
       buy.href = url;
-      buy.textContent = 'Acquista — taglia ' + currentSize() + ' →';
+      buy.textContent = card.querySelector('.size') ? 'Acquista — taglia ' + currentSize() + ' →' : 'Acquista →';
       buy.removeAttribute('aria-disabled');
     } else {
       buy.href = '#';

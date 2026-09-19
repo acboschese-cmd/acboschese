@@ -114,7 +114,7 @@
   const key = new THREE.DirectionalLight(0xfff6dd, 1.15);
   key.position.set(-260, 340, 420);   /* radente dall'alto-sx: esalta il rilievo coniato */
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0xbda360, 0.6);
+  const rim = new THREE.DirectionalLight(0x1dfa93, 0.6);
   rim.position.set(380, -160, 260);
   scene.add(rim);
 

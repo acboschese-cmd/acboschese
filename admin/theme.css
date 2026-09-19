@@ -8,9 +8,9 @@
    ============================================================ */
 
 @font-face {
-  font-family: 'Cormorant';
-  src: url('/assets/fonts/Cormorant-VF.woff2') format('woff2');
-  font-weight: 400 700;
+  font-family: 'Faculty Glyphic';
+  src: url('/assets/fonts/FacultyGlyphic-latin.woff2') format('woff2');
+  font-weight: 400;
   font-display: swap;
 }
 
@@ -126,7 +126,7 @@ body, [class*="AppMainContainer"] {
 .acb-sidebar-brand img { width: 40px; height: 40px; opacity: .95; }
 [class*="SidebarHeading"] {
   color: var(--acb-ink-dim) !important;
-  font-family: 'Cormorant', serif !important;
+  font-family: 'Faculty Glyphic', serif !important;
   text-transform: uppercase;
   letter-spacing: .14em;
   font-weight: 600 !important;
@@ -195,7 +195,7 @@ body, [class*="AppMainContainer"] {
 
 /* ---------- card di collezione ---------- */
 [class*="CollectionContainer"] { background: transparent !important; }
-[class*="CollectionTop"], h2 { font-family: 'Cormorant', serif; }
+[class*="CollectionTop"], h2 { font-family: 'Faculty Glyphic', serif; }
 [class*="CollectionTopContainer"] { background: transparent !important; padding: 28px 0 18px !important; box-shadow: none !important; }
 [class*="CollectionTopHeading"] { font-size: 32px !important; color: var(--acb-cream) !important; }
 [class*="CollectionTopNewButton"] {
@@ -228,14 +228,14 @@ body, [class*="AppMainContainer"] {
 }
 [class*="ListCard-card"] * {
   color: var(--acb-cream) !important;
-  font-family: 'Cormorant', serif !important;
+  font-family: 'Faculty Glyphic', serif !important;
   font-weight: 600 !important;
 }
 
 /* ============================================================
    Gerarchia dei campi: un GRUPPO (contiene altri campi: SEO,
    Apertura pagina, Blocchi...) è una vera sezione bento con badge
-   a icona e titolo in Cormorant; una FOGLIA (Titolo, Data, un
+   a icona e titolo in Faculty Glyphic; una FOGLIA (Titolo, Data, un
    singolo testo) è leggera — nessuna cornice, solo un'etichetta
    minuta sopra il campo, per lasciare risaltare il contenuto.
    La distinzione è :has() puro (niente JS, niente timing da
@@ -299,7 +299,7 @@ body, [class*="AppMainContainer"] {
 [class*="ControlContainer"]:has([class*="ControlContainer"]) > [class*="ControlTopbar"] [class*="FieldLabel"] {
   background: none !important;
   color: var(--acb-cream) !important;
-  font-family: 'Cormorant', serif !important;
+  font-family: 'Faculty Glyphic', serif !important;
   font-weight: 600 !important;
   text-transform: none;
   letter-spacing: normal;
@@ -488,7 +488,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 [data-acb-block="split"] .acb-badge       { color: var(--acb-gold); }
 [data-acb-block="statistiche"] .acb-badge { color: var(--acb-teal); }
 [data-acb-block="galleria"] .acb-badge    { color: var(--acb-clay); }
-.acb-block-title { font-family: 'Cormorant', serif; font-size: 16px; font-weight: 600; letter-spacing: .01em; }
+.acb-block-title { font-family: 'Faculty Glyphic', serif; font-size: 16px; font-weight: 600; letter-spacing: .01em; }
 
 [class*="StyledListItemTopBar"] { background: transparent !important; border-bottom: 1px solid var(--acb-border) !important; }
 [class*="DragIconContainer"] { opacity: .4; transition: opacity .15s ease; cursor: grab; color: var(--acb-ink-dim); }

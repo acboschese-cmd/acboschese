@@ -5,7 +5,7 @@
    ============================================================ */
 
 :root {
-  --green:      #076A60;   /* sfondo */
+  --green:      #016938;   /* sfondo */
   --green-2:    #185A3A;   /* mid green surface */
   --emerald:    #107947;   /* main green */
   --gold:       #1DFA93;   /* accento */
@@ -123,7 +123,7 @@ p { text-wrap: pretty; }
   transition: transform .5s var(--ease), background .5s var(--ease), padding .5s var(--ease);
 }
 .nav.hidden { transform: translateY(-110%); }
-.nav.solid { background: rgba(7,106,96,0.82); backdrop-filter: blur(14px); padding-top: 14px; padding-bottom: 14px; }
+.nav.solid { background: rgba(1,105,56,0.82); backdrop-filter: blur(14px); padding-top: 14px; padding-bottom: 14px; }
 .nav__brand { display: flex; align-items: center; }
 .nav__brand img { width: 44px; }
 .nav__links { display: flex; gap: 34px; align-items: center; }
@@ -158,7 +158,7 @@ p { text-wrap: pretty; }
 .hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; }
 .hero__media { position: absolute; inset: -12% 0; will-change: transform; }
 .hero__media img { width: 100%; height: 100%; object-fit: cover; }
-.hero__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,106,96,0.55) 0%, rgba(7,106,96,0.15) 40%, rgba(7,106,96,0.85) 100%); }
+.hero__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(1,105,56,0.55) 0%, rgba(1,105,56,0.15) 40%, rgba(1,105,56,0.85) 100%); }
 .hero__inner { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; justify-content: space-between; padding: calc(var(--pad) + 60px) var(--pad) var(--pad); }
 .hero__top { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; color: var(--cream); }
 .hero__title { align-self: flex-start; }
@@ -234,7 +234,7 @@ section { position: relative; }
 .break--short { height: 72svh; min-height: 460px; }
 .break__media { position: absolute; inset: -15% 0; will-change: transform; }
 .break__media img, .break__media video { width: 100%; height: 100%; object-fit: cover; }
-.break__media::after { content: ''; position: absolute; inset: 0; background: rgba(7,106,96,0.35); }
+.break__media::after { content: ''; position: absolute; inset: 0; background: rgba(1,105,56,0.35); }
 .break__text { position: relative; z-index: 2; text-align: center; padding: 0 var(--pad); }
 .break__text .display { font-size: clamp(50px, 11vw, 180px); text-transform: uppercase; }
 

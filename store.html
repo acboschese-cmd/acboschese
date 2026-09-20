@@ -14,7 +14,7 @@
 <meta property="og:type" content="website" />
 
 <link rel="preload" href="assets/fonts/Cormorant-VF.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="assets/site.css?v=21" />
+<link rel="stylesheet" href="assets/site.css?v=29" />
 
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
@@ -74,8 +74,18 @@
     <div class="store-grid">
 
       <article class="product" data-product="maglia-home">
-        <div class="product__media ph-reveal">
-          <img src="assets/photos/prod-home-maglia-v3.webp" alt="Maglia home Audace Club Boschese: verde petrolio con inserti smeraldo, monogramma ACB e gelso in oro, cuciture a contrasto" />
+        <div class="product__media pgal ph-reveal" data-gallery>
+          <div class="pgal__track" tabindex="0" aria-label="Foto del prodotto, scorri per vedere le altre">
+            <figure class="pgal__slide pgal__slide--render"><img src="assets/photos/prod-home-maglia-v3.webp" alt="Maglia home Audace Club Boschese: verde petrolio con inserti smeraldo, monogramma ACB e gelso in oro, cuciture a contrasto" /></figure>
+            <figure class="pgal__slide"><img src="assets/photos/store-home-1.webp" alt="Giocatore con la maglia home a braccia conserte sotto il cielo, monogramma ACB e gelso in oro sul petto" loading="lazy" decoding="async" /></figure>
+            <figure class="pgal__slide"><img src="assets/photos/store-home-2.webp" alt="Giocatore seduto in panchina con la maglia home, luce calda del tardo pomeriggio" loading="lazy" decoding="async" /></figure>
+            <figure class="pgal__slide"><img src="assets/photos/store-home-3.webp" alt="Giocatore ripreso dal basso con la maglia home, sullo sfondo il cielo" loading="lazy" decoding="async" /></figure>
+            <figure class="pgal__slide"><img src="assets/photos/store-home-4.webp" alt="Giocatore con la maglia home in posa tra i tralicci verdi dello stadio" loading="lazy" decoding="async" /></figure>
+            <figure class="pgal__slide"><img src="assets/photos/store-home-5.webp" alt="Giocatore sotto la tribuna con la maglia home, inserti smeraldo su fianchi e maniche" loading="lazy" decoding="async" /></figure>
+          </div>
+          <button class="pgal__btn pgal__btn--prev" type="button" aria-label="Foto precedente">←</button>
+          <button class="pgal__btn pgal__btn--next" type="button" aria-label="Foto successiva">→</button>
+          <div class="pgal__dots" role="tablist" aria-label="Scegli foto"></div>
         </div>
         <h2 class="product__name">Maglia <em>Home</em></h2>
         <p class="product__desc">Verde petrolio con inserti smeraldo su fianchi e maniche: monogramma ACB e gelso in oro, cuciture a contrasto.</p>
@@ -85,8 +95,16 @@
       </article>
 
       <article class="product" data-product="maglia-portiere">
-        <div class="product__media ph-reveal">
-          <img src="assets/photos/prod-portiere-maglia-v4.webp" alt="Maglia portiere Audace Club Boschese: corallo con collo nero, pannelli e maniche bordeaux, monogramma ACB nero" />
+        <div class="product__media pgal ph-reveal" data-gallery>
+          <div class="pgal__track" tabindex="0" aria-label="Foto del prodotto, scorri per vedere le altre">
+            <figure class="pgal__slide pgal__slide--render"><img src="assets/photos/prod-portiere-maglia-v4.webp" alt="Maglia portiere Audace Club Boschese: corallo con collo nero, pannelli e maniche bordeaux, monogramma ACB nero" /></figure>
+            <figure class="pgal__slide"><img src="assets/photos/store-portiere-1.webp" alt="Portiere con la maglia corallo appoggiato al palo della porta" loading="lazy" decoding="async" /></figure>
+            <figure class="pgal__slide"><img src="assets/photos/store-portiere-2.webp" alt="Portiere in primo piano con la maglia corallo, rete della porta alle spalle" loading="lazy" decoding="async" /></figure>
+            <figure class="pgal__slide"><img src="assets/photos/store-portiere-3.webp" alt="Portiere ripreso dal basso con la maglia corallo, cielo e tralicci verdi" loading="lazy" decoding="async" /></figure>
+          </div>
+          <button class="pgal__btn pgal__btn--prev" type="button" aria-label="Foto precedente">←</button>
+          <button class="pgal__btn pgal__btn--next" type="button" aria-label="Foto successiva">→</button>
+          <div class="pgal__dots" role="tablist" aria-label="Scegli foto"></div>
         </div>
         <h2 class="product__name">Maglia <em>Portiere</em></h2>
         <p class="product__desc">Corallo acceso, collo e polsini neri, maniche bordeaux: la maglia audace di chi difende la porta di Bosco.</p>
@@ -155,6 +173,43 @@ const PRICES = {
   'maglia-home': '39 €',
   'maglia-portiere': '39 €'
 };
+
+
+/* Gallerie prodotto: scroll-snap orizzontale + frecce, puntini e trascinamento col mouse */
+document.querySelectorAll('[data-gallery]').forEach((g) => {
+  const track = g.querySelector('.pgal__track');
+  const slides = Array.from(track.children);
+  const dots = g.querySelector('.pgal__dots');
+  const prev = g.querySelector('.pgal__btn--prev');
+  const next = g.querySelector('.pgal__btn--next');
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.type = 'button'; d.className = 'pgal__dot'; d.setAttribute('aria-label', 'Foto ' + (i + 1) + ' di ' + slides.length);
+    d.addEventListener('click', () => go(i));
+    dots.appendChild(d);
+  });
+  const idx = () => Math.round(track.scrollLeft / track.clientWidth);
+  const go = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * track.clientWidth, behavior: 'smooth' });
+  function sync() {
+    const i = idx();
+    Array.from(dots.children).forEach((d, k) => d.classList.toggle('is-on', k === i));
+    prev.disabled = i === 0; next.disabled = i === slides.length - 1;
+  }
+  prev.addEventListener('click', () => go(idx() - 1));
+  next.addEventListener('click', () => go(idx() + 1));
+  track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+  track.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(idx() + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx() - 1); }
+  });
+  /* trascinamento col mouse (il touch scorre già da solo) */
+  let down = false, sx = 0, sl = 0, moved = false;
+  track.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; track.classList.add('is-dragging'); });
+  window.addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 3) moved = true; track.scrollLeft = sl - dx; });
+  window.addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('is-dragging'); go(idx()); });
+  window.addEventListener('resize', () => go(idx()));
+  sync();
+});
 
 document.querySelectorAll('.product').forEach((card) => {
   const id = card.dataset.product;

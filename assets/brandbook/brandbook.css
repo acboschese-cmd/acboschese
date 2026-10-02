@@ -294,6 +294,7 @@ b, strong { font-weight: 500; }
 .lab__mark svg { width: 100%; height: 100%; }
 .lab__mark img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .lab__mark.is-wide svg { height: auto; }
+.lab__mark.is-small { width: 43.4%; height: 43.4%; }  /* 19/28: 30% più piccolo degli altri marchi */
 .lab__grid { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: .15; opacity: 0; transition: opacity .5s; pointer-events: none; }
 .lab__grid line, .lab__grid rect { stroke-dasharray: .8 .8; }
 .lab__grid circle { stroke-width: 1px; opacity: .6; }

@@ -361,7 +361,7 @@
     { id: 'logotipo', name: 'Il logotipo', tag: 'Nome per esteso', sym: 'wordmark', ratio: '604/173', wide: true,
       desc: 'Audace Club Boschese composto in Rector su due righe, con l\'anno di fondazione in oro. La voce rinascimentale del club.',
       uso: 'Intestazioni, sciarpe, manifesti, merchandising', car: 'Rector' },
-    { id: '1928', name: '19/28', tag: 'Brand del centenario', sym: 'm1928', ratio: '147/160',
+    { id: '1928', name: '19/28', tag: 'Brand del centenario', sym: 'm1928', ratio: '147/160', small: true,
       desc: 'L\'anno di fondazione scomposto e sfalsato su due righe: un sigillo dedicato al cammino verso il 2028.',
       uso: 'Collezione del centenario, dettagli in oro, celebrazioni', car: 'Rector' },
     { id: 'scudetto', name: 'Lo scudetto', tag: 'Memoria storica', img: 'assets/brand/scudetto.svg',
@@ -412,7 +412,7 @@
     let html;
     if (m.sym) html = `<svg viewBox="0 0 ${m.ratio.replace('/', ' ')}" aria-label="${m.name}"><use href="#${m.sym}"/></svg>`;
     else html = `<img src="${m.img}" alt="${m.name}">`;
-    markBox.className = 'lab__mark' + (m.wide ? ' is-wide' : '');
+    markBox.className = 'lab__mark' + (m.wide ? ' is-wide' : '') + (m.small ? ' is-small' : '');
     markBox.innerHTML = html;
     info.innerHTML = `<p class="eyebrow">${m.tag}</p><p>${m.desc}</p><dl><dt>Uso</dt><dd>${m.uso}</dd><dt>Carattere</dt><dd>${m.car}</dd></dl>`;
     if (mqAcc.matches) labPlace(i, animate, yStart);

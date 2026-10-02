@@ -361,7 +361,7 @@
     { id: 'logotipo', name: 'Il logotipo', tag: 'Nome per esteso', sym: 'wordmark', ratio: '604/173', wide: true,
       desc: 'Audace Club Boschese composto in Rector su due righe, con l\'anno di fondazione in oro. La voce rinascimentale del club.',
       uso: 'Intestazioni, sciarpe, manifesti, merchandising', car: 'Rector' },
-    { id: '1928', name: '19/28', tag: 'Brand del centenario', n1928: true,
+    { id: '1928', name: '19/28', tag: 'Brand del centenario', sym: 'm1928', ratio: '147/160',
       desc: 'L\'anno di fondazione scomposto e sfalsato su due righe: un sigillo dedicato al cammino verso il 2028.',
       uso: 'Collezione del centenario, dettagli in oro, celebrazioni', car: 'Rector' },
     { id: 'scudetto', name: 'Lo scudetto', tag: 'Memoria storica', img: 'assets/brand/scudetto.svg',
@@ -411,7 +411,6 @@
     curMark = i; const m = MARKS[i];
     let html;
     if (m.sym) html = `<svg viewBox="0 0 ${m.ratio.replace('/', ' ')}" aria-label="${m.name}"><use href="#${m.sym}"/></svg>`;
-    else if (m.n1928) html = `<div class="lab__n1928" aria-label="1928"><span>19</span><span>28</span></div>`;
     else html = `<img src="${m.img}" alt="${m.name}">`;
     markBox.className = 'lab__mark' + (m.wide ? ' is-wide' : '');
     markBox.innerHTML = html;
@@ -568,8 +567,8 @@
     const ctl = gsap.timeline({ defaults: { ease: 'none' }, onUpdate: countUp, scrollTrigger: {
       trigger: '#centenario', start: 'top top', end: 'bottom bottom', scrub: .8, invalidateOnRefresh: true, onUpdate: countUp,
     } });
-    ctl.fromTo('#n19', { x: () => -innerWidth * .42, yPercent: 50 }, { x: 0, yPercent: 0, duration: 1, ease: 'power3.inOut' }, 0)
-       .fromTo('#n28', { x: () => innerWidth * .42, yPercent: -50 }, { x: 0, yPercent: 0, duration: 1, ease: 'power3.inOut' }, 0)
+    ctl.fromTo('#n19', { x: () => -innerWidth * .42, yPercent: 22 }, { x: 0, yPercent: 0, duration: 1, ease: 'power3.inOut' }, 0)
+       .fromTo('#n28', { x: () => innerWidth * .42, yPercent: -22 }, { x: 0, yPercent: 0, duration: 1, ease: 'power3.inOut' }, 0)
        .to('.cent__num', { scale: .72, yPercent: -12, duration: .6, ease: 'power2.inOut' }, 1.05)
        .to('#centCopy', { opacity: 1, duration: .4 }, 1.3)
        .fromTo('#centCount', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .3 }, 1.2)

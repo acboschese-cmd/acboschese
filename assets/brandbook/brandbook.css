@@ -544,6 +544,10 @@ b, strong { font-weight: 500; }
 .collab { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); margin-top: var(--sec-y); border-top: 1px solid var(--line-l); }
 .collab__card { padding-top: 34px; }
 .collab__card > p:not(.eyebrow) { margin: 22px 0 0; max-width: 32em; }
+.collab__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; min-height: 44px; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; color: var(--verde); text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 calc(100% - 10px) / 0 1px no-repeat; transition: background-size .5s var(--ease); }
+.collab__link:hover { background-size: 100% 1px; }
+.hero__credit a { color: inherit; text-decoration: none; }
+.hero__credit a:hover b { text-decoration: underline; text-underline-offset: 4px; }
 .notizia { margin-top: var(--sec-y); max-width: 1180px; }
 .notizia__quote { margin: 0; font: 400 clamp(36px, 5.6vw, 96px)/1.04 var(--f-body); letter-spacing: -.03em; color: var(--verde); }
 .notizia__note { margin: 34px 0 0 auto; max-width: 34em; }

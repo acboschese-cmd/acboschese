@@ -588,28 +588,56 @@
   /* ==========================================================
      08 APPLICAZIONI — scroll orizzontale
      ========================================================== */
-  const apps = $('#applicazioni'), track = $('#appsTrack');
+  const track = $('#appsTrack');
   const appFigs = $$('.app', track);
-  const appsNow = $('#appsNow');
+  const appsNow = $('#appsNow'), appsPrev = $('#appsPrev'), appsNext = $('#appsNext');
   $('#appsTot').textContent = String(appFigs.length).padStart(2, '0');
-  function nearestApp() {
-    const mid = innerWidth / 2; let best = 0, d = Infinity;
-    appFigs.forEach((f, i) => { const r = f.getBoundingClientRect(); const dd = Math.abs(r.left + r.width / 2 - mid); if (dd < d) { d = dd; best = i; } });
+  let appCur = 0;
+  function appsState() {
+    const r0 = track.getBoundingClientRect(), x = r0.left + parseFloat(getComputedStyle(track).paddingLeft);
+    let best = 0, d = Infinity;
+    appFigs.forEach((f, i) => { const dd = Math.abs(f.getBoundingClientRect().left - x); if (dd < d) { d = dd; best = i; } });
+    const max = track.scrollWidth - track.clientWidth;
+    if (track.scrollLeft >= max - 2) best = appFigs.length - 1;
+    appCur = best;
     appsNow.textContent = String(best + 1).padStart(2, '0');
+    appsPrev.disabled = track.scrollLeft <= 2;
+    appsNext.disabled = track.scrollLeft >= max - 2;
   }
-  const mmA = gsap.matchMedia();
-  mmA.add('(min-width: 901px)', () => {
-    const dist = () => track.scrollWidth - innerWidth;
-    const setH = () => { apps.style.height = (dist() + innerHeight) + 'px'; };
-    setH();
-    ScrollTrigger.addEventListener('refreshInit', setH);
-    const tw = gsap.to(track, {
-      x: () => -dist(), ease: 'none',
-      scrollTrigger: { trigger: apps, start: 'top top', end: 'bottom bottom', scrub: reduce ? true : .6, invalidateOnRefresh: true, onUpdate: nearestApp },
-    });
-    return () => { ScrollTrigger.removeEventListener('refreshInit', setH); apps.style.height = ''; tw.kill(); };
+  function appsGo(i) {
+    i = gsap.utils.clamp(0, appFigs.length - 1, i);
+    const left = appFigs[i].offsetLeft - parseFloat(getComputedStyle(track).paddingLeft);
+    track.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  appsPrev.addEventListener('click', () => appsGo(appCur - 1));
+  appsNext.addEventListener('click', () => appsGo(appCur + 1));
+  track.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); appsGo(appCur + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); appsGo(appCur - 1); }
   });
-  track.addEventListener('scroll', nearestApp, { passive: true });
+  track.addEventListener('scroll', appsState, { passive: true });
+  addEventListener('resize', appsState);
+  // trascinamento con il mouse (su touch lo scroll è nativo)
+  let drag = null;
+  track.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    drag = { x: e.clientX, left: track.scrollLeft, moved: false };
+    track.classList.add('is-drag');
+  });
+  addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x;
+    if (Math.abs(dx) > 4) drag.moved = true;
+    track.scrollLeft = drag.left - dx;
+  });
+  addEventListener('pointerup', () => {
+    if (!drag) return;
+    const moved = drag.moved; drag = null;
+    track.classList.remove('is-drag');
+    if (moved) { appsState(); appsGo(appCur); }
+  });
+  track.addEventListener('dragstart', (e) => e.preventDefault());
+  appsState();
 
   /* ---------- immagini caricate → ricalcolo ---------- */
   let rT;

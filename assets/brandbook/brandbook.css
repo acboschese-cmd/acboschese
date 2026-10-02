@@ -403,20 +403,24 @@ b, strong { font-weight: 500; }
 /* ==========================================================
    08 APPLICAZIONI
    ========================================================== */
-.apps { position: relative; background: var(--bosco); }
-.apps__stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; align-items: center; }
-.apps__track { display: flex; align-items: center; gap: clamp(20px, 3vw, 48px); padding: 0 var(--gut); will-change: transform; }
-.apps__intro { flex: 0 0 clamp(280px, 30vw, 460px); padding-right: 2vw; }
+.apps { background: var(--bosco); padding: 18vh 0 16vh; }
+.apps__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px var(--gut); flex-wrap: wrap; padding: 0 var(--gut); margin-bottom: 7vh; }
+.apps__intro { max-width: 520px; }
 .apps__intro p:not(.eyebrow) { margin: 22px 0 0; }
-.apps__counter { font-variant-numeric: tabular-nums; }
-.app { flex: 0 0 auto; margin: 0; }
-.app img { width: 100%; height: 100%; object-fit: cover; }
+.apps__ctrl { display: flex; align-items: center; gap: 12px; }
+.apps__counter { font-variant-numeric: tabular-nums; margin-right: 10px; }
+.apps__arrow { width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255,253,233,.4); font: 300 20px/1 var(--f-body); color: var(--avorio); transition: background .3s, color .3s, border-color .3s, opacity .3s; }
+.apps__arrow:hover:not(:disabled) { background: var(--avorio); color: var(--bosco); border-color: var(--avorio); }
+.apps__arrow:disabled { opacity: .3; cursor: default; }
+.apps__track { display: flex; align-items: flex-start; gap: clamp(16px, 2.4vw, 40px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-left: var(--gut); padding: 0 var(--gut) 8px; scrollbar-width: none; cursor: grab; touch-action: pan-x pan-y; }
+.apps__track::-webkit-scrollbar { display: none; }
+.apps__track.is-drag { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.apps__track::after { content: ""; flex: 0 0 1px; }
+.app { flex: 0 0 auto; margin: 0; scroll-snap-align: start; overflow: hidden; }
+.app img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 .app--sq { width: clamp(260px, 34vw, 560px); height: clamp(260px, 34vw, 560px); }
 .app--tall { width: clamp(220px, 26vw, 420px); height: clamp(300px, 39vw, 620px); }
 .app--wide { width: clamp(320px, 52vw, 860px); height: clamp(220px, 29vw, 480px); }
-.app > img { overflow: hidden; }
-.app figcaption { font-size: 12px; letter-spacing: .06em; margin-top: 14px; opacity: .8; }
-.app figcaption b { color: var(--oro); margin-right: 10px; font-weight: 400; }
 
 /* ==========================================================
    OUTRO
@@ -573,12 +577,7 @@ b, strong { font-weight: 500; }
   .glyphs__big { aspect-ratio: auto; height: 180px; }
   .cent__copy { bottom: 6vh; right: var(--gut); }
   .cent__count { top: 12vh; }
-  .apps { height: auto !important; }
-  .apps__stick { position: relative; height: auto; padding: 14vh 0; }
-  .apps__track { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; transform: none !important; padding-bottom: 12px; -webkit-overflow-scrolling: touch; scrollbar-width: none; width: 100%; }
-  .apps__track::-webkit-scrollbar { display: none; }
-  .apps__intro { flex-basis: 78vw; }
-  .app { scroll-snap-align: center; }
+  .apps__arrow { width: 46px; height: 46px; }
   .app--sq { width: 78vw; height: 78vw; }
   .app--tall { width: 64vw; height: 90vw; }
   .app--wide { width: 86vw; height: 58vw; }

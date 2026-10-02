@@ -277,7 +277,9 @@ b, strong { font-weight: 500; }
 .lab__body { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--gut); align-items: start; }
 .lab__stage { position: relative; aspect-ratio: 1; background: var(--c-bg, var(--verde)); color: var(--c-mark, var(--avorio)); --wm-year: var(--c-year, var(--oro)); transition: background .6s var(--ease), color .6s var(--ease); overflow: hidden; display: grid; place-items: center; }
 .lab__mark { width: 62%; height: 62%; display: grid; place-items: center; }
-.lab__mark svg, .lab__mark img { width: 100%; height: 100%; object-fit: contain; }
+.lab__mark { position: relative; }
+.lab__mark svg { width: 100%; height: 100%; }
+.lab__mark img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .lab__mark.is-wide svg { height: auto; }
 .lab__n1928 { display: grid; font: 500 clamp(80px, 13vw, 220px)/.82 var(--f-display); }
 .lab__n1928 span:last-child { margin-left: .42em; }

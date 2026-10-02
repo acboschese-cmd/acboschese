@@ -243,7 +243,7 @@ b, strong { font-weight: 500; }
 .values { list-style: none; margin: 40px 0 0; padding: 0; display: flex; gap: 0; border-top: 1px solid rgba(255,253,233,.2); }
 .values li { flex: 1; padding: 18px 0 0; font: 500 clamp(24px, 2.6vw, 40px)/1 var(--f-display); text-transform: uppercase; }
 .values span { display: block; font: 400 11px/1 var(--f-body); letter-spacing: .16em; opacity: .55; margin-bottom: 14px; }
-.wind { padding: 20vh 0 8vh; cursor: none; }
+.wind { padding: 12vh 0 8vh; cursor: none; }
 @media (hover: none) { .wind { cursor: auto; } }
 .wind__quote { font: 400 clamp(40px, 7.4vw, 136px)/1.02 var(--f-body); letter-spacing: -.035em; margin: 0; max-width: 13em; }
 .wind__quote b { font-weight: 400; color: var(--oro); }
@@ -566,6 +566,7 @@ b, strong { font-weight: 500; }
   .gelso__grid, .evo__compare, .lab__body { grid-template-columns: 1fr; }
   .gelso__media { order: 2; }
   .wind__note { margin-left: 0; }
+  .wind { padding-top: 64px; }
   .pal__bars { flex-direction: column; height: auto; min-height: 0; }
   .bar { height: 76px; flex: none; transition: height .7s var(--ease); }
   .bar.is-open { height: 250px; }

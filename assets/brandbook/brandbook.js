@@ -155,7 +155,8 @@
     });
     // "fluttuazione": è il contenitore che si muove rispetto alla pagina
     $$('[data-float]').forEach((el) => {
-      const a = +el.dataset.float || 50;
+      // su mobile la fluttuazione è più contenuta: le sezioni sono più strette in verticale
+      const a = (+el.dataset.float || 50) * (innerWidth <= 900 ? .4 : 1);
       gsap.fromTo(el, { y: a }, { y: -a, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
     });
     // foto di storia (Santa Croce, Vasari): l'immagine scorre dentro la cornice, con inerzia

@@ -516,11 +516,10 @@ b, strong { font-weight: 500; }
 /* ==========================================================
    ATTO III — IL MONOGRAMMA DISEGNATO
    ========================================================== */
-.draw { height: 260vh; position: relative; background: var(--avorio); color: var(--bosco); }
-.draw__stick { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: var(--gut); padding: 0 var(--gut); overflow: hidden; }
+.draw { position: relative; background: var(--avorio); color: var(--bosco); }
+.draw__stick { min-height: 100vh; min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: var(--gut); padding: 0 var(--gut); overflow: hidden; }
 .draw__mono { width: min(100%, 62vh); height: auto; justify-self: center; overflow: visible; }
 .draw__f { fill: var(--verde); }
-.draw__s { fill: none; stroke: var(--verde); stroke-width: 1.5px; stroke-dasharray: 1; stroke-dashoffset: 1; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
 .draw__copy { max-width: 30em; }
 .draw__copy p:not(.eyebrow) { margin: 22px 0 0; }
 .evo--compare { padding-top: 0; }
@@ -654,7 +653,6 @@ b, strong { font-weight: 500; }
 @media (max-width: 900px) {
   .sfida__grid, .soc__intro { grid-template-columns: 1fr; }
   .stat dd { font-size: clamp(56px, 18vw, 96px); }
-  .draw { height: 220vh; }
   .draw__stick { grid-template-columns: 1fr; align-content: center; gap: 36px; padding-top: 64px; }
   .draw__mono { width: min(56vw, 34vh); }
   .lab__progress { display: none; }

@@ -228,20 +228,19 @@
   /* ==========================================================
      ATTO III — il monogramma si disegna con lo scroll
      ========================================================== */
-  // le due parti (A·C e B) si avvicinano mentre il tratto si disegna; il verde sale dal basso come inchiostro
-  const drawStrokes = $$('#drawMono .draw__s'), clipRect = $('#drawClipRect');
+  // il profilo si compone progressivamente (prima A·C, poi B), poi il riempimento entra in dissolvenza
+  const drawStrokes = $$('#drawMono .draw__s'), drawFills = $$('#drawMono .draw__f');
   if (!reduce) {
-    const dtl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '#monogramma', start: 'top top', end: 'bottom bottom', scrub: 1.4 } });
-    dtl.fromTo('#drawPcA', { x: -16, y: 6, rotation: -2, svgOrigin: '24 90' }, { x: 0, y: 0, rotation: 0, svgOrigin: '24 90', duration: 1.2, ease: 'sine.inOut' }, 0)
-       .fromTo('#drawPcB', { x: 16, y: -6, rotation: 2, svgOrigin: '97 80' }, { x: 0, y: 0, rotation: 0, svgOrigin: '97 80', duration: 1.2, ease: 'sine.inOut' }, 0)
-       .fromTo(drawStrokes, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, stagger: .12, ease: 'sine.inOut' }, 0)
-       .fromTo(clipRect, { attr: { y: 164 } }, { attr: { y: -36 }, duration: 1, ease: 'sine.inOut' }, .55)
-       .to(drawStrokes, { strokeOpacity: 0, duration: .45, ease: 'sine.out' }, 1.2)
-       .fromTo('#drawCopy', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .45, ease: 'sine.out' }, 1.25)
+    gsap.set(drawFills, { opacity: 0 });
+    const dtl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '#monogramma', start: 'top top', end: 'bottom bottom', scrub: 1 } });
+    dtl.fromTo(drawStrokes[0], { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: .7 }, 0)
+       .fromTo(drawStrokes[1], { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: .9 }, .55)
+       .to(drawFills, { opacity: 1, duration: .5, ease: 'power1.inOut' }, 1.5)
+       .to(drawStrokes, { strokeOpacity: 0, duration: .35, ease: 'power1.inOut' }, 1.75)
+       .fromTo('#drawCopy', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .45, ease: 'power2.out' }, 1.7)
        .to({}, { duration: .35 });
   } else {
     gsap.set(drawStrokes, { strokeDashoffset: 0, strokeOpacity: 0 });
-    gsap.set(clipRect, { attr: { y: -36 } });
   }
 
   /* ==========================================================

@@ -383,8 +383,16 @@
     { name: 'Lo scudetto', tag: 'La memoria', img: 'assets/brand/scudetto.svg', bg: C.pietra, mark: C.verde, year: C.oro,
       desc: 'Lo stemma storico con il gelso. Lo teniamo per le occasioni importanti.' },
   ];
-  const stage = $('#labStage'), markBox = $('#labMark'), info = $('#labInfo'), tabs = $('#labTabs');
-  let curMark = 0;
+  const BGS = [
+    { k: 'verde', bg: C.verde, mark: C.avorio, year: C.oro },
+    { k: 'avorio', bg: C.avorio, mark: C.verde, year: C.oro },
+    { k: 'bosco', bg: C.bosco, mark: C.verde, year: C.oro },
+    { k: 'gelso', bg: C.gelso, mark: C.avorio, year: C.oro },
+    { k: 'pietra', bg: C.pietra, mark: C.verde, year: C.bosco },
+    { k: 'oro', bg: C.oro, mark: C.avorio, year: C.bosco },
+  ];
+  const stage = $('#labStage'), markBox = $('#labMark'), info = $('#labInfo'), tabs = $('#labTabs'), sw = $('#labSwatches'), labCtrl = $('.lab__ctrl');
+  let curMark = 0, pickedBg = -1;   // -1: ogni insegna usa il suo fondo; dopo un click il fondo scelto resta
   const labBtns = [], labAccs = [];
   MARKS.forEach((m, i) => {
     const b = document.createElement('button');
@@ -397,19 +405,19 @@
   const labPanel = $('#labPanel'), labViz = $('.lab__viz'), labBody = $('.lab__body');
   // mobile: ogni voce aperta contiene anteprima e testo; -1 = tutte chiuse
   let labOpen = -1;
-  const labRestore = () => { labBody.prepend(labViz); labPanel.appendChild(info); };
+  // desktop: pallini sotto il testo; mobile: dentro la voce aperta, sotto l'anteprima
+  const labRestore = () => { labBody.prepend(labViz); labPanel.appendChild(info); labPanel.appendChild(labCtrl); };
   function labPlace(i, scroll, yStart) {
     labOpen = i;
     labBtns.forEach((t, k) => t.setAttribute('aria-expanded', k === i));
     if (i < 0) { labAccs.forEach((a) => a.classList.remove('is-open')); labRestore(); safeRefresh(); return; }
+    labViz.appendChild(labCtrl);
     accPlace(labAccs, i, [labViz, info], labRestore, labBtns[i], yStart);
   }
   function renderMark(i, animate = true) {
     const yStart = labBtns[i].getBoundingClientRect().top;   // prima di cambiare testo e stili
     curMark = i; const m = MARKS[i];
-    stage.style.setProperty('--c-bg', m.bg);
-    stage.style.setProperty('--c-mark', m.mark);
-    stage.style.setProperty('--c-year', m.year);
+    paint(pickedBg < 0 ? m : BGS[pickedBg]);
     // ogni insegna vive in un livello proprio: la vecchia esce, la nuova si rivela dal basso
     const layer = document.createElement('div');
     layer.className = 'lab__m' + (m.small ? ' is-small' : '');
@@ -428,6 +436,18 @@
       gsap.fromTo(info.children, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .6, stagger: .05, ease: 'power3.out' });
     }
   }
+  function paint(c) {
+    stage.style.setProperty('--c-bg', c.bg);
+    stage.style.setProperty('--c-mark', c.mark);
+    stage.style.setProperty('--c-year', c.year);
+    $$('.swatch', sw).forEach((s) => s.setAttribute('aria-pressed', BGS[+s.dataset.i].bg === c.bg));
+  }
+  BGS.forEach((b, i) => {
+    const s = document.createElement('button');
+    s.className = 'swatch'; s.style.setProperty('--sw', b.bg); s.dataset.i = i;
+    s.setAttribute('aria-label', 'Fondo ' + b.k);
+    sw.appendChild(s);
+  });
   // riproduzione automatica (solo desktop, solo quando la sezione è visibile, si ferma al primo click)
   const labProg = $('#labProgress');
   let labAuto = !reduce, labInView = false, labTween = null;
@@ -449,6 +469,10 @@
     e.preventDefault(); labStop();
     const n = (curMark + (e.key === 'ArrowDown' ? 1 : -1) + MARKS.length) % MARKS.length;
     renderMark(n); labBtns[n].focus();
+  });
+  sw.addEventListener('click', (e) => {
+    const s = e.target.closest('.swatch'); if (!s) return;
+    labStop(); pickedBg = +s.dataset.i; paint(BGS[pickedBg]);
   });
   renderMark(0, false);
   if (mqAcc.matches) labPlace(-1);

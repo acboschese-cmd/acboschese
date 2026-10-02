@@ -541,7 +541,7 @@ b, strong { font-weight: 500; }
 .soc__credit { margin: var(--head-gap) 0 0; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .7; }
 
 /* Atto IV: i partner, la notizia, i dettagli */
-.collab { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gut); margin-top: var(--sec-y); border-top: 1px solid var(--line-l); }
+.collab { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); margin-top: var(--sec-y); border-top: 1px solid var(--line-l); }
 .collab__card { padding-top: 34px; }
 .collab__card > p:not(.eyebrow) { margin: 22px 0 0; max-width: 32em; }
 .notizia { margin-top: var(--sec-y); max-width: 1180px; }

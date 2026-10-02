@@ -217,7 +217,7 @@
      ATTO I — i numeri contano quando entrano in scena
      ========================================================== */
   $$('.stat__n[data-count]').forEach((dd) => {
-    const to = +dd.dataset.count, from = 0, o = { v: from };
+    const to = +dd.dataset.count, from = to > 1000 ? to - 60 : 0, o = { v: from };   // gli anni partono da poco prima, non da zero
     if (reduce) return;
     dd.textContent = from;
     ScrollTrigger.create({ trigger: dd, start: 'top 88%', once: true, onEnter: () => {

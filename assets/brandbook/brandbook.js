@@ -228,14 +228,19 @@
   /* ==========================================================
      ATTO III — il monogramma si disegna con lo scroll
      ========================================================== */
-  // il monogramma si riempie dal basso verso l'alto mentre scorri, partendo da opacità 0
-  const fillRect = $('#fillRect');
+  // stessa animazione del preloader (tratto che si disegna, poi riempimento), in verde e legata allo scroll
+  const ldPaths = $$('#drawMono .draw__ld');
   if (!reduce) {
-    const ftl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '#monogramma', start: 'top top', end: 'bottom bottom', scrub: .6 } });
-    ftl.fromTo('#drawFill', { opacity: 0 }, { opacity: 1, duration: .3 }, 0)
-       .fromTo(fillRect, { attr: { y: 166, height: 0 } }, { attr: { y: -6, height: 172 }, duration: 1 }, 0)
-       .fromTo('#drawCopy', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .3, ease: 'power2.out' }, .95)
-       .to({}, { duration: .25 });
+    // autoRound: false — GSAP arrotonda i valori in px e il tratto (pathLength = 1) salterebbe da 1 a 0 senza disegnarsi
+    const ftl = gsap.timeline({ defaults: { autoRound: false }, scrollTrigger: { trigger: '#monogramma', start: 'top top', end: 'bottom bottom', scrub: .6 } });
+    ftl.fromTo(ldPaths[0], { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.5, ease: 'power3.out' }, 0)
+       .fromTo(ldPaths[1], { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.5, ease: 'power3.out' }, .2)
+       .fromTo(ldPaths[0], { fillOpacity: 0, strokeWidth: .7 }, { fillOpacity: 1, strokeWidth: 0, duration: .5, ease: 'none' }, 1.3)
+       .fromTo(ldPaths[1], { fillOpacity: 0, strokeWidth: .7 }, { fillOpacity: 1, strokeWidth: 0, duration: .5, ease: 'none' }, 1.4)
+       .fromTo('#drawCopy', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .5, ease: 'power2.out' }, 1.6)
+       .to({}, { duration: .4 });
+  } else {
+    gsap.set(ldPaths, { strokeDashoffset: 0, fillOpacity: 1, strokeWidth: 0 });
   }
 
   /* ==========================================================
@@ -626,4 +631,6 @@
   /* ---------- immagini caricate → ricalcolo ---------- */
   // le immagini hanno width/height: lo spazio è già riservato, basta un refresh a pagina caricata
   addEventListener('load', () => ScrollTrigger.refresh());
+  // i font (Rector) cambiano l'altezza dei titoli: quando sono pronti ricalcolo le posizioni
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
 })();

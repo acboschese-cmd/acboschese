@@ -216,12 +216,12 @@
   /* ==========================================================
      ATTO I — i numeri contano quando entrano in scena
      ========================================================== */
-  $$('.stat dd[data-count]').forEach((dd) => {
-    const to = +dd.dataset.count, from = to > 1000 ? to - 60 : 0, o = { v: from };
+  $$('.stat__n[data-count]').forEach((dd) => {
+    const to = +dd.dataset.count, from = 0, o = { v: from };
     if (reduce) return;
     dd.textContent = from;
     ScrollTrigger.create({ trigger: dd, start: 'top 88%', once: true, onEnter: () => {
-      gsap.to(o, { v: to, duration: to > 1000 ? 1.4 : 1.1, ease: 'power3.out', onUpdate: () => { dd.textContent = Math.round(o.v); } });
+      gsap.to(o, { v: to, duration: to > 10 ? 1.4 : .9, ease: 'power3.out', onUpdate: () => { dd.textContent = Math.round(o.v); } });
     } });
   });
 

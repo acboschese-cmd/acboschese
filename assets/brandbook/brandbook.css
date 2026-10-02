@@ -404,10 +404,9 @@ b, strong { font-weight: 500; }
    08 APPLICAZIONI
    ========================================================== */
 .apps { background: var(--bosco); padding: 18vh 0 16vh; }
-.apps__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px var(--gut); flex-wrap: wrap; padding: 0 var(--gut); margin-bottom: 7vh; }
-.apps__intro { max-width: 520px; }
+.apps__intro { flex: 0 0 clamp(280px, 30vw, 460px); align-self: center; padding-right: 2vw; scroll-snap-align: start; }
 .apps__intro p:not(.eyebrow) { margin: 22px 0 0; }
-.apps__ctrl { display: flex; align-items: center; gap: 12px; }
+.apps__ctrl { display: flex; justify-content: flex-end; align-items: center; gap: 12px; padding: 4vh var(--gut) 0; }
 .apps__counter { font-variant-numeric: tabular-nums; margin-right: 10px; }
 .apps__arrow { width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255,253,233,.4); font: 300 20px/1 var(--f-body); color: var(--avorio); transition: background .3s, color .3s, border-color .3s, opacity .3s; }
 .apps__arrow:hover:not(:disabled) { background: var(--avorio); color: var(--bosco); border-color: var(--avorio); }
@@ -578,6 +577,7 @@ b, strong { font-weight: 500; }
   .cent__copy { bottom: 6vh; right: var(--gut); }
   .cent__count { top: 12vh; }
   .apps__arrow { width: 46px; height: 46px; }
+  .apps__intro { flex-basis: 78vw; }
   .app--sq { width: 78vw; height: 78vw; }
   .app--tall { width: 64vw; height: 90vw; }
   .app--wide { width: 86vw; height: 58vw; }

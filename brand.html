@@ -11,7 +11,7 @@
 <meta property="og:image" content="assets/brandbook/sb2-home-petto.webp">
 <link rel="icon" href="assets/brand/monogram-green.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/Rector-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/brandbook/brandbook.css?v=31">
+<link rel="stylesheet" href="assets/brandbook/brandbook.css?v=32">
 </head>
 <body>
 <a class="skip" href="#contenuto">Salta al contenuto</a>
@@ -409,19 +409,12 @@
 
 <!-- ============ 10 APPLICAZIONI ============ -->
 <section class="apps" id="applicazioni" data-chapter="Applicazioni" data-num="10">
-  <div class="apps__head">
-    <div class="apps__intro">
-      <p class="eyebrow" data-reveal>10 &nbsp;—&nbsp; Applicazioni</p>
-      <h2 class="display display--l" data-reveal>OLTRE<br>IL CAMPO</h2>
-      <p data-reveal>Dalla felpa alla bandiera, dal manifesto alla t-shirt: un sistema che regge su ogni superficie.</p>
-    </div>
-    <div class="apps__ctrl" data-reveal>
-      <p class="small apps__counter" aria-live="polite"><span id="appsNow">01</span> / <span id="appsTot">07</span></p>
-      <button class="apps__arrow" id="appsPrev" aria-label="Immagine precedente" aria-controls="appsTrack">←</button>
-      <button class="apps__arrow" id="appsNext" aria-label="Immagine successiva" aria-controls="appsTrack">→</button>
-    </div>
-  </div>
   <div class="apps__track" id="appsTrack" data-cursor="Trascina" tabindex="0" role="region" aria-label="Carosello delle applicazioni: trascina o usa le frecce">
+      <div class="apps__intro">
+        <p class="eyebrow">10 &nbsp;—&nbsp; Applicazioni</p>
+        <h2 class="display display--l">OLTRE<br>IL CAMPO</h2>
+        <p>Dalla felpa alla bandiera, dal manifesto alla t-shirt: un sistema che regge su ogni superficie.</p>
+      </div>
       <figure class="app app--wide"><img src="assets/brandbook/bb2-felpa.webp" alt="Felpa verde con il monogramma ACB ricamato" loading="lazy"></figure>
       <figure class="app app--tall"><img src="assets/brandbook/bb2-tshirt.webp" alt="T-shirt bianca con monogramma e logotipo" loading="lazy"></figure>
       <figure class="app app--wide"><img src="assets/brandbook/bb2-bandiera.webp" alt="Bandiera verde con la scritta Sempre Audaci" loading="lazy"></figure>
@@ -429,6 +422,11 @@
       <figure class="app app--tall"><img src="assets/brandbook/bb2-affissione.webp" alt="Affissione con logotipo e sigillo" loading="lazy"></figure>
       <figure class="app app--sq"><img src="assets/photos/club-strips.webp" alt="Il logotipo declinato sui colori della palette" loading="lazy"></figure>
       <figure class="app app--sq"><img src="assets/photos/club-sigilli.webp" alt="Il sigillo nelle quattro versioni cromatiche" loading="lazy"></figure>
+  </div>
+  <div class="apps__ctrl">
+    <p class="small apps__counter" aria-live="polite"><span id="appsNow">01</span> / <span id="appsTot">07</span></p>
+    <button class="apps__arrow" id="appsPrev" aria-label="Indietro" aria-controls="appsTrack">←</button>
+    <button class="apps__arrow" id="appsNext" aria-label="Avanti" aria-controls="appsTrack">→</button>
   </div>
 </section>
 
@@ -456,6 +454,6 @@
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
-<script src="assets/brandbook/brandbook.js?v=11"></script>
+<script src="assets/brandbook/brandbook.js?v=12"></script>
 </body>
 </html>

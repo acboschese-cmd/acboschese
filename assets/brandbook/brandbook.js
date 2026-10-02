@@ -599,14 +599,16 @@
     appFigs.forEach((f, i) => { const dd = Math.abs(f.getBoundingClientRect().left - x); if (dd < d) { d = dd; best = i; } });
     const max = track.scrollWidth - track.clientWidth;
     if (track.scrollLeft >= max - 2) best = appFigs.length - 1;
+    if (track.scrollLeft <= 2) best = -1;
     appCur = best;
-    appsNow.textContent = String(best + 1).padStart(2, '0');
+    appsNow.textContent = String(Math.max(best, 0) + 1).padStart(2, '0');
     appsPrev.disabled = track.scrollLeft <= 2;
     appsNext.disabled = track.scrollLeft >= max - 2;
   }
+  // indice -1 = inizio della striscia (il testo introduttivo)
   function appsGo(i) {
-    i = gsap.utils.clamp(0, appFigs.length - 1, i);
-    const left = appFigs[i].offsetLeft - parseFloat(getComputedStyle(track).paddingLeft);
+    i = gsap.utils.clamp(-1, appFigs.length - 1, i);
+    const left = i < 0 ? 0 : appFigs[i].offsetLeft - parseFloat(getComputedStyle(track).paddingLeft);
     track.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' });
   }
   appsPrev.addEventListener('click', () => appsGo(appCur - 1));
@@ -634,7 +636,7 @@
     if (!drag) return;
     const moved = drag.moved; drag = null;
     track.classList.remove('is-drag');
-    if (moved) { appsState(); appsGo(appCur); }
+    if (moved) appsState();
   });
   track.addEventListener('dragstart', (e) => e.preventDefault());
   appsState();

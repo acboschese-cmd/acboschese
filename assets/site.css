@@ -496,3 +496,5 @@ footer { border-top: 1px solid rgba(255,253,233,0.15); padding: 40px var(--pad);
 .pgal__dot { pointer-events: auto; width: 8px; height: 8px; padding: 0; border-radius: 50%; border: 1px solid rgba(255,253,233,0.75); background: rgba(0,0,0,0.25); cursor: pointer; transition: background .3s, transform .3s; }
 .pgal__dot.is-on { background: var(--gold); border-color: var(--gold); transform: scale(1.25); }
 @media (hover: none) { .pgal__btn { display: none; } }
+.foot__legal a { color: inherit; text-decoration: none; transition: color .3s var(--ease); }
+.foot__legal a:hover { color: var(--gold); }

@@ -228,15 +228,20 @@
   /* ==========================================================
      ATTO III — il monogramma si disegna con lo scroll
      ========================================================== */
-  const drawPaths = $$('#drawMono path');
+  // le due parti (A·C e B) si avvicinano mentre il tratto si disegna; il verde sale dal basso come inchiostro
+  const drawStrokes = $$('#drawMono .draw__s'), clipRect = $('#drawClipRect');
   if (!reduce) {
-    const dtl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '#monogramma', start: 'top top', end: 'bottom bottom', scrub: .8 } });
-    dtl.fromTo(drawPaths, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1, stagger: .15, ease: 'power1.inOut' }, 0)
-       .to(drawPaths, { fillOpacity: 1, strokeOpacity: 0, duration: .35 }, 1.05)
-       .fromTo('#drawCopy', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .35, ease: 'power2.out' }, 1.15)
-       .to({}, { duration: .3 });
+    const dtl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '#monogramma', start: 'top top', end: 'bottom bottom', scrub: 1.4 } });
+    dtl.fromTo('#drawPcA', { x: -16, y: 6, rotation: -2, svgOrigin: '24 90' }, { x: 0, y: 0, rotation: 0, svgOrigin: '24 90', duration: 1.2, ease: 'sine.inOut' }, 0)
+       .fromTo('#drawPcB', { x: 16, y: -6, rotation: 2, svgOrigin: '97 80' }, { x: 0, y: 0, rotation: 0, svgOrigin: '97 80', duration: 1.2, ease: 'sine.inOut' }, 0)
+       .fromTo(drawStrokes, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, stagger: .12, ease: 'sine.inOut' }, 0)
+       .fromTo(clipRect, { attr: { y: 164 } }, { attr: { y: -36 }, duration: 1, ease: 'sine.inOut' }, .55)
+       .to(drawStrokes, { strokeOpacity: 0, duration: .45, ease: 'sine.out' }, 1.2)
+       .fromTo('#drawCopy', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .45, ease: 'sine.out' }, 1.25)
+       .to({}, { duration: .35 });
   } else {
-    gsap.set(drawPaths, { strokeDashoffset: 0, fillOpacity: 1 });
+    gsap.set(drawStrokes, { strokeDashoffset: 0, strokeOpacity: 0 });
+    gsap.set(clipRect, { attr: { y: -36 } });
   }
 
   /* ==========================================================

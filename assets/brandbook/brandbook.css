@@ -140,7 +140,8 @@ b, strong { font-weight: 500; }
   position: fixed; inset: 0; z-index: 45;
   background: var(--bosco); color: var(--avorio);
   padding: 110px var(--gut) 32px;
-  display: flex; flex-direction: column; justify-content: space-between;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 40px;
+  overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
   clip-path: inset(0 0 100% 0); transition: clip-path .8s var(--ease);
 }
 .index[hidden] { display: flex; visibility: hidden; }
@@ -548,6 +549,7 @@ b, strong { font-weight: 500; }
   .hud { grid-template-columns: 1fr auto; }
   .hud__chapter { display: none; }
   .index__list { columns: 1; }
+  .index { padding-top: 76px; }
   .hero__line--a { top: 18vh; }
   .hero__line--b { bottom: 22vh; }
   .hero__meta { display: none; }

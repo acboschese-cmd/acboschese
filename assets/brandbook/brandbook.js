@@ -1,4 +1,4 @@
-/* AC Boschese — Brand Book
+/* AC Boschese — Sempre Audaci, caso studio
    GSAP + ScrollTrigger + Lenis (self-hosted). Sezioni "pinnate" con position:sticky,
    le timeline sono scrub sulla lunghezza della sezione. */
 (() => {
@@ -26,17 +26,6 @@
     lenis.stop();
   }
   const goTo = (target) => lenis ? lenis.scrollTo(target, { duration: 1.6 }) : (typeof target === 'number' ? scrollTo({ top: target, behavior: reduce ? 'auto' : 'smooth' }) : target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }));
-
-  /* ---------- toast ---------- */
-  const toast = $('#toast'); let toastT;
-  function showToast(msg) {
-    toast.textContent = msg; toast.classList.add('is-on');
-    clearTimeout(toastT); toastT = setTimeout(() => toast.classList.remove('is-on'), 1800);
-  }
-  async function copy(text) {
-    try { await navigator.clipboard.writeText(text); showToast('Copiato ' + text); }
-    catch { showToast(text); }
-  }
 
   /* ---------- accordion mobile: sposta i contenuti dentro la voce aperta ---------- */
   const mqAcc = matchMedia('(max-width: 900px)');
@@ -225,6 +214,32 @@
   }
 
   /* ==========================================================
+     ATTO I — i numeri contano quando entrano in scena
+     ========================================================== */
+  $$('.stat dd[data-count]').forEach((dd) => {
+    const to = +dd.dataset.count, from = to > 1000 ? to - 60 : 0, o = { v: from };
+    if (reduce) return;
+    dd.textContent = from;
+    ScrollTrigger.create({ trigger: dd, start: 'top 88%', once: true, onEnter: () => {
+      gsap.to(o, { v: to, duration: to > 1000 ? 1.4 : 1.1, ease: 'power3.out', onUpdate: () => { dd.textContent = Math.round(o.v); } });
+    } });
+  });
+
+  /* ==========================================================
+     ATTO III — il monogramma si disegna con lo scroll
+     ========================================================== */
+  const drawPaths = $$('#drawMono path');
+  if (!reduce) {
+    const dtl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '#monogramma', start: 'top top', end: 'bottom bottom', scrub: .8 } });
+    dtl.fromTo(drawPaths, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1, stagger: .15, ease: 'power1.inOut' }, 0)
+       .to(drawPaths, { fillOpacity: 1, strokeOpacity: 0, duration: .35 }, 1.05)
+       .fromTo('#drawCopy', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .35, ease: 'power2.out' }, 1.15)
+       .to({}, { duration: .3 });
+  } else {
+    gsap.set(drawPaths, { strokeDashoffset: 0, fillOpacity: 1 });
+  }
+
+  /* ==========================================================
      01 RADICI — il contatore degli anni
      ========================================================== */
   const YEARS = [1566, 1928, 2025, 2028];
@@ -351,33 +366,21 @@
   /* ==========================================================
      04 LABORATORIO MARCHI
      ========================================================== */
+  // ogni insegna ha il suo fondo; su desktop scorrono da sole come in una sequenza, il click ferma la riproduzione
   const MARKS = [
-    { id: 'sigillo', name: 'Il sigillo', tag: 'Firma primaria', sym: 'oval', ratio: '356/422',
-      desc: 'Il monogramma ACB racchiuso nell\'ovale, con il nome completo e l\'anno di fondazione. È la firma istituzionale del club.',
-      uso: 'Comunicazione ufficiale, insegne, tribuna, social', car: 'Ortus + Rector' },
-    { id: 'monogramma', name: 'Il monogramma', tag: 'Segno breve', sym: 'monogram', ratio: '140/160',
-      desc: 'A, C e B intrecciate in un unico segno verticale. Nasce dal blackletter dei sigilli papali e lo porta nel presente.',
-      uso: 'Maglia, ricami, avatar, favicon', car: 'Ortus' },
-    { id: 'logotipo', name: 'Il logotipo', tag: 'Nome per esteso', sym: 'wordmark', ratio: '604/173', wide: true,
-      desc: 'Audace Club Boschese composto in Rector su due righe, con l\'anno di fondazione in oro. La voce rinascimentale del club.',
-      uso: 'Intestazioni, sciarpe, manifesti, merchandising', car: 'Rector' },
-    { id: '1928', name: '19/28', tag: 'Brand del centenario', sym: 'm1928', ratio: '147/160', small: true,
-      desc: 'L\'anno di fondazione scomposto e sfalsato su due righe: un sigillo dedicato al cammino verso il 2028.',
-      uso: 'Collezione del centenario, dettagli in oro, celebrazioni', car: 'Rector' },
-    { id: 'scudetto', name: 'Lo scudetto', tag: 'Memoria storica', img: 'assets/brand/scudetto.svg',
-      desc: 'Lo stemma con il gelso e la scritta A.C. Boschese. Resta nel sistema come segno della tradizione.',
-      uso: 'Archivio, occasioni celebrative, maglia', car: 'Storico' },
+    { name: 'Il sigillo', tag: 'La firma ufficiale', sym: 'oval', ratio: '356/422', bg: C.verde, mark: C.avorio, year: C.oro,
+      desc: 'Il monogramma dentro un ovale, con il nome per intero e l\'anno di fondazione. Firma i comunicati, l\'insegna dello stadio e i social.' },
+    { name: 'Il monogramma', tag: 'Il segno breve', sym: 'monogram', ratio: '140/160', bg: C.avorio, mark: C.verde, year: C.oro,
+      desc: 'A, C e B in un solo segno verticale. Lo trovate sulle maglie, sui ricami e ovunque ci sia poco spazio.' },
+    { name: 'Il logotipo', tag: 'Il nome per intero', sym: 'wordmark', ratio: '604/173', bg: C.bosco, mark: C.avorio, year: C.oro,
+      desc: 'Audace Club Boschese in Rector, su due righe, con il 1928 in oro. Sta sulle sciarpe, sui manifesti e sulle intestazioni.' },
+    { name: '19/28', tag: 'Il centenario', sym: 'm1928', ratio: '147/160', small: true, bg: C.oro, mark: C.avorio, year: C.avorio,
+      desc: 'Il 19 sopra, il 28 sotto. Lo useremo per tutta la stagione del centenario.' },
+    { name: 'Lo scudetto', tag: 'La memoria', img: 'assets/brand/scudetto.svg', bg: C.pietra, mark: C.verde, year: C.oro,
+      desc: 'Lo stemma storico con il gelso. Lo teniamo per le occasioni importanti.' },
   ];
-  const BGS = [
-    { k: 'verde', bg: C.verde, mark: C.avorio, year: C.oro },
-    { k: 'avorio', bg: C.avorio, mark: C.verde, year: C.oro },
-    { k: 'bosco', bg: C.bosco, mark: C.verde, year: C.oro },
-    { k: 'gelso', bg: C.gelso, mark: C.avorio, year: C.oro },
-    { k: 'pietra', bg: C.pietra, mark: C.verde, year: C.bosco },
-    { k: 'oro', bg: C.oro, mark: C.avorio, year: C.bosco },
-  ];
-  const stage = $('#labStage'), markBox = $('#labMark'), info = $('#labInfo'), tabs = $('#labTabs'), sw = $('#labSwatches');
-  let curMark = 0, curBg = 0;
+  const stage = $('#labStage'), markBox = $('#labMark'), info = $('#labInfo'), tabs = $('#labTabs');
+  let curMark = 0;
   const labBtns = [], labAccs = [];
   MARKS.forEach((m, i) => {
     const b = document.createElement('button');
@@ -388,28 +391,22 @@
     tabs.append(b, a); labBtns.push(b); labAccs.push(a);
   });
   const labPanel = $('#labPanel'), labViz = $('.lab__viz'), labBody = $('.lab__body');
-  // mobile: ogni voce aperta contiene anteprima + colori + testo; -1 = tutte chiuse
+  // mobile: ogni voce aperta contiene anteprima e testo; -1 = tutte chiuse
   let labOpen = -1;
-  const labCtrl = $('.lab__ctrl');
-  // desktop: pallini e griglia sotto il testo; mobile: dentro la voce aperta, sotto l'anteprima
-  const labRestore = () => { labBody.prepend(labViz); labPanel.appendChild(info); labPanel.appendChild(labCtrl); };
+  const labRestore = () => { labBody.prepend(labViz); labPanel.appendChild(info); };
   function labPlace(i, scroll, yStart) {
     labOpen = i;
     labBtns.forEach((t, k) => t.setAttribute('aria-expanded', k === i));
     if (i < 0) { labAccs.forEach((a) => a.classList.remove('is-open')); labRestore(); safeRefresh(); return; }
-    labViz.appendChild(labCtrl);
     accPlace(labAccs, i, [labViz, info], labRestore, labBtns[i], yStart);
   }
-  BGS.forEach((b, i) => {
-    const s = document.createElement('button');
-    s.className = 'swatch'; s.style.setProperty('--sw', b.bg); s.dataset.i = i;
-    s.setAttribute('aria-label', 'Fondo ' + b.k);
-    sw.appendChild(s);
-  });
   function renderMark(i, animate = true) {
     const yStart = labBtns[i].getBoundingClientRect().top;   // prima di cambiare testo e stili
     curMark = i; const m = MARKS[i];
-    // ogni marchio vive in un livello proprio: il vecchio esce, il nuovo si rivela dal basso
+    stage.style.setProperty('--c-bg', m.bg);
+    stage.style.setProperty('--c-mark', m.mark);
+    stage.style.setProperty('--c-year', m.year);
+    // ogni insegna vive in un livello proprio: la vecchia esce, la nuova si rivela dal basso
     const layer = document.createElement('div');
     layer.className = 'lab__m' + (m.small ? ' is-small' : '');
     layer.innerHTML = m.sym
@@ -417,7 +414,7 @@
       : `<img src="${m.img}" alt="${m.name}">`;
     const old = [...markBox.children];
     markBox.appendChild(layer);
-    info.innerHTML = `<p class="eyebrow">${m.tag}</p><p>${m.desc}</p><dl><dt>Uso</dt><dd>${m.uso}</dd><dt>Carattere</dt><dd>${m.car}</dd></dl>`;
+    info.innerHTML = `<p class="eyebrow">${m.tag}</p><p>${m.desc}</p>`;
     if (mqAcc.matches) labPlace(i, animate, yStart);
     else { labRestore(); labBtns.forEach((t, k) => t.setAttribute('aria-expanded', k === i)); }
     if (!animate || reduce) old.forEach((o) => o.remove());
@@ -427,87 +424,54 @@
       gsap.fromTo(info.children, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .6, stagger: .05, ease: 'power3.out' });
     }
   }
-  function renderBg(i) {
-    curBg = i; const b = BGS[i];
-    stage.style.setProperty('--c-bg', b.bg);
-    stage.style.setProperty('--c-mark', b.mark);
-    stage.style.setProperty('--c-year', b.year);
-    $$('.swatch', sw).forEach((s, k) => s.setAttribute('aria-pressed', k === i));
+  // riproduzione automatica (solo desktop, solo quando la sezione è visibile, si ferma al primo click)
+  const labProg = $('#labProgress');
+  let labAuto = !reduce, labInView = false, labTween = null;
+  function labNext() {
+    if (!labAuto || !labInView || mqAcc.matches) return;
+    labTween = gsap.fromTo(labProg, { scaleX: 0 }, { scaleX: 1, duration: 3.6, ease: 'none', onComplete: () => { renderMark((curMark + 1) % MARKS.length); labNext(); } });
   }
+  function labStop() { labAuto = false; labTween && labTween.kill(); gsap.set(labProg, { scaleX: 0 }); }
+  ScrollTrigger.create({ trigger: stage, start: 'top 75%', end: 'bottom 25%', onToggle: (s) => { labInView = s.isActive; if (s.isActive) labNext(); else { labTween && labTween.kill(); gsap.set(labProg, { scaleX: 0 }); } } });
   tabs.addEventListener('click', (e) => {
     const t = e.target.closest('.lab__tab'); if (!t) return;
     const i = +t.dataset.i;
+    labStop();
     if (mqAcc.matches && i === labOpen) { labPlace(-1); return; }   // tocco sulla voce aperta: si chiude
     renderMark(i);
   });
   tabs.addEventListener('keydown', (e) => {
     if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return;
-    e.preventDefault();
+    e.preventDefault(); labStop();
     const n = (curMark + (e.key === 'ArrowDown' ? 1 : -1) + MARKS.length) % MARKS.length;
     renderMark(n); labBtns[n].focus();
   });
-  sw.addEventListener('click', (e) => { const s = e.target.closest('.swatch'); if (s) renderBg(+s.dataset.i); });
-  $('#gridBtn').addEventListener('click', (e) => {
-    const on = stage.classList.toggle('show-grid');
-    e.currentTarget.setAttribute('aria-pressed', on);
-    e.currentTarget.textContent = on ? 'Nascondi griglia' : 'Mostra griglia';
-  });
-  if (finePointer) {
-    const coord = $('#labCoord');
-    stage.addEventListener('pointermove', (e) => {
-      if (!stage.classList.contains('show-grid')) return;
-      const r = stage.getBoundingClientRect();
-      coord.textContent = `x ${Math.round((e.clientX - r.left) / r.width * 100)} · y ${Math.round((e.clientY - r.top) / r.height * 100)}`;
-    });
-  }
-  renderMark(0, false); renderBg(0);
+  renderMark(0, false);
   if (mqAcc.matches) labPlace(-1);
 
   /* ==========================================================
      05 PALETTE
      ========================================================== */
   const PAL = [
-    { n: 'Verde Audace', hex: '#107947', t: C.avorio, role: 'Il colore primario del club: maglia, sigillo e comunicazione.' },
-    { n: 'Verde Bosco', hex: '#1E4430', t: C.avorio, role: 'Il verde più profondo, per fondi e superfici istituzionali.' },
-    { n: 'Verde Gelso', hex: '#185A3A', t: C.avorio, role: 'Il tono intermedio, per i tono su tono e i dettagli ricamati.' },
-    { n: 'Pietra', hex: '#D3D2C4', t: C.bosco, role: 'Il neutro caldo, per carta, fondi editoriali e respiro.' },
-    { n: 'Avorio', hex: '#FFFDE9', t: C.verde, role: 'Il bianco del biancoverde, ammorbidito.' },
-    { n: 'Oro', hex: '#BDA360', t: C.bosco, role: 'Nobilita il brand: riservato al centenario e ai dettagli preziosi.' },
+    { n: 'Verde Audace', hex: '#107947', t: C.avorio, role: 'Il colore delle maglie e del sigillo.' },
+    { n: 'Verde Bosco', hex: '#1E4430', t: C.avorio, role: 'Il verde più scuro, per i fondi.' },
+    { n: 'Verde Gelso', hex: '#185A3A', t: C.avorio, role: 'Sta in mezzo: lo usiamo per i tono su tono.' },
+    { n: 'Pietra', hex: '#D3D2C4', t: C.bosco, role: 'Il neutro: carta, manifesti, pagine come questa.' },
+    { n: 'Avorio', hex: '#FFFDE9', t: C.verde, role: 'Il nostro bianco.' },
+    { n: 'Oro', hex: '#BDA360', t: C.bosco, role: 'Solo per il centenario e per i dettagli.' },
   ];
-  const rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)).join(' · ');
-  const cmyk = (h) => {
-    const [r, g, b] = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
-    const k = 1 - Math.max(r, g, b);
-    if (k >= 1) return '0 · 0 · 0 · 100';
-    return [(1 - r - k) / (1 - k), (1 - g - k) / (1 - k), (1 - b - k) / (1 - k), k].map((v) => Math.round(v * 100)).join(' · ');
-  };
   const bars = $('#palBars');
   PAL.forEach((p, i) => {
     const b = document.createElement('button');
     b.className = 'bar'; b.style.setProperty('--c', p.hex); b.style.setProperty('--t', p.t);
-    b.dataset.cursor = 'Copia';
-    b.setAttribute('aria-label', `${p.n}, ${p.hex}. Copia il codice`);
-    b.innerHTML = `<span class="bar__idx">0${i + 1}</span><span class="bar__copy">Clicca per copiare</span>
-      <span class="bar__hex">${p.hex.slice(1)}</span>
-      <span class="bar__info"><span class="bar__name">${p.n}</span><span class="bar__role">${p.role}</span>
-      <span class="bar__codes"><span>HEX</span><span>${p.hex}</span><span>RGB</span><span>${rgb(p.hex)}</span><span>CMYK</span><span>${cmyk(p.hex)}</span></span></span>`;
+    b.setAttribute('aria-expanded', 'false');
+    b.setAttribute('aria-label', `${p.n}. ${p.role}`);
+    b.innerHTML = `<span class="bar__idx">0${i + 1}</span><span class="bar__hex">${p.hex.slice(1)}</span>
+      <span class="bar__info"><span class="bar__name">${p.n}</span><span class="bar__role">${p.role}</span><span class="bar__code">${p.hex}</span></span>`;
     b.addEventListener('click', () => {
-      const narrow = innerWidth <= 900;
-      if (narrow && !b.classList.contains('is-open')) {
-        $$('.bar', bars).forEach((x) => x.classList.toggle('is-open', x === b));
-        return;
-      }
-      copy(p.hex);
+      $$('.bar', bars).forEach((x) => { const on = x === b && !b.classList.contains('is-open'); x.classList.toggle('is-open', on); x.setAttribute('aria-expanded', on); });
     });
     bars.appendChild(b);
-  });
-  const chips = $('#palChips');
-  [{ n: 'Verde Web', hex: '#016938' }, { n: 'Menta', hex: '#1DFA93' }].forEach((c) => {
-    const b = document.createElement('button');
-    b.className = 'chip'; b.style.setProperty('--c', c.hex); b.dataset.cursor = 'Copia';
-    b.innerHTML = `<i></i>${c.n} ${c.hex}`;
-    b.addEventListener('click', () => copy(c.hex));
-    chips.appendChild(b);
   });
   if (!reduce) {
     const mm = gsap.matchMedia();
@@ -520,45 +484,12 @@
   }
 
   /* ==========================================================
-     06 TIPOGRAFIA — tester e glifi
+     I CARATTERI
      ========================================================== */
-  const SETS = {
-    rector: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&?!«»',
-    avant: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&?!',
-  };
-  const CLS = { rector: 'f-rector', avant: 'f-avant' };
-  let font = 'rector';
-  const tIn = $('#testerInput'), tOut = $('#testerOut'), tSize = $('#testerSize');
-  const gGrid = $('#glyphGrid'), gBig = $('#glyphBig'), gCode = $('#glyphCode');
-  const clean = (s) => font === 'rector' ? s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase() : s;
-  function renderTester() {
-    tOut.className = 'tester__out ' + CLS[font];
-    tOut.textContent = clean(tIn.value) || ' ';
-    const v = +tSize.value;
-    tOut.style.fontSize = `min(${v}px, ${(v / 12).toFixed(2)}vw)`;
+  // la riga in Rector attraversa lo schermo mentre scorri
+  if (!reduce) {
+    gsap.fromTo('#typeBig', { xPercent: 8 }, { xPercent: -38, ease: 'none', scrollTrigger: { trigger: '#typeBig', start: 'top bottom', end: 'bottom top', scrub: 1 } });
   }
-  function setGlyph(ch) {
-    gBig.textContent = ch; gBig.className = CLS[font];
-    gCode.textContent = 'U+' + ch.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
-    $$('button', gGrid).forEach((b) => b.classList.toggle('is-on', b.textContent === ch));
-  }
-  function renderGlyphs() {
-    gGrid.className = 'glyphs__grid ' + CLS[font];
-    gGrid.innerHTML = [...SETS[font]].map((c) => `<button type="button" aria-label="Glifo ${c}">${c}</button>`).join('');
-    setGlyph(SETS[font][0]);
-  }
-  gGrid.addEventListener('pointerover', (e) => { const b = e.target.closest('button'); if (b) setGlyph(b.textContent); });
-  gGrid.addEventListener('focusin', (e) => { const b = e.target.closest('button'); if (b) setGlyph(b.textContent); });
-  $$('.tester__fonts .pill').forEach((p) => p.addEventListener('click', () => {
-    font = p.dataset.f;
-    $$('.tester__fonts .pill').forEach((x) => { x.classList.toggle('is-on', x === p); x.setAttribute('aria-checked', x === p); });
-    renderTester(); renderGlyphs();
-    if (!reduce) gsap.fromTo(tOut, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6, ease: 'power3.out' });
-  }));
-  $$('.tcard').forEach((c) => c.addEventListener('click', () => { const b = $(`.tester__fonts [data-f="${c.dataset.font}"]`); if (b) b.click(); }));
-  tIn.addEventListener('input', renderTester);
-  tSize.addEventListener('input', renderTester);
-  renderTester(); renderGlyphs();
 
   /* ==========================================================
      07 CENTENARIO — 19 e 28 si incontrano
@@ -589,10 +520,10 @@
      ========================================================== */
   const KITS = [
     { k: 'home', name: 'Home', tag: 'Forto Pro — Home',
-      desc: 'Il verde più profondo del bosco, i pannelli laterali in verde foglia e il monogramma ACB in oro, con le cuciture a vista che disegnano il busto. Al collo, la fettuccia Societas.',
+      desc: 'La maglia che indossiamo in casa: verde bosco, mesh verde foglia, monogramma e profili in oro.',
       sw: [['Verde Bosco', '#1E4430'], ['Verde foglia', '#17A355'], ['Oro', '#BDA360']] },
     { k: 'portiere', name: 'Portiere', tag: 'Forto Pro — Portiere',
-      desc: 'Corallo acceso, colletto nero e inserti bordeaux: il portiere si riconosce da lontano. Il monogramma ACB è in nero.',
+      desc: 'Corallo, colletto nero e inserti bordeaux. Qui il monogramma è nero.',
       sw: [['Corallo', '#FF5F4F'], ['Nero', '#151515'], ['Bordeaux', '#7A1E25']] },
   ];
   const socTabs = $('#socTabs'), socInfo = $('#socInfo');

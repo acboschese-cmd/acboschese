@@ -289,12 +289,10 @@ b, strong { font-weight: 500; }
 .lab__head { margin-bottom: var(--head-gap); }
 .lab__body { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--gut); align-items: start; }
 .lab__stage { position: relative; aspect-ratio: 1; background: var(--c-bg, var(--verde)); color: var(--c-mark, var(--avorio)); --wm-year: var(--c-year, var(--oro)); transition: background .6s var(--ease), color .6s var(--ease); overflow: hidden; display: grid; place-items: center; }
-.lab__mark { width: 62%; height: 62%; display: grid; place-items: center; }
-.lab__mark { position: relative; }
-.lab__mark svg { width: 100%; height: 100%; }
-.lab__mark img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-.lab__mark.is-wide svg { height: auto; }
-.lab__mark.is-small { width: 43.4%; height: 43.4%; }  /* 19/28: 30% più piccolo degli altri marchi */
+.lab__mark { position: relative; width: 62%; height: 62%; }
+.lab__m { position: absolute; inset: 0; will-change: clip-path, transform; }
+.lab__m.is-small { inset: 15%; }  /* 19/28: 30% più piccolo degli altri marchi */
+.lab__m svg, .lab__m img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .lab__grid { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: .15; opacity: 0; transition: opacity .5s; pointer-events: none; }
 .lab__grid line, .lab__grid rect { stroke-dasharray: .8 .8; }
 .lab__grid circle { stroke-width: 1px; opacity: .6; }

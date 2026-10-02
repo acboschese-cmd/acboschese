@@ -409,16 +409,21 @@
   function renderMark(i, animate = true) {
     const yStart = labBtns[i].getBoundingClientRect().top;   // prima di cambiare testo e stili
     curMark = i; const m = MARKS[i];
-    let html;
-    if (m.sym) html = `<svg viewBox="0 0 ${m.ratio.replace('/', ' ')}" aria-label="${m.name}"><use href="#${m.sym}"/></svg>`;
-    else html = `<img src="${m.img}" alt="${m.name}">`;
-    markBox.className = 'lab__mark' + (m.wide ? ' is-wide' : '') + (m.small ? ' is-small' : '');
-    markBox.innerHTML = html;
+    // ogni marchio vive in un livello proprio: il vecchio esce, il nuovo si rivela dal basso
+    const layer = document.createElement('div');
+    layer.className = 'lab__m' + (m.small ? ' is-small' : '');
+    layer.innerHTML = m.sym
+      ? `<svg viewBox="0 0 ${m.ratio.replace('/', ' ')}" role="img" aria-label="${m.name}"><use href="#${m.sym}"/></svg>`
+      : `<img src="${m.img}" alt="${m.name}">`;
+    const old = [...markBox.children];
+    markBox.appendChild(layer);
     info.innerHTML = `<p class="eyebrow">${m.tag}</p><p>${m.desc}</p><dl><dt>Uso</dt><dd>${m.uso}</dd><dt>Carattere</dt><dd>${m.car}</dd></dl>`;
     if (mqAcc.matches) labPlace(i, animate, yStart);
     else { labRestore(); labBtns.forEach((t, k) => t.setAttribute('aria-expanded', k === i)); }
+    if (!animate || reduce) old.forEach((o) => o.remove());
     if (animate && !reduce) {
-      gsap.fromTo(markBox.firstElementChild, { scale: .86, opacity: 0, rotate: -4 }, { scale: 1, opacity: 1, rotate: 0, duration: .9, ease: 'expo.out' });
+      old.forEach((o) => gsap.to(o, { opacity: 0, yPercent: -6, duration: .35, ease: 'power2.in', onComplete: () => o.remove() }));
+      gsap.fromTo(layer, { clipPath: 'inset(100% 0% 0% 0%)', yPercent: 5 }, { clipPath: 'inset(0% 0% 0% 0%)', yPercent: 0, duration: .95, delay: .15, ease: 'expo.out' });
       gsap.fromTo(info.children, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .6, stagger: .05, ease: 'power3.out' });
     }
   }

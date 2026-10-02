@@ -16,7 +16,8 @@
 
   /* ---------- smooth scroll ---------- */
   let lenis = null;
-  if (!reduce) {
+  // smooth scroll solo con mouse/trackpad: su touch lo scroll nativo è già fluido e Lenis interferirebbe con accordion e salti
+  if (!reduce && finePointer) {
     // stessa sensazione di scroll del resto del sito (site.js)
     lenis = new Lenis({ duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 1.6 });
     lenis.on('scroll', ScrollTrigger.update);
@@ -24,7 +25,7 @@
     gsap.ticker.lagSmoothing(0);
     lenis.stop();
   }
-  const goTo = (target) => lenis ? lenis.scrollTo(target, { duration: 1.6 }) : (typeof target === 'number' ? scrollTo(0, target) : target.scrollIntoView());
+  const goTo = (target) => lenis ? lenis.scrollTo(target, { duration: 1.6 }) : (typeof target === 'number' ? scrollTo({ top: target, behavior: reduce ? 'auto' : 'smooth' }) : target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }));
 
   /* ---------- toast ---------- */
   const toast = $('#toast'); let toastT;
@@ -39,20 +40,31 @@
 
   /* ---------- accordion mobile: sposta i contenuti dentro la voce aperta ---------- */
   const mqAcc = matchMedia('(max-width: 900px)');
-  function accPlace(accs, idx, nodes, restore, scrollTo) {
+  // ricalcola i trigger senza mai spostare la pagina
+  function safeRefresh() {
+    const y = scrollY;
+    ScrollTrigger.refresh();
+    if (Math.abs(scrollY - y) > 1) { if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); else scrollTo(0, y); }
+  }
+  // la voce si apre dove si trova e spinge giù il resto; se sopra se ne chiude un'altra, la voce toccata resta ferma
+  function accPlace(accs, idx, nodes, restore, anchor, yStart) {
     if (mqAcc.matches) {
+      const y0 = yStart ?? (anchor ? anchor.getBoundingClientRect().top : 0);
       accs.forEach((a, k) => { a.classList.toggle('is-open', k === idx); });
       const target = accs[idx];
-      const before = target.offsetHeight;
       nodes.forEach((n) => target.appendChild(n));
-      if (!reduce) gsap.fromTo(target, { height: before }, { height: 'auto', duration: .6, ease: 'power3.inOut', clearProps: 'height', onComplete: () => ScrollTrigger.refresh() });
-      else ScrollTrigger.refresh();
-      if (scrollTo && lenis) lenis.scrollTo(scrollTo, { offset: -70, duration: 1 });
+      if (anchor) {
+        const dy = anchor.getBoundingClientRect().top - y0;
+        if (Math.abs(dy) > 1) { const y = scrollY + dy; if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); else scrollTo(0, y); }
+      }
+      if (!reduce) gsap.fromTo(target, { height: 0 }, { height: 'auto', duration: .55, ease: 'power3.out', clearProps: 'height', onComplete: safeRefresh });
+      else safeRefresh();
     } else {
       accs.forEach((a) => a.classList.remove('is-open'));
       restore();
     }
   }
+
 
   /* ---------- loader ---------- */
   const loader = $('#loader');
@@ -104,7 +116,7 @@
   ScrollTrigger.create({ start: 0, end: 'max', onUpdate: (s) => { bar.style.transform = `scaleY(${s.progress})`; } });
 
   const index = $('#index'), menuBtn = $('#menuBtn'), list = $('#indexList');
-  $$('section[id][data-chapter]').forEach((s) => {
+  $$('section[id][data-chapter]:not([data-noindex])').forEach((s) => {
     const li = document.createElement('li');
     li.innerHTML = `<a href="#${s.id}"><span>${s.dataset.num}</span><b>${s.dataset.chapter}</b></a>`;
     list.appendChild(li);
@@ -303,13 +315,15 @@
      03 EVOLUZIONE — schizzi e confronto
      ========================================================== */
   const sketch = $('#evoSketch img');
-  gsap.set(sketch, { yPercent: -50 });
-  if (!reduce) {
-    gsap.fromTo(sketch, { x: () => innerWidth * .04 }, {
+  // desktop: gli schizzi scorrono di lato; mobile: immagine intera e ferma, si vedono tutti i loghi
+  gsap.matchMedia().add('(min-width: 901px)', () => {
+    gsap.set(sketch, { yPercent: -50 });
+    const tw = reduce ? null : gsap.fromTo(sketch, { x: () => innerWidth * .04 }, {
       x: () => -(sketch.offsetWidth - innerWidth * .96), ease: 'none',
       scrollTrigger: { trigger: '#evoSketch', start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true },
     });
-  }
+    return () => { tw && tw.scrollTrigger && tw.scrollTrigger.kill(); tw && tw.kill(); gsap.set(sketch, { clearProps: 'all' }); };
+  });
   const cmp = $('#compare');
   let cmpPos = 50, dragging = false;
   function setCmp(p) {
@@ -376,12 +390,15 @@
   const labPanel = $('#labPanel'), labViz = $('.lab__viz'), labBody = $('.lab__body');
   // mobile: ogni voce aperta contiene anteprima + colori + testo; -1 = tutte chiuse
   let labOpen = -1;
-  const labRestore = () => { labBody.prepend(labViz); labPanel.appendChild(info); };
-  function labPlace(i, scroll) {
+  const labCtrl = $('.lab__ctrl');
+  // desktop: pallini e griglia sotto il testo; mobile: dentro la voce aperta, sotto l'anteprima
+  const labRestore = () => { labBody.prepend(labViz); labPanel.appendChild(info); labPanel.appendChild(labCtrl); };
+  function labPlace(i, scroll, yStart) {
     labOpen = i;
     labBtns.forEach((t, k) => t.setAttribute('aria-expanded', k === i));
-    if (i < 0) { labAccs.forEach((a) => a.classList.remove('is-open')); labRestore(); ScrollTrigger.refresh(); return; }
-    accPlace(labAccs, i, [labViz, info], labRestore, scroll ? labBtns[i] : null);
+    if (i < 0) { labAccs.forEach((a) => a.classList.remove('is-open')); labRestore(); safeRefresh(); return; }
+    labViz.appendChild(labCtrl);
+    accPlace(labAccs, i, [labViz, info], labRestore, labBtns[i], yStart);
   }
   BGS.forEach((b, i) => {
     const s = document.createElement('button');
@@ -390,6 +407,7 @@
     sw.appendChild(s);
   });
   function renderMark(i, animate = true) {
+    const yStart = labBtns[i].getBoundingClientRect().top;   // prima di cambiare testo e stili
     curMark = i; const m = MARKS[i];
     let html;
     if (m.sym) html = `<svg viewBox="0 0 ${m.ratio.replace('/', ' ')}" aria-label="${m.name}"><use href="#${m.sym}"/></svg>`;
@@ -398,7 +416,7 @@
     markBox.className = 'lab__mark' + (m.wide ? ' is-wide' : '');
     markBox.innerHTML = html;
     info.innerHTML = `<p class="eyebrow">${m.tag}</p><p>${m.desc}</p><dl><dt>Uso</dt><dd>${m.uso}</dd><dt>Carattere</dt><dd>${m.car}</dd></dl>`;
-    if (mqAcc.matches) labPlace(i, animate);
+    if (mqAcc.matches) labPlace(i, animate, yStart);
     else { labRestore(); labBtns.forEach((t, k) => t.setAttribute('aria-expanded', k === i)); }
     if (animate && !reduce) {
       gsap.fromTo(markBox.firstElementChild, { scale: .86, opacity: 0, rotate: -4 }, { scale: 1, opacity: 1, rotate: 0, duration: .9, ease: 'expo.out' });
@@ -587,6 +605,7 @@
     socTabs.append(b, a); socBtns.push(b); socAccs.push(a);
   });
   function renderKit(i, animate = true) {
+    const yStart = socBtns[i].getBoundingClientRect().top;
     curKit = i; const kt = KITS[i];
     socBtns.forEach((t, n) => t.setAttribute('aria-expanded', n === i));
     socSets.forEach((s) => {
@@ -600,7 +619,7 @@
     });
     socInfo.innerHTML = `<p class="eyebrow">${kt.tag}</p><p>${kt.desc}</p>
       <ul class="soc__sw">${kt.sw.map(([n, c]) => `<li><i style="background:${c}"></i><span>${n}</span></li>`).join('')}</ul>`;
-    accPlace(socAccs, i, [socInfo, socStage], () => { socBody.prepend(socStage); socPanel.appendChild(socInfo); }, animate ? socBtns[i] : null);
+    accPlace(socAccs, i, [socInfo, socStage], () => { socBody.prepend(socStage); socPanel.appendChild(socInfo); }, socBtns[i], yStart);
     if (animate && !reduce) gsap.fromTo(socInfo.children, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .6, stagger: .06, ease: 'power3.out' });
   }
   socTabs.addEventListener('click', (e) => { const t = e.target.closest('.soc__tab'); if (t && +t.dataset.i !== curKit) renderKit(+t.dataset.i); });

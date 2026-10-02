@@ -373,7 +373,16 @@
     a.className = 'lab__acc'; a.id = 'labAcc' + i;
     tabs.append(b, a); labBtns.push(b); labAccs.push(a);
   });
-  const labPanel = $('#labPanel');
+  const labPanel = $('#labPanel'), labViz = $('.lab__viz'), labBody = $('.lab__body');
+  // mobile: ogni voce aperta contiene anteprima + colori + testo; -1 = tutte chiuse
+  let labOpen = -1;
+  const labRestore = () => { labBody.prepend(labViz); labPanel.appendChild(info); };
+  function labPlace(i, scroll) {
+    labOpen = i;
+    labBtns.forEach((t, k) => t.setAttribute('aria-expanded', k === i));
+    if (i < 0) { labAccs.forEach((a) => a.classList.remove('is-open')); labRestore(); ScrollTrigger.refresh(); return; }
+    accPlace(labAccs, i, [labViz, info], labRestore, scroll ? labBtns[i] : null);
+  }
   BGS.forEach((b, i) => {
     const s = document.createElement('button');
     s.className = 'swatch'; s.style.setProperty('--sw', b.bg); s.dataset.i = i;
@@ -382,7 +391,6 @@
   });
   function renderMark(i, animate = true) {
     curMark = i; const m = MARKS[i];
-    labBtns.forEach((t, k) => t.setAttribute('aria-expanded', k === i));
     let html;
     if (m.sym) html = `<svg viewBox="0 0 ${m.ratio.replace('/', ' ')}" aria-label="${m.name}"><use href="#${m.sym}"/></svg>`;
     else if (m.n1928) html = `<div class="lab__n1928" aria-label="1928"><span>19</span><span>28</span></div>`;
@@ -390,7 +398,8 @@
     markBox.className = 'lab__mark' + (m.wide ? ' is-wide' : '');
     markBox.innerHTML = html;
     info.innerHTML = `<p class="eyebrow">${m.tag}</p><p>${m.desc}</p><dl><dt>Uso</dt><dd>${m.uso}</dd><dt>Carattere</dt><dd>${m.car}</dd></dl>`;
-    accPlace(labAccs, i, [info], () => labPanel.appendChild(info));
+    if (mqAcc.matches) labPlace(i, animate);
+    else { labRestore(); labBtns.forEach((t, k) => t.setAttribute('aria-expanded', k === i)); }
     if (animate && !reduce) {
       gsap.fromTo(markBox.firstElementChild, { scale: .86, opacity: 0, rotate: -4 }, { scale: 1, opacity: 1, rotate: 0, duration: .9, ease: 'expo.out' });
       gsap.fromTo(info.children, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .6, stagger: .05, ease: 'power3.out' });
@@ -403,7 +412,12 @@
     stage.style.setProperty('--c-year', b.year);
     $$('.swatch', sw).forEach((s, k) => s.setAttribute('aria-pressed', k === i));
   }
-  tabs.addEventListener('click', (e) => { const t = e.target.closest('.lab__tab'); if (t && (+t.dataset.i !== curMark || !mqAcc.matches)) renderMark(+t.dataset.i); });
+  tabs.addEventListener('click', (e) => {
+    const t = e.target.closest('.lab__tab'); if (!t) return;
+    const i = +t.dataset.i;
+    if (mqAcc.matches && i === labOpen) { labPlace(-1); return; }   // tocco sulla voce aperta: si chiude
+    renderMark(i);
+  });
   tabs.addEventListener('keydown', (e) => {
     if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return;
     e.preventDefault();
@@ -425,6 +439,7 @@
     });
   }
   renderMark(0, false); renderBg(0);
+  if (mqAcc.matches) labPlace(-1);
 
   /* ==========================================================
      05 PALETTE
@@ -597,7 +612,7 @@
   });
   renderKit(0, false);
   // al cambio breakpoint rimetto i contenuti al posto giusto
-  mqAcc.addEventListener('change', () => { renderMark(curMark, false); renderKit(curKit, false); ScrollTrigger.refresh(); });
+  mqAcc.addEventListener('change', () => { if (mqAcc.matches) labPlace(-1); else renderMark(curMark, false); renderKit(curKit, false); ScrollTrigger.refresh(); });
 
   /* ==========================================================
      08 APPLICAZIONI — scroll orizzontale

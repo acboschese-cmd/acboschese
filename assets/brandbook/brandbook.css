@@ -599,7 +599,8 @@ b, strong { font-weight: 500; }
   .lab__tab::after, .soc__tab::after { content: "+"; margin-left: auto; font: 300 22px/1 var(--f-body); transition: transform .4s var(--ease); }
   .lab__tab span { margin-left: auto; margin-right: 14px; }
   .lab__tab[aria-expanded="true"]::after, .soc__tab[aria-expanded="true"]::after { transform: rotate(45deg); }
-  .lab__viz { position: sticky; top: 52px; z-index: 3; background: var(--bosco); padding: 8px 0 12px; }
+  .lab__body > .lab__viz { display: none; }
+  .lab__acc .lab__viz { padding: 6px 0 22px; }
   .lab__stage { aspect-ratio: 4 / 3; }
   .lab__ctrl { margin-top: 20px; gap: 18px 12px; }
   .lab__ctrl .small { display: none; }

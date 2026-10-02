@@ -9,6 +9,8 @@
   const C = { verde: '#107947', bosco: '#1E4430', gelso: '#185A3A', pietra: '#D3D2C4', avorio: '#FFFDE9', oro: '#BDA360' };
 
   gsap.registerPlugin(ScrollTrigger);
+  // su mobile la barra degli indirizzi cambia l'altezza: niente refresh (eviterebbe salti a metà scroll)
+  ScrollTrigger.config({ ignoreMobileResize: true });
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   scrollTo(0, 0);
 
@@ -77,6 +79,14 @@
   /* ---------- HUD, indice, progress ---------- */
   const hudNum = $('#hudNum'), hudName = $('#hudName');
   let curChapter = '';
+  // su touch niente mix-blend (costoso): il colore dell'HUD segue la luminosità della sezione
+  const hudEl = $('.hud');
+  function hudTheme(el) {
+    const m = getComputedStyle(el).backgroundColor.match(/\d+(\.\d+)?/g);
+    if (!m) return;
+    const [r, g, b] = m.map(Number);
+    hudEl.classList.toggle('is-light', (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 > 0.5);
+  }
   function setHud(el) {
     const name = el.dataset.chapter;
     if (name === curChapter) return;
@@ -87,6 +97,8 @@
   }
   $$('[data-chapter]').forEach((el) => {
     ScrollTrigger.create({ trigger: el, start: 'top 50%', end: 'bottom 50%', onToggle: (s) => s.isActive && setHud(el) });
+    // colore dell'HUD: conta la sezione che passa sotto la barra, non quella a metà schermo
+    ScrollTrigger.create({ trigger: el, start: 'top 28px', end: 'bottom 28px', onToggle: (s) => s.isActive && hudTheme(el) });
   });
   const bar = $('#progressBar');
   ScrollTrigger.create({ start: 0, end: 'max', onUpdate: (s) => { bar.style.transform = `scaleY(${s.progress})`; } });
@@ -221,6 +233,7 @@
   function setStep(i) {
     if (i === curStep) return;
     curStep = i; steps.forEach((s, k) => s.classList.toggle('is-on', k === i));
+    setTimeout(() => hudTheme(radici), 450);
   }
   if (!reduce) {
     const rtl = gsap.timeline({
@@ -642,8 +655,6 @@
   appsState();
 
   /* ---------- immagini caricate → ricalcolo ---------- */
-  let rT;
-  const refresh = () => { clearTimeout(rT); rT = setTimeout(() => ScrollTrigger.refresh(), 200); };
-  addEventListener('load', refresh);
-  $$('img[loading="lazy"]').forEach((img) => img.addEventListener('load', refresh, { once: true }));
+  // le immagini hanno width/height: lo spazio è già riservato, basta un refresh a pagina caricata
+  addEventListener('load', () => ScrollTrigger.refresh());
 })();

@@ -604,7 +604,10 @@ b, strong { font-weight: 500; }
   .lab__stage { aspect-ratio: 4 / 3; }
   .lab__ctrl { margin-top: 20px; gap: 18px 12px; }
   .lab__ctrl .small { display: none; }
-  .swatch { width: 30px; height: 30px; }
+  .swatch { width: 32px; height: 32px; }
+  /* dentro l'accordion (overflow hidden) l'anello di selezione va disegnato all'interno */
+  .swatch[aria-pressed="true"] { outline: none; box-shadow: inset 0 0 0 2px var(--avorio), inset 0 0 0 4px var(--bosco); }
+  .swatch:hover { transform: none; }
   .lab__ctrl .pill { height: 34px; padding: 0 14px; font-size: 11px; }
   .soc__panel { order: 0; }
   .soc__tab[aria-expanded="true"] { border-bottom-color: transparent; }

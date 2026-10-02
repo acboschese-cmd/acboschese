@@ -27,8 +27,8 @@
   /* sistema unico di spaziature, linee e testi */
   --sec-y: clamp(88px, 15vh, 168px);      /* padding verticale di ogni sezione */
   --head-gap: clamp(44px, 8vh, 88px);     /* spazio tra intestazione e contenuto */
-  --line-d: var(--line-d);         /* linee su fondo scuro */
-  --line-l: var(--line-l);            /* linee su fondo chiaro */
+  --line-d: rgba(255,253,233,.18);       /* linee su fondo scuro */
+  --line-l: rgba(30,68,48,.2);         /* linee su fondo chiaro */
   --line-ctl: rgba(255,253,233,.4);       /* contorni dei controlli su fondo scuro */
   --r-pill: 99px;
   --fs-meta: 12px;                        /* etichette maiuscole */

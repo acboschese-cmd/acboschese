@@ -485,7 +485,7 @@ b, strong { font-weight: 500; }
 .ci--b { grid-column: 9 / span 4; aspect-ratio: 4 / 5; margin-top: 14vh; }
 .ci--c { grid-column: 2 / span 5; aspect-ratio: 3 / 2; }
 .ci--d { grid-column: 7 / span 6; aspect-ratio: 3 / 2; margin-top: 10vh; }
-.ci--e { grid-column: 1 / span 5; aspect-ratio: 4 / 5; }
+.ci--e { grid-column: 8 / span 5; aspect-ratio: 4 / 5; margin-top: 10vh; }
 .ci--f { grid-column: 6 / span 7; aspect-ratio: 3 / 2; margin-top: 18vh; }
 
 @media (max-width: 900px) {

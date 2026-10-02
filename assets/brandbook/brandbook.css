@@ -516,10 +516,9 @@ b, strong { font-weight: 500; }
 /* ==========================================================
    ATTO III — IL MONOGRAMMA DISEGNATO
    ========================================================== */
-.draw { position: relative; background: var(--avorio); color: var(--bosco); }
-.draw__stick { min-height: 100vh; min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: var(--gut); padding: 0 var(--gut); overflow: hidden; }
+.draw { height: 220vh; position: relative; background: var(--avorio); color: var(--bosco); }
+.draw__stick { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: var(--gut); padding: 0 var(--gut); overflow: hidden; }
 .draw__mono { width: min(100%, 62vh); height: auto; justify-self: center; overflow: visible; }
-.draw__ghost path { fill: var(--verde); opacity: .12; }
 .draw__fill path { fill: var(--verde); }
 .draw__copy { max-width: 30em; }
 .draw__copy p:not(.eyebrow) { margin: 22px 0 0; }
@@ -542,7 +541,7 @@ b, strong { font-weight: 500; }
 .soc__credit { margin: var(--head-gap) 0 0; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .7; }
 
 /* Atto IV: i partner, la notizia, i dettagli */
-.collab { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); margin-top: var(--sec-y); border-top: 1px solid var(--line-l); }
+.collab { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gut); margin-top: var(--sec-y); border-top: 1px solid var(--line-l); }
 .collab__card { padding-top: 34px; }
 .collab__card > p:not(.eyebrow) { margin: 22px 0 0; max-width: 32em; }
 .notizia { margin-top: var(--sec-y); max-width: 1180px; }

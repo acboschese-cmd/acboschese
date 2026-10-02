@@ -228,15 +228,14 @@
   /* ==========================================================
      ATTO III — il monogramma si disegna con lo scroll
      ========================================================== */
-  // il monogramma si riempie dal basso verso l'alto quando la sezione entra in scena (animazione a tempo, sempre fluida)
+  // il monogramma si riempie dal basso verso l'alto mentre scorri, partendo da opacità 0
   const fillRect = $('#fillRect');
   if (!reduce) {
-    gsap.set(fillRect, { attr: { y: 166, height: 0 } });
-    gsap.set('#drawCopy', { autoAlpha: 0, y: 30 });
-    ScrollTrigger.create({ trigger: '#monogramma', start: 'top 55%', once: true, onEnter: () => {
-      gsap.to(fillRect, { attr: { y: -6, height: 172 }, duration: 2.2, ease: 'power2.inOut' });
-      gsap.to('#drawCopy', { autoAlpha: 1, y: 0, duration: 1.1, delay: 1.2, ease: 'power3.out' });
-    } });
+    const ftl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '#monogramma', start: 'top top', end: 'bottom bottom', scrub: .6 } });
+    ftl.fromTo('#drawFill', { opacity: 0 }, { opacity: 1, duration: .3 }, 0)
+       .fromTo(fillRect, { attr: { y: 166, height: 0 } }, { attr: { y: -6, height: 172 }, duration: 1 }, 0)
+       .fromTo('#drawCopy', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .3, ease: 'power2.out' }, .95)
+       .to({}, { duration: .25 });
   }
 
   /* ==========================================================

@@ -256,9 +256,6 @@ b, strong { font-weight: 500; }
    03 EVOLUZIONE
    ========================================================== */
 .evo { background: var(--avorio); color: var(--bosco); padding: var(--sec-y) 0; overflow: hidden; }
-.evo__head { padding: 0 var(--gut); max-width: 1100px; }
-.evo__sketch { position: relative; margin: var(--head-gap) 0; height: clamp(240px, 62vh, 700px); overflow: hidden; }
-.evo__sketch img { position: absolute; top: 50%; left: 0; width: max(160vw, 110vh); max-width: none; height: auto; mix-blend-mode: multiply; }
 .evo__compare { display: grid; grid-template-columns: 1.25fr 1fr; gap: var(--gut); align-items: center; padding: 0 var(--gut); }
 .compare { position: relative; aspect-ratio: 5 / 4; background: var(--verde); overflow: hidden; touch-action: pan-y; user-select: none; --pos: 50%; }
 .compare__layer { position: absolute; inset: 0; display: grid; place-items: center; }
@@ -608,8 +605,6 @@ b, strong { font-weight: 500; }
   .gelso__grid, .evo__compare, .lab__body { grid-template-columns: 1fr; }
   .gelso__media { order: 2; }
   .wind__note { margin-left: 0; }
-  .evo__sketch { height: auto; aspect-ratio: 2 / 1; margin: 6vh 0 8vh; }
-  .evo__sketch img { position: static; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
   .pal__bars { flex-direction: column; height: auto; min-height: 0; }
   .bar { height: 76px; flex: none; transition: height .7s var(--ease); }
   .bar.is-open { height: 250px; }

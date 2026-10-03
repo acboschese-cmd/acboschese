@@ -331,18 +331,8 @@
   }
 
   /* ==========================================================
-     03 EVOLUZIONE — schizzi e confronto
+     03 EVOLUZIONE — confronto
      ========================================================== */
-  const sketch = $('#evoSketch img');
-  // desktop: gli schizzi scorrono di lato; mobile: immagine intera e ferma, si vedono tutti i loghi
-  gsap.matchMedia().add('(min-width: 901px)', () => {
-    gsap.set(sketch, { yPercent: -50 });
-    const tw = reduce ? null : gsap.fromTo(sketch, { x: () => innerWidth * .04 }, {
-      x: () => -(sketch.offsetWidth - innerWidth * .96), ease: 'none',
-      scrollTrigger: { trigger: '#evoSketch', start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true },
-    });
-    return () => { tw && tw.scrollTrigger && tw.scrollTrigger.kill(); tw && tw.kill(); gsap.set(sketch, { clearProps: 'all' }); };
-  });
   const cmp = $('#compare');
   let cmpPos = 50, dragging = false;
   function setCmp(p) {

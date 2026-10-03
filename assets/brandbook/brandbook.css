@@ -358,7 +358,7 @@ b, strong { font-weight: 500; }
 .cent__stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
 .cent__num { position: relative; width: clamp(200px, 30vw, 520px); aspect-ratio: 147 / 160; color: var(--avorio); }
 .cent__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; will-change: transform; }
-.cent__copy { position: absolute; left: var(--gut); bottom: 9vh; max-width: 30em; opacity: 0; }
+.cent__copy { position: absolute; left: var(--gut); bottom: clamp(24px, 4vh, 44px); max-width: 30em; opacity: 0; }
 .cent__copy .lead { margin-top: 22px; }
 .cent__count { position: absolute; right: var(--gut); top: 18vh; text-align: right; opacity: 0; }
 .cent__count span { display: block; font: 500 clamp(60px, 7vw, 120px)/1 var(--f-display); font-variant-numeric: tabular-nums; }
@@ -572,9 +572,9 @@ b, strong { font-weight: 500; }
    TITOLI DI CODA
    ========================================================== */
 .credits { background: var(--bosco); padding: var(--sec-y) var(--gut); text-align: center; }
-.credits__list { margin: var(--head-gap) auto 0; max-width: 760px; display: grid; gap: 44px; }
+.credits__list { margin: var(--head-gap) auto 0; max-width: 760px; display: grid; gap: 34px; }
 .credits__list dt { font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
-.credits__list dd { margin: 12px 0 0; font: 500 clamp(30px, 3.6vw, 52px)/1.05 var(--f-display); text-transform: uppercase; }
+.credits__list dd { margin: 10px 0 0; font: 500 clamp(22px, 2.2vw, 32px)/1.1 var(--f-display); text-transform: uppercase; }
 .credits__list a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .5s var(--ease), color .3s; }
 .credits__list a:hover { color: var(--oro); background-size: 100% 1px; }
 .credits__photo { margin: var(--head-gap) auto 0; max-width: 54em; font-size: 12px; line-height: 1.6; opacity: .6; }
@@ -619,7 +619,7 @@ b, strong { font-weight: 500; }
   .tcard__glyph { font-size: 120px; }
   
   
-  .cent__copy { bottom: 6vh; right: var(--gut); }
+  .cent__copy { bottom: clamp(20px, 3vh, 32px); right: var(--gut); }
   .cent__count { top: 12vh; }
   .apps__arrow { width: 46px; height: 46px; }
   .apps__intro { flex-basis: 78vw; }

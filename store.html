@@ -14,7 +14,7 @@
 <meta property="og:type" content="website" />
 
 <link rel="preload" href="assets/fonts/Cormorant-VF.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="assets/site.css?v=31" />
+<link rel="stylesheet" href="assets/site.css?v=32" />
 
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
@@ -83,9 +83,11 @@
             <figure class="pgal__slide"><img src="assets/photos/store-home-4.webp" alt="Giocatore con la maglia home in posa tra i tralicci verdi dello stadio" loading="lazy" decoding="async" /></figure>
             <figure class="pgal__slide"><img src="assets/photos/store-home-5.webp" alt="Giocatore sotto la tribuna con la maglia home, inserti smeraldo su fianchi e maniche" loading="lazy" decoding="async" /></figure>
           </div>
-          <button class="pgal__btn pgal__btn--prev" type="button" aria-label="Foto precedente">←</button>
-          <button class="pgal__btn pgal__btn--next" type="button" aria-label="Foto successiva">→</button>
-          <div class="pgal__dots" role="tablist" aria-label="Scegli foto"></div>
+          <div class="pgal__nav">
+            <button class="pgal__btn pgal__btn--prev" type="button" aria-label="Foto precedente"><span aria-hidden="true">←</span></button>
+            <div class="pgal__dots" role="group" aria-label="Scegli foto"></div>
+            <button class="pgal__btn pgal__btn--next" type="button" aria-label="Foto successiva"><span aria-hidden="true">→</span></button>
+          </div>
         </div>
         <h2 class="product__name">Maglia <em>Home</em></h2>
         <p class="product__desc">Verde petrolio con inserti smeraldo su fianchi e maniche: monogramma ACB e gelso in oro, cuciture a contrasto.</p>
@@ -102,9 +104,11 @@
             <figure class="pgal__slide"><img src="assets/photos/store-portiere-2.webp" alt="Portiere in primo piano con la maglia corallo, rete della porta alle spalle" loading="lazy" decoding="async" /></figure>
             <figure class="pgal__slide"><img src="assets/photos/store-portiere-3.webp" alt="Portiere ripreso dal basso con la maglia corallo, cielo e tralicci verdi" loading="lazy" decoding="async" /></figure>
           </div>
-          <button class="pgal__btn pgal__btn--prev" type="button" aria-label="Foto precedente">←</button>
-          <button class="pgal__btn pgal__btn--next" type="button" aria-label="Foto successiva">→</button>
-          <div class="pgal__dots" role="tablist" aria-label="Scegli foto"></div>
+          <div class="pgal__nav">
+            <button class="pgal__btn pgal__btn--prev" type="button" aria-label="Foto precedente"><span aria-hidden="true">←</span></button>
+            <div class="pgal__dots" role="group" aria-label="Scegli foto"></div>
+            <button class="pgal__btn pgal__btn--next" type="button" aria-label="Foto successiva"><span aria-hidden="true">→</span></button>
+          </div>
         </div>
         <h2 class="product__name">Maglia <em>Portiere</em></h2>
         <p class="product__desc">Corallo acceso, collo e polsini neri, maniche bordeaux: la maglia audace di chi difende la porta di Bosco.</p>
@@ -193,7 +197,7 @@ document.querySelectorAll('[data-gallery]').forEach((g) => {
   const go = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * track.clientWidth, behavior: 'smooth' });
   function sync() {
     const i = idx();
-    Array.from(dots.children).forEach((d, k) => d.classList.toggle('is-on', k === i));
+    Array.from(dots.children).forEach((d, k) => { d.classList.toggle('is-on', k === i); if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
     prev.disabled = i === 0; next.disabled = i === slides.length - 1;
   }
   prev.addEventListener('click', () => go(idx() - 1));

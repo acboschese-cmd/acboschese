@@ -307,7 +307,7 @@ b, strong { font-weight: 500; }
 /* ==========================================================
    05 PALETTE
    ========================================================== */
-.pal { background: var(--avorio); color: var(--bosco); padding: var(--sec-y) 0; }
+.pal { background: var(--avorio); color: var(--bosco); padding: var(--sec-y) 0 0; }  /* le barre poggiano direttamente sulla sezione dei caratteri */
 .pal__head { padding: 0 var(--gut); margin-bottom: var(--head-gap); }
 .pal__bars { display: flex; height: 82vh; min-height: 520px; overflow: hidden; }
 .bar {

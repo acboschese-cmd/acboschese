@@ -528,6 +528,8 @@ b, strong { font-weight: 500; }
 .draw__copy { max-width: 30em; }
 .draw__copy p:not(.eyebrow) { margin: 22px 0 0; }
 .evo--compare { padding-top: 0; }
+.evo__crest { margin: var(--sec-y) var(--gut) 0 auto; width: min(56%, 820px); }
+.evo__crest img { width: 100%; height: auto; }
 
 /* stage delle insegne: barra di avanzamento della riproduzione automatica */
 .lab__progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(0,0,0,.08); }
@@ -660,6 +662,7 @@ b, strong { font-weight: 500; }
   .soc__acc.is-open { padding: 4px 0 26px; border-bottom: 1px solid var(--line-l); }
   .soc__acc .soc__stage { margin-top: 22px; }
   .fullbleed { aspect-ratio: 1350 / 1080; }
+  .evo__crest { width: auto; margin: var(--head-gap) var(--gut) 0; }
 }
 
 /* caso studio: mobile */

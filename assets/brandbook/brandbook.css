@@ -157,7 +157,7 @@ b, strong { font-weight: 500; }
 .index__list { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: var(--gut); }
 .index__list li { break-inside: avoid; border-top: 1px solid var(--line-d); }
 .index__list a { display: flex; align-items: baseline; gap: 22px; padding: 14px 0; text-decoration: none; }
-.index__list span { font-size: 12px; opacity: .5; letter-spacing: .12em; width: 24px; }
+.index__list span { font-size: 12px; opacity: .5; letter-spacing: .12em; flex: none; width: 76px; }  /* largo abbastanza per "Epilogo" */
 .index__list b { font: 500 clamp(28px, 4vw, 60px)/1 var(--f-display); text-transform: uppercase; transition: color .3s, transform .5s var(--ease); }
 .index__list a:hover b { color: var(--oro); transform: translateX(12px); }
 .index__foot { font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .5; margin: 0; }

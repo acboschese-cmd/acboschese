@@ -391,9 +391,10 @@ b, strong { font-weight: 500; }
    ========================================================== */
 .outro { background: var(--verde); padding: var(--sec-y) 0 0; text-align: center; overflow: hidden; }
 .marquee { overflow: hidden; }
-.marquee__row { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+.marquee__row { display: flex; width: max-content; animation: marquee 56s linear infinite; }  /* due coppie identiche: il -50% chiude il giro */
 .marquee__row span { font: 500 clamp(80px, 14vw, 240px)/1 var(--f-display); padding-right: .5em; white-space: nowrap; }
 .marquee__row i { font: 400 .62em/1 var(--f-body); vertical-align: .32em; color: var(--oro); margin-right: .06em; }
+.marquee__la { color: var(--oro); }   /* il motto in latino, dopo #sempreaudaci */
 @keyframes marquee { to { transform: translateX(-50%); } }
 .outro__seal { width: clamp(120px, 13vw, 200px); margin: 10vh auto 0; color: var(--avorio); }
 .outro__lead { font: 400 clamp(22px, 2.4vw, 36px)/1.25 var(--f-body); letter-spacing: -.01em; margin: 40px auto 0; padding: 0 var(--gut); }

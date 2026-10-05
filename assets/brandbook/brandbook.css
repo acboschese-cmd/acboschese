@@ -1,12 +1,12 @@
 /* ==========================================================
    AC Boschese — Brand Book
-   Palette ufficiale (Color PDF) · Rector / Antarctica / Ortus
+   Palette ufficiale (Color PDF) · Rector / Antarctica / PIVS
    Regole: titoli Rector sempre MAIUSCOLI e senza accentate;
    mai italic; Helvetica mai oltre 500.
    ========================================================== */
 
 @font-face { font-family: 'Rector'; src: url('../fonts/Rector-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
-/* Ortus e Antarctica sono solo immagini SVG (tracciati generati dai font): i file dei font non vanno online. */
+/* PIVS (le lettere del monogramma) e Antarctica sono solo immagini SVG (tracciati generati dai font): i file dei font non vanno online. */
 
 :root {
   --verde: #107947;
@@ -723,3 +723,4 @@ b, strong { font-weight: 500; }
 .st--chars .st__w { clip-path: inset(-.15em -.1em 0 -.1em); }   /* le lettere salgono da sotto la riga */
 .st__c { display: inline-block; will-change: transform; }
 .tcard__abcimg--ant { width: min(100%, 196px); }  /* Antarctica è più pesante: stessa presenza degli altri alfabeti */
+.tcard__mono { display: block; width: 64px; height: auto; margin: 24px 0 0; color: var(--bosco); opacity: .85; }

@@ -565,15 +565,27 @@ b, strong { font-weight: 500; }
 .dettaglio { margin: 0; }
 .dettaglio:nth-child(2) { margin-top: 10vh; }
 .dettaglio__img { position: relative; overflow: hidden; aspect-ratio: 4 / 5; }
-.dettagli__hint { margin: -10px 0 var(--head-gap); display: none; }
-/* lente: solo con il mouse. Mostra la stessa foto ingrandita sotto il cursore */
-.lens { position: absolute; left: 0; top: 0; z-index: 2; width: clamp(150px, 13vw, 220px); aspect-ratio: 1; border-radius: 50%; pointer-events: none;
-  background: var(--bosco) no-repeat; box-shadow: 0 0 0 1px rgba(255,253,233,.75), 0 18px 44px rgba(0,0,0,.35);
-  opacity: 0; scale: .6; transition: opacity .3s, scale .45s var(--ease); }
-.dettaglio__img.is-lens { cursor: none; }
-.dettaglio__img.is-lens .lens { opacity: 1; scale: 1; }
-.cursor.is-on.is-hidden { opacity: 0; }
-@media (hover: hover) and (pointer: fine) { .dettagli__hint { display: block; } }
+/* la maglia punto per punto: i punti solo su desktop, l'elenco sempre */
+.anatomia { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gut); align-items: center; margin-bottom: var(--sec-y); }
+.anatomia__fig { position: relative; margin: 0; }
+.anatomia__fig img { width: 100%; height: auto; }
+.anatomia__hint { margin: 18px 0 0; }
+.anatomia__list { list-style: none; margin: 34px 0 0; padding: 0; border-top: 1px solid var(--line-l); }
+.anatomia__list li { display: grid; grid-template-columns: 48px 1fr; padding: 18px 0; border-bottom: 1px solid var(--line-l); transition: opacity .35s var(--ease); }
+.anatomia__list li > span { font-size: var(--fs-meta); letter-spacing: .16em; color: var(--verde); padding-top: 5px; }
+.anatomia__list b { display: block; font: 500 clamp(22px, 2vw, 30px)/1 var(--f-display); text-transform: uppercase; transition: color .3s; }
+.anatomia__list p { margin: 8px 0 0; }
+.anatomia.is-active .anatomia__list li { opacity: .35; }
+.anatomia.is-active .anatomia__list li.is-on { opacity: 1; }
+.anatomia__list li.is-on b { color: var(--verde); }
+.hs { display: none; position: absolute; left: var(--x); top: var(--y); width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; place-items: center; }
+.hs span { position: relative; z-index: 1; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--avorio); color: var(--bosco); font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.25); transition: background .3s, color .3s, scale .4s var(--ease); }
+.hs::before { content: ''; position: absolute; inset: 8px; border-radius: 50%; border: 1px solid var(--avorio); animation: hs-pulse 2.4s var(--ease) infinite; }
+.hs.is-on span, .hs:hover span { background: var(--oro); color: var(--bosco); scale: 1.15; }
+@keyframes hs-pulse { 0% { scale: 1; opacity: .9; } 100% { scale: 2.1; opacity: 0; } }
+@media (hover: hover) and (pointer: fine) and (min-width: 901px) { .hs { display: grid; } }
+@media (hover: none), (max-width: 900px) { .anatomia__hint { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hs::before { animation: none; opacity: 0; } }
 .dettaglio__img img { width: 100%; height: 100%; object-fit: cover; }
 .dettaglio figcaption { margin-top: 16px; font-size: 15px; max-width: 26em; }
 .dettaglio figcaption b { display: block; font-size: var(--fs-meta); letter-spacing: .16em; color: var(--verde); margin-bottom: 6px; font-weight: 400; }
@@ -683,6 +695,7 @@ b, strong { font-weight: 500; }
   .lab__progress { display: none; }
   .credits__list { gap: 32px; }
   .collab, .dettagli__grid { grid-template-columns: 1fr; }
+  .anatomia { grid-template-columns: 1fr; }
   .dettaglio:nth-child(2) { margin-top: 0; }
   }
 
@@ -694,6 +707,6 @@ b, strong { font-weight: 500; }
    Usa la proprietà `scale`, separata da `transform`: non litiga con parallasse e scrub di GSAP */
 .evo__crest { overflow: hidden; }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .soc__f, .ci, .app, .radici__media figure) img { transition: scale 1.2s var(--ease); }
-  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .soc__f, .ci, .app, .radici__media figure):hover img { scale: 1.04; }
+  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .dettaglio__img, .soc__f, .ci, .app, .radici__media figure) img { transition: scale 1.2s var(--ease); }
+  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .dettaglio__img, .soc__f, .ci, .app, .radici__media figure):hover img { scale: 1.04; }
 }

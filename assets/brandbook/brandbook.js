@@ -147,6 +147,40 @@
     });
   }
 
+  /* ---------- lente sui dettagli delle maglie (solo mouse) ---------- */
+  if (finePointer) {
+    const Z = 2.4;   // ingrandimento rispetto alla foto come appare a schermo
+    $$('.dettaglio__img').forEach((box) => {
+      const img = $('img', box);
+      const lens = document.createElement('span');
+      lens.className = 'lens'; lens.setAttribute('aria-hidden', 'true');
+      box.appendChild(lens);
+      let geo = null;
+      // la foto è in object-fit: cover, quindi calcoliamo dimensioni e scarto della parte visibile
+      const measure = () => {
+        const r = box.getBoundingClientRect();
+        const nw = img.naturalWidth || +img.getAttribute('width'), nh = img.naturalHeight || +img.getAttribute('height');
+        const k = Math.max(r.width / nw, r.height / nh), w = nw * k, h = nh * k;
+        geo = { ox: (r.width - w) / 2, oy: (r.height - h) / 2 };
+        lens.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
+        lens.style.backgroundSize = `${w * Z}px ${h * Z}px`;
+      };
+      const move = (e) => {
+        if (!geo) return;
+        const r = box.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, L = lens.offsetWidth / 2;
+        lens.style.transform = `translate(${x - L}px, ${y - L}px)`;
+        lens.style.backgroundPosition = `${L - (x - geo.ox) * Z}px ${L - (y - geo.oy) * Z}px`;
+      };
+      box.addEventListener('pointerenter', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        measure(); move(e);
+        box.classList.add('is-lens'); cursor.classList.add('is-hidden');
+      });
+      box.addEventListener('pointermove', move);
+      box.addEventListener('pointerleave', () => { geo = null; box.classList.remove('is-lens'); cursor.classList.remove('is-hidden'); });
+    });
+  }
+
   /* ---------- reveal & fluttuazione ---------- */
   if (!reduce) {
     gsap.set('[data-reveal]', { opacity: 0, y: 40 });

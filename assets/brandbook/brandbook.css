@@ -564,7 +564,16 @@ b, strong { font-weight: 500; }
 .dettagli__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); align-items: start; }
 .dettaglio { margin: 0; }
 .dettaglio:nth-child(2) { margin-top: 10vh; }
-.dettaglio__img { overflow: hidden; aspect-ratio: 4 / 5; }
+.dettaglio__img { position: relative; overflow: hidden; aspect-ratio: 4 / 5; }
+.dettagli__hint { margin: -10px 0 var(--head-gap); display: none; }
+/* lente: solo con il mouse. Mostra la stessa foto ingrandita sotto il cursore */
+.lens { position: absolute; left: 0; top: 0; z-index: 2; width: clamp(150px, 13vw, 220px); aspect-ratio: 1; border-radius: 50%; pointer-events: none;
+  background: var(--bosco) no-repeat; box-shadow: 0 0 0 1px rgba(255,253,233,.75), 0 18px 44px rgba(0,0,0,.35);
+  opacity: 0; scale: .6; transition: opacity .3s, scale .45s var(--ease); }
+.dettaglio__img.is-lens { cursor: none; }
+.dettaglio__img.is-lens .lens { opacity: 1; scale: 1; }
+.cursor.is-on.is-hidden { opacity: 0; }
+@media (hover: hover) and (pointer: fine) { .dettagli__hint { display: block; } }
 .dettaglio__img img { width: 100%; height: 100%; object-fit: cover; }
 .dettaglio figcaption { margin-top: 16px; font-size: 15px; max-width: 26em; }
 .dettaglio figcaption b { display: block; font-size: var(--fs-meta); letter-spacing: .16em; color: var(--verde); margin-bottom: 6px; font-weight: 400; }
@@ -685,6 +694,6 @@ b, strong { font-weight: 500; }
    Usa la proprietà `scale`, separata da `transform`: non litiga con parallasse e scrub di GSAP */
 .evo__crest { overflow: hidden; }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .dettaglio__img, .soc__f, .ci, .app, .radici__media figure) img { transition: scale 1.2s var(--ease); }
-  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .dettaglio__img, .soc__f, .ci, .app, .radici__media figure):hover img { scale: 1.04; }
+  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .soc__f, .ci, .app, .radici__media figure) img { transition: scale 1.2s var(--ease); }
+  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .soc__f, .ci, .app, .radici__media figure):hover img { scale: 1.04; }
 }

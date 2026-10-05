@@ -537,10 +537,10 @@
      09 SOCIETAS — le divise
      ========================================================== */
   const KITS = [
-    { k: 'home', name: 'Home', tag: 'Forto Pro — Home',
+    { k: 'home', name: 'Home', tag: 'Forto Aeris — Home',
       desc: 'La maglia che indossiamo in casa: verde bosco, mesh verde foglia, monogramma e profili in oro.',
       sw: [['Verde Bosco', '#1E4430'], ['Verde foglia', '#17A355'], ['Oro', '#BDA360']] },
-    { k: 'portiere', name: 'Portiere', tag: 'Forto Pro — Portiere',
+    { k: 'portiere', name: 'Portiere', tag: 'Forto Aeris — Portiere',
       desc: 'Corallo, colletto nero e inserti bordeaux. Qui il monogramma è nero.',
       sw: [['Corallo', '#FF5F4F'], ['Nero', '#151515'], ['Bordeaux', '#7A1E25']] },
   ];

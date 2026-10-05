@@ -680,3 +680,11 @@ b, strong { font-weight: 500; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* zoom leggero al passaggio del mouse sulle foto.
+   Usa la proprietà `scale`, separata da `transform`: non litiga con parallasse e scrub di GSAP */
+.evo__crest { overflow: hidden; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .dettaglio__img, .soc__f, .ci, .app, .radici__media figure) img { transition: scale 1.2s var(--ease); }
+  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .dettaglio__img, .soc__f, .ci, .app, .radici__media figure):hover img { scale: 1.04; }
+}

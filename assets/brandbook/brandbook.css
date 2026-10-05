@@ -1,14 +1,12 @@
 /* ==========================================================
    AC Boschese — Brand Book
-   Palette ufficiale (Color PDF) · Rector / Ortus / Avant-Garde
+   Palette ufficiale (Color PDF) · Rector / Antarctica / Ortus
    Regole: titoli Rector sempre MAIUSCOLI e senza accentate;
    mai italic; Helvetica mai oltre 500.
    ========================================================== */
 
 @font-face { font-family: 'Rector'; src: url('../fonts/Rector-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
-/* ITC Avant Garde Gothic Pro — Book e Demi (subset latino). Ortus è solo immagine SVG. */
-@font-face { font-family: 'AvantGardeWeb'; src: url('../fonts/AvantGarde-Book.woff2') format('woff2'); font-weight: 400; font-display: swap; }
-@font-face { font-family: 'AvantGardeWeb'; src: url('../fonts/AvantGarde-Demi.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+/* Ortus e Antarctica sono solo immagini SVG (tracciati generati dai font): i file dei font non vanno online. */
 
 :root {
   --verde: #107947;
@@ -20,7 +18,6 @@
   --ink: #12291D;
 
   --f-display: 'Rector', 'Cormorant', Georgia, serif;
-  --f-avant: 'AvantGardeWeb', 'Avant Garde', 'Century Gothic', sans-serif;
   --f-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   --gut: clamp(16px, 4vw, 64px);
@@ -83,7 +80,6 @@ b, strong { font-weight: 500; }
 .lead { font-size: clamp(18px, 1.55vw, 24px); line-height: 1.45; max-width: 34em; margin: 28px 0 0; }
 .small { font-size: 13px; letter-spacing: .02em; opacity: .75; margin: 0; }
 .f-rector { font-family: var(--f-display); text-transform: uppercase; }
-.f-avant { font-family: var(--f-avant); }
 
 .pill {
   display: inline-flex; align-items: center; gap: 8px;
@@ -343,10 +339,10 @@ b, strong { font-weight: 500; }
 .tcard:hover .tcard__glyph { transform: translateY(-10px) scale(1.04); }
 .tcard__name { font-size: clamp(32px, 3vw, 46px); font-weight: 400; margin: 0 0 14px; line-height: 1; }
 .tcard__name.f-rector { font-weight: 500; }
-.tcard__name.f-avant, .tcard__glyph.f-avant { font-weight: 600; letter-spacing: -.02em; }
 .tcard__glyph--img { height: 1em; display: flex; align-items: flex-end; }
 .tcard__glyph--img img { height: .74em; width: auto; }
 .tcard__nameimg { height: .78em; width: auto; display: block; }
+.tcard__nameimg--caps { height: .56em; max-width: 100%; object-fit: contain; object-position: left; }  /* tracciato tagliato all'altezza delle maiuscole */
 .tcard__abcimg { display: block; width: min(100%, 250px); height: auto; margin: 24px 0 0; opacity: .85; }
 .tcard p:not(.tcard__role):not(.tcard__abc) { margin: 0; max-width: 26em; }
 .tcard__abc { font-size: 22px; line-height: 1.3; margin: 24px 0 0; opacity: .85; letter-spacing: .02em; word-break: break-all; }
@@ -726,3 +722,4 @@ b, strong { font-weight: 500; }
 .st__w { display: inline-block; }
 .st--chars .st__w { clip-path: inset(-.15em -.1em 0 -.1em); }   /* le lettere salgono da sotto la riga */
 .st__c { display: inline-block; will-change: transform; }
+.tcard__abcimg--ant { width: min(100%, 196px); }  /* Antarctica è più pesante: stessa presenza degli altri alfabeti */

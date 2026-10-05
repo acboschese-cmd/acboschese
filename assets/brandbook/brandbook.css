@@ -721,3 +721,8 @@ b, strong { font-weight: 500; }
   :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .dettaglio__img, .soc__f, .ci, .app, .radici__media figure) img { transition: scale 1.2s var(--ease); }
   :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .dettaglio__img, .soc__f, .ci, .app, .radici__media figure):hover img { scale: 1.04; }
 }
+
+/* testi che si compongono con lo scroll (vedi splitText in brandbook.js) */
+.st__w { display: inline-block; }
+.st--chars .st__w { clip-path: inset(-.15em -.1em 0 -.1em); }   /* le lettere salgono da sotto la riga */
+.st__c { display: inline-block; will-change: transform; }

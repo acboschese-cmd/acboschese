@@ -180,6 +180,54 @@
     });
   }
 
+  /* ---------- testi che si compongono con lo scroll ----------
+     I titoli si compongono lettera per lettera, i testi lunghi si "scrivono" parola per parola.
+     Il testo vero resta per i lettori di schermo (.sr); la copia animata è aria-hidden. */
+  function splitText(el, chars) {
+    const vis = document.createElement('span');
+    vis.className = 'st' + (chars ? ' st--chars' : '');
+    vis.setAttribute('aria-hidden', 'true');
+    const walk = (src, dst) => src.childNodes.forEach((n) => {
+      if (n.nodeType === 3) {
+        n.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { dst.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span');
+          w.className = 'st__w';
+          if (chars) [...part].forEach((ch) => { const c = document.createElement('span'); c.className = 'st__c'; c.textContent = ch; w.appendChild(c); });
+          else w.textContent = part;
+          dst.appendChild(w);
+        });
+      } else if (n.nodeType === 1) {
+        const c = n.cloneNode(false);
+        dst.appendChild(c); walk(n, c);
+      }
+    });
+    walk(el, vis);
+    const sr = document.createElement('span');
+    sr.className = 'sr'; sr.innerHTML = el.innerHTML.replace(/<br\s*\/?>/g, ' ');   // a capo = spazio per chi ascolta
+    el.replaceChildren(sr, vis);
+    el.removeAttribute('data-reveal');   // l'animazione la gestisce lo scroll, non il reveal
+    return vis;
+  }
+  if (!reduce) {
+    $$('h2.display[data-reveal], h3.display[data-reveal]').forEach((el) => {
+      const vis = splitText(el, true);
+      gsap.fromTo($$('.st__c', vis), { yPercent: 110 }, {
+        yPercent: 0, ease: 'power3.out', stagger: .035,
+        scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 58%', scrub: .8 },
+      });
+    });
+    $$('.lead[data-reveal], .notizia__quote[data-reveal], .outro__lead[data-reveal]').forEach((el) => {
+      if (el.querySelector('a')) return;   // i link devono restare cliccabili
+      const vis = splitText(el, false);
+      gsap.fromTo($$('.st__w', vis), { opacity: .14 }, {
+        opacity: 1, ease: 'none', stagger: .1,
+        scrollTrigger: { trigger: el, start: 'top 88%', end: 'bottom 62%', scrub: .6 },
+      });
+    });
+  }
+
   /* ---------- reveal & fluttuazione ---------- */
   if (!reduce) {
     gsap.set('[data-reveal]', { opacity: 0, y: 40 });

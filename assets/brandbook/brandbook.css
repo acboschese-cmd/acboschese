@@ -575,10 +575,17 @@ b, strong { font-weight: 500; }
 .anatomia__meta { position: absolute; left: 16px; right: 16px; top: 14px; display: flex; justify-content: space-between; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .7; }
 .anatomia__hint { margin: 18px 0 0; }
 .anatomia__list { list-style: none; margin: 34px 0 0; padding: 0; border-top: 1px solid var(--line-l); }
-.anatomia__list li { display: grid; grid-template-columns: 48px 1fr; padding: 18px 0; border-bottom: 1px solid var(--line-l); transition: opacity .35s var(--ease); }
-.anatomia__list li > span { font-size: var(--fs-meta); letter-spacing: .16em; color: var(--verde); padding-top: 5px; }
-.anatomia__list b { display: block; font: 500 clamp(22px, 2vw, 30px)/1 var(--f-display); text-transform: uppercase; transition: color .3s; }
-.anatomia__list p { margin: 8px 0 0; }
+.anatomia__list li { border-bottom: 1px solid var(--line-l); transition: opacity .35s var(--ease); }
+.anatomia__q { width: 100%; display: grid; grid-template-columns: 48px 1fr auto; align-items: baseline; padding: 18px 0; text-align: left; }
+.anatomia__q span { font-size: var(--fs-meta); letter-spacing: .16em; color: var(--verde); }
+.anatomia__q b { font: 500 clamp(22px, 2vw, 30px)/1 var(--f-display); text-transform: uppercase; transition: color .3s; }
+.anatomia__q::after { content: "+"; font: 300 22px/1 var(--f-body); transition: transform .4s var(--ease); }
+.anatomia__list li.is-open .anatomia__q::after { transform: rotate(45deg); }
+/* apertura morbida: la riga passa da 0 all'altezza del testo */
+.anatomia__a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); }
+.anatomia__a > p { overflow: hidden; min-height: 0; margin: 0; padding-left: 48px; }
+.anatomia__list li.is-open .anatomia__a { grid-template-rows: 1fr; }
+.anatomia__list li.is-open .anatomia__a > p { padding-bottom: 20px; }
 .anatomia.is-active .anatomia__list li { opacity: .35; }
 .anatomia.is-active .anatomia__list li.is-on { opacity: 1; }
 .anatomia__list li.is-on b { color: var(--verde); }

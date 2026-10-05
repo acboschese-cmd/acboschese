@@ -150,24 +150,33 @@
   /* ---------- la maglia punto per punto: punti sulla foto ↔ voci dell'elenco ---------- */
   const anat = $('.anatomia');
   if (anat) {
-    const dots = $$('.hs', anat), items = $$('.anatomia__list li', anat);
-    let pinned = -1;   // con il click (o la tastiera) il punto resta acceso
-    const show = (i) => {
+    const dots = $$('.hs', anat), items = $$('.anatomia__list li', anat), qs = $$('.anatomia__q', anat);
+    let open = -1;
+    // evidenzia punto e voce (passaggio del mouse o voce aperta)
+    const mark = (i) => {
       anat.classList.toggle('is-active', i >= 0);
-      dots.forEach((d, k) => { d.classList.toggle('is-on', k === i); d.setAttribute('aria-expanded', k === i); });
+      dots.forEach((d, k) => d.classList.toggle('is-on', k === i));
       items.forEach((li, k) => li.classList.toggle('is-on', k === i));
+    };
+    // accordion: si apre una voce alla volta, al click sul punto o sul titolo
+    const toggle = (i) => {
+      open = open === i ? -1 : i;
+      items.forEach((li, k) => li.classList.toggle('is-open', k === open));
+      qs.forEach((q, k) => q.setAttribute('aria-expanded', k === open));
+      dots.forEach((d, k) => d.setAttribute('aria-expanded', k === open));
+      mark(open);
+      setTimeout(safeRefresh, 500);
     };
     dots.forEach((d, i) => {
       d.setAttribute('aria-expanded', 'false');
-      d.addEventListener('pointerenter', () => show(i));
-      d.addEventListener('pointerleave', () => show(pinned));
-      d.addEventListener('focus', () => show(i));
-      d.addEventListener('blur', () => show(pinned));
-      d.addEventListener('click', () => { pinned = pinned === i ? -1 : i; show(pinned < 0 ? i : pinned); });
+      d.addEventListener('pointerenter', () => mark(i));
+      d.addEventListener('pointerleave', () => mark(open));
+      d.addEventListener('click', () => toggle(i));
     });
+    qs.forEach((q, i) => q.addEventListener('click', () => toggle(i)));
     items.forEach((li, i) => {
-      li.addEventListener('pointerenter', () => show(i));
-      li.addEventListener('pointerleave', () => show(pinned));
+      li.addEventListener('pointerenter', () => mark(i));
+      li.addEventListener('pointerleave', () => mark(open));
     });
   }
 

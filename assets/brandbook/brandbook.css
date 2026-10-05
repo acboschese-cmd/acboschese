@@ -567,8 +567,12 @@ b, strong { font-weight: 500; }
 .dettaglio__img { position: relative; overflow: hidden; aspect-ratio: 4 / 5; }
 /* la maglia punto per punto: i punti solo su desktop, l'elenco sempre */
 .anatomia { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gut); align-items: center; margin-bottom: var(--sec-y); }
-.anatomia__fig { position: relative; margin: 0; }
-.anatomia__fig img { width: 100%; height: auto; }
+/* scheda tecnica: la maglia scontornata su una griglia sottile */
+.anatomia__fig { position: relative; margin: 0; padding: 6%; background-color: rgba(211,210,196,.35);
+  background-image: linear-gradient(var(--line-l) 1px, transparent 1px), linear-gradient(90deg, var(--line-l) 1px, transparent 1px);
+  background-size: 12.5% 12.5%; background-position: -1px -1px; border: 1px solid var(--line-l); }
+.anatomia__fig img { position: relative; width: 100%; height: auto; }
+.anatomia__meta { position: absolute; left: 16px; right: 16px; top: 14px; display: flex; justify-content: space-between; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .7; }
 .anatomia__hint { margin: 18px 0 0; }
 .anatomia__list { list-style: none; margin: 34px 0 0; padding: 0; border-top: 1px solid var(--line-l); }
 .anatomia__list li { display: grid; grid-template-columns: 48px 1fr; padding: 18px 0; border-bottom: 1px solid var(--line-l); transition: opacity .35s var(--ease); }
@@ -578,7 +582,7 @@ b, strong { font-weight: 500; }
 .anatomia.is-active .anatomia__list li { opacity: .35; }
 .anatomia.is-active .anatomia__list li.is-on { opacity: 1; }
 .anatomia__list li.is-on b { color: var(--verde); }
-.hs { display: none; position: absolute; left: var(--x); top: var(--y); width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; place-items: center; }
+.hs { display: none; position: absolute; left: calc(6% + var(--x) * .88); top: calc(6% + var(--y) * .88); width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; place-items: center; }
 .hs span { position: relative; z-index: 1; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--avorio); color: var(--bosco); font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.25); transition: background .3s, color .3s, scale .4s var(--ease); }
 .hs::before { content: ''; position: absolute; inset: 8px; border-radius: 50%; border: 1px solid var(--avorio); animation: hs-pulse 2.4s var(--ease) infinite; }
 .hs.is-on span, .hs:hover span { background: var(--oro); color: var(--bosco); scale: 1.15; }

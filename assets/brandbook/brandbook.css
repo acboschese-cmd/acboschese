@@ -82,7 +82,7 @@ b, strong { font-weight: 500; }
 .lead { font-size: clamp(18px, 1.55vw, 24px); line-height: 1.45; max-width: 34em; margin: 28px 0 0; }
 .small { font-size: 13px; letter-spacing: .02em; opacity: .75; margin: 0; }
 .f-rector { font-family: var(--f-display); text-transform: uppercase; }
-.f-pivs { font-family: 'PIVS', var(--f-display); font-weight: 400; text-transform: uppercase; letter-spacing: .02em; }
+.f-pivs { font-family: 'PIVS', var(--f-display); font-weight: 400; text-transform: uppercase; letter-spacing: 0; }   /* la spaziatura è già nel font */
 
 .pill {
   display: inline-flex; align-items: center; gap: 8px;
@@ -727,7 +727,7 @@ b, strong { font-weight: 500; }
 .st--chars .st__w { clip-path: inset(-.15em -.1em 0 -.1em); }   /* le lettere salgono da sotto la riga */
 .st__c { display: inline-block; will-change: transform; }
 .tcard__abcimg--ant { width: min(100%, 196px); }  /* Antarctica è più pesante: stessa presenza degli altri alfabeti */
-.marquee__row .marquee__la { font-family: 'PIVS', var(--f-display); font-weight: 400; letter-spacing: .03em; }   /* il motto latino nel nostro carattere */
+.marquee__row .marquee__la { font-family: 'PIVS', var(--f-display); font-weight: 400; letter-spacing: 0; }   /* il motto latino nel nostro carattere */
 /* il PIVS è molto stretto: un po' più grande per avere la stessa presenza di Rector e Antarctica */
 .tcard__name.f-pivs { font-size: clamp(38px, 3.6vw, 56px); line-height: .84; }  /* descrizione alla stessa altezza delle altre colonne */
-.tcard__abc.f-pivs { font-size: 30px; line-height: 1.2; letter-spacing: .06em; }
+.tcard__abc.f-pivs { font-size: 30px; line-height: 1.2; letter-spacing: 0; }

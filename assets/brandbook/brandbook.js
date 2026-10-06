@@ -228,6 +228,19 @@
     });
   }
 
+  /* ---------- video della costruzione: parte quando è in vista, si ferma quando esce ---------- */
+  const film = $('#filmVideo');
+  if (film) {
+    film.muted = true;                       // alcuni browser vogliono la proprietà, non solo l'attributo, per l'autoplay
+    if (reduce) { film.controls = true; film.preload = 'metadata'; }
+    else if ('IntersectionObserver' in window) {
+      new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { film.preload = 'auto'; film.play().catch(() => { film.controls = true; }); }
+        else film.pause();
+      }), { threshold: .35 }).observe(film);
+    }
+  }
+
   /* ---------- reveal & fluttuazione ---------- */
   if (!reduce) {
     gsap.set('[data-reveal]', { opacity: 0, y: 40 });

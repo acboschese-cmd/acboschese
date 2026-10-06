@@ -6,7 +6,7 @@
    ========================================================== */
 
 /* PIVS: il nostro carattere, ricavato dalle lettere del monogramma (solo maiuscole) */
-@font-face { font-family: 'PIVS'; src: url('../fonts/PIVS-Regular-07.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'PIVS'; src: url('../fonts/PIVS-Regular-08.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 @font-face { font-family: 'Rector'; src: url('../fonts/Rector-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
 /* PIVS (le lettere del monogramma) e Antarctica sono solo immagini SVG (tracciati generati dai font): i file dei font non vanno online. */
 

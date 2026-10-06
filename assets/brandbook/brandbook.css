@@ -218,7 +218,7 @@ b, strong { font-weight: 500; }
 .radici__steps li.is-on { opacity: 1; }
 .radici__steps li.is-on::after { transform: scaleX(1); }
 .radici__year { grid-column: 1; grid-row: 2; align-self: center; }
-.odo { display: flex; font: 400 clamp(110px, 21vw, 380px)/1 'PIVS', var(--f-display); letter-spacing: 0; font-variant-numeric: tabular-nums; }   /* gli anni nel nostro carattere */
+.odo { display: flex; font: 400 clamp(148px, 28vw, 510px)/1 'PIVS', var(--f-display); letter-spacing: 0; font-variant-numeric: tabular-nums; }   /* gli anni nel nostro carattere */
 .odo__d { height: 1em; overflow: hidden; display: inline-block; }
 .odo__col { display: flex; flex-direction: column; }
 .odo__col span { height: 1em; line-height: 1; display: block; text-align: center; }
@@ -631,7 +631,7 @@ b, strong { font-weight: 500; }
   .radici__stick { grid-template-columns: 1fr; grid-template-rows: auto auto auto 1fr; align-content: start; padding-top: 72px; gap: 12px; }
   .radici__steps { gap: 18px; }
   .radici__year { grid-row: 2; }
-  .odo { font-size: clamp(72px, 24vw, 160px); }
+  .odo { font-size: clamp(97px, 32vw, 216px); }   /* PIVS ~1.35× per avere l'ingombro del Rector */
   .radici__media { grid-column: 1; grid-row: 3; margin: 0; align-self: start; width: min(100%, 42svh, calc(100svh - 460px)); aspect-ratio: 1; }
   .radici__copy { grid-row: 4; min-height: 180px; }
   .radici__copy .display--m { font-size: 28px; }

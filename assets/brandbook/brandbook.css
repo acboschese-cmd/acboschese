@@ -218,7 +218,7 @@ b, strong { font-weight: 500; }
 .radici__steps li.is-on { opacity: 1; }
 .radici__steps li.is-on::after { transform: scaleX(1); }
 .radici__year { grid-column: 1; grid-row: 2; align-self: center; }
-.odo { display: flex; font: 500 clamp(110px, 21vw, 380px)/1 var(--f-display); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.odo { display: flex; font: 400 clamp(110px, 21vw, 380px)/1 'PIVS', var(--f-display); letter-spacing: 0; font-variant-numeric: tabular-nums; }   /* gli anni nel nostro carattere */
 .odo__d { height: 1em; overflow: hidden; display: inline-block; }
 .odo__col { display: flex; flex-direction: column; }
 .odo__col span { height: 1em; line-height: 1; display: block; text-align: center; }

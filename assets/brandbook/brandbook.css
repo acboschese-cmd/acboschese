@@ -5,6 +5,8 @@
    mai italic; Helvetica mai oltre 500.
    ========================================================== */
 
+/* PIVS: il nostro carattere, ricavato dalle lettere del monogramma (solo maiuscole) */
+@font-face { font-family: 'PIVS'; src: url('../fonts/PIVS-Regular-03.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 @font-face { font-family: 'Rector'; src: url('../fonts/Rector-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
 /* PIVS (le lettere del monogramma) e Antarctica sono solo immagini SVG (tracciati generati dai font): i file dei font non vanno online. */
 
@@ -80,6 +82,7 @@ b, strong { font-weight: 500; }
 .lead { font-size: clamp(18px, 1.55vw, 24px); line-height: 1.45; max-width: 34em; margin: 28px 0 0; }
 .small { font-size: 13px; letter-spacing: .02em; opacity: .75; margin: 0; }
 .f-rector { font-family: var(--f-display); text-transform: uppercase; }
+.f-pivs { font-family: 'PIVS', var(--f-display); font-weight: 400; text-transform: uppercase; letter-spacing: .02em; }
 
 .pill {
   display: inline-flex; align-items: center; gap: 8px;
@@ -724,4 +727,7 @@ b, strong { font-weight: 500; }
 .st--chars .st__w { clip-path: inset(-.15em -.1em 0 -.1em); }   /* le lettere salgono da sotto la riga */
 .st__c { display: inline-block; will-change: transform; }
 .tcard__abcimg--ant { width: min(100%, 196px); }  /* Antarctica è più pesante: stessa presenza degli altri alfabeti */
-.tcard__mono { display: block; width: 64px; height: auto; margin: 24px 0 0; color: var(--bosco); opacity: .85; }
+.marquee__row .marquee__la { font-family: 'PIVS', var(--f-display); font-weight: 400; letter-spacing: .03em; }   /* il motto latino nel nostro carattere */
+/* il PIVS è molto stretto: un po' più grande per avere la stessa presenza di Rector e Antarctica */
+.tcard__name.f-pivs { font-size: clamp(38px, 3.6vw, 56px); line-height: .84; }  /* descrizione alla stessa altezza delle altre colonne */
+.tcard__abc.f-pivs { font-size: 30px; line-height: 1.2; letter-spacing: .06em; }

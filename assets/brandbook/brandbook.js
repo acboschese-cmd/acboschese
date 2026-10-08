@@ -403,10 +403,10 @@
   }
   splitWords(quote);
   const words = $$('.w', quote);
-  // "piegare" si piega più di tutte, "abbatte" resta dritta: il vento non ci abbatte
+  // "piegarci" si piega più di tutte, "abbatterci" resta dritta: il vento non ci abbatte
   words.forEach((w, i) => {
     const t = w.textContent.toLowerCase();
-    w._k = t.startsWith('piegare') ? 1.7 : t.startsWith('abbatte') ? 0 : .55 + Math.sin(i * 2.3) * .2;
+    w._k = t.startsWith('pieg') ? 1.7 : t.startsWith('abbatt') ? 0 : .55 + Math.sin(i * 2.3) * .2;
   });
   if (!reduce) {
     gsap.fromTo(words, { opacity: .14 }, { opacity: 1, stagger: .12, ease: 'none', scrollTrigger: { trigger: quote, start: 'top 82%', end: 'bottom 50%', scrub: true } });

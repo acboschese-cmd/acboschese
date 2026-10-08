@@ -819,3 +819,4 @@ b, strong { font-weight: 500; }
 .pivs__chars { color: var(--oro); }
 /* legature facoltative: niente spaziatura tra le lettere, altrimenti il browser non le applica */
 .pivs__chars--liga { letter-spacing: 0; word-spacing: .45em; font-feature-settings: "dlig" 1; font-variant-ligatures: discretionary-ligatures; }
+.compare__hint { margin: 16px 0 0; }

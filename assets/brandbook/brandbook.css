@@ -809,3 +809,10 @@ b, strong { font-weight: 500; }
 .soc__intro--solo { display: block; }
 .soc__intro--solo > div { max-width: 40em; }
 .soc__intro .display--l { white-space: nowrap; }   /* "OLTRE LA / CATEGORIA" va a capo solo dove c'è il <br> */
+
+/* PIVS: il set di caratteri, in quattro righe separate da filetti */
+.pivs__set { margin-top: var(--head-gap); border-top: 1px solid var(--line-d); }
+.pivs__row { display: grid; grid-template-columns: minmax(140px, 1fr) minmax(0, 3.2fr); gap: var(--gut); align-items: baseline; padding: 26px 0 30px; border-bottom: 1px solid var(--line-d); }
+.pivs__label { margin: 0; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
+.pivs__chars { margin: 0; font-size: clamp(34px, 4.2vw, 72px); line-height: 1.15; letter-spacing: .14em; word-break: break-all; font-feature-settings: "liga" 0, "dlig" 0; }
+@media (max-width: 900px) { .pivs__row { grid-template-columns: 1fr; gap: 14px; } }

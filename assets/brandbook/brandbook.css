@@ -759,3 +759,35 @@ b, strong { font-weight: 500; }
 .outro__years { margin: 28px 0 0; text-align: center; }
 .outro__years + .outro__lead { margin-top: 14px; }
 .cent__copy { max-width: min(30em, 28vw); }
+
+/* ==========================================================
+   PIVS — type design (sezione dedicata)
+   ========================================================== */
+.pivs { background: var(--bosco); color: var(--avorio); padding: var(--sec-y) var(--edge); }
+.pivs__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: var(--gut); align-items: end; }
+.pivs__name { font-size: clamp(150px, 22vw, 380px); line-height: .8; margin: 18px 0 0; }
+.pivs__copy .lead { margin-top: 0; }
+.pivs__copy p:not(.lead) { margin: 18px 0 0; max-width: 34em; opacity: .85; }
+.pivs__facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: var(--head-gap) 0 0; border-top: 1px solid var(--line-d); }
+.pivs__facts div { padding: 22px 22px 0 0; }
+.pivs__facts div + div { padding-left: 22px; border-left: 1px solid var(--line-d); }
+.pivs__facts dt { font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
+.pivs__facts dd { margin: 14px 0 0; font: 400 clamp(44px, 5vw, 84px)/.9 'PIVS', var(--f-display); color: var(--oro); }
+.pivs__facts dd.pivs__fmt { font-size: clamp(26px, 2.4vw, 40px); line-height: 1.05; }
+.pivs__liga { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gut); margin-top: var(--sec-y); }
+.pivs__liga figure { margin: 0; padding-top: 22px; border-top: 1px solid var(--line-d); }
+.pivs__liga figcaption { font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
+.pivs__sample { margin: 24px 0 0; font-size: clamp(110px, 15vw, 260px); line-height: .85; }
+.pivs__sample--dlig { font-feature-settings: "dlig" 1; font-variant-ligatures: discretionary-ligatures; color: var(--oro); }
+.pivs .type__film { border-top-color: var(--line-d); margin-top: var(--sec-y); }
+.pivs .type__filmframe { background: #12291d; }
+@media (max-width: 900px) {
+  .pivs__grid, .pivs__liga { grid-template-columns: 1fr; }
+  .pivs__facts { grid-template-columns: 1fr 1fr; }
+  .pivs__facts div:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+
+/* ---------- manifesto ---------- */
+.manifesto { background: var(--avorio); color: var(--bosco); padding: var(--sec-y) var(--edge); }
+.manifesto__text { margin: 0; max-width: 18em; font: 400 clamp(36px, 5.6vw, 96px)/1.04 var(--f-body); letter-spacing: -.03em; }
+.manifesto__text span { color: var(--verde); }

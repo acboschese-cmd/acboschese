@@ -228,9 +228,8 @@
     });
   }
 
-  /* ---------- video della costruzione: parte quando è in vista, si ferma quando esce ---------- */
-  const film = $('#filmVideo');
-  if (film) {
+  /* ---------- video (costruzione del marchio, PIVS): partono quando sono in vista, si fermano quando escono ---------- */
+  $$('video[data-autoplay]').forEach((film) => {
     film.muted = true;                       // alcuni browser vogliono la proprietà, non solo l'attributo, per l'autoplay
     if (reduce) { film.controls = true; film.preload = 'metadata'; }
     else if ('IntersectionObserver' in window) {
@@ -239,7 +238,7 @@
         else film.pause();
       }), { threshold: .35 }).observe(film);
     }
-  }
+  });
 
   /* ---------- reveal & fluttuazione ---------- */
   if (!reduce) {

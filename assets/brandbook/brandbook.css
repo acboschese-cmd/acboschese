@@ -817,3 +817,5 @@ b, strong { font-weight: 500; }
 .pivs__chars { margin: 0; font-size: clamp(34px, 4.2vw, 72px); line-height: 1.15; letter-spacing: .14em; word-break: break-all; font-feature-settings: "liga" 0, "dlig" 0; }
 @media (max-width: 900px) { .pivs__row { grid-template-columns: 1fr; gap: 14px; } }
 .pivs__chars { color: var(--oro); }
+/* legature facoltative: niente spaziatura tra le lettere, altrimenti il browser non le applica */
+.pivs__chars--liga { letter-spacing: 0; word-spacing: .45em; font-feature-settings: "dlig" 1; font-variant-ligatures: discretionary-ligatures; }

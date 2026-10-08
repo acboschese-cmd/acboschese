@@ -808,3 +808,4 @@ b, strong { font-weight: 500; }
 .soc__intro .display--l { font-size: clamp(40px, 4.6vw, 84px); }
 .soc__intro--solo { display: block; }
 .soc__intro--solo > div { max-width: 40em; }
+.soc__intro .display--l { white-space: nowrap; }   /* "OLTRE LA / CATEGORIA" va a capo solo dove c'è il <br> */

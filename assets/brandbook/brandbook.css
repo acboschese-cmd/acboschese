@@ -791,3 +791,15 @@ b, strong { font-weight: 500; }
 .manifesto { background: var(--avorio); color: var(--bosco); padding: var(--sec-y) var(--edge); }
 .manifesto__text { margin: 0; max-width: 18em; font: 400 clamp(36px, 5.6vw, 96px)/1.04 var(--f-body); letter-spacing: -.03em; }
 .manifesto__text span { color: var(--verde); }
+
+/* ---------- ATTO I — lo scudetto al posto dei numeri ---------- */
+.sfida__grid { align-items: center; }
+.sfida__crest { margin: 0; justify-self: center; width: min(100%, 380px); perspective: 900px; }
+.sfida__crestIn { position: relative; transform-style: preserve-3d; will-change: transform; filter: drop-shadow(0 26px 34px rgba(30,68,48,.22)); }
+.sfida__crestIn img { display: block; width: 100%; height: auto; }
+.sfida__glare { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .6s var(--ease);
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 40%), rgba(255,255,255,.55), rgba(255,255,255,0) 42%);
+  mix-blend-mode: soft-light;
+  -webkit-mask: url('../brand/scudetto.svg') center / 100% 100% no-repeat; mask: url('../brand/scudetto.svg') center / 100% 100% no-repeat; }
+.sfida__crest:hover .sfida__glare { opacity: 1; }
+@media (max-width: 900px) { .sfida__crest { width: min(72%, 320px); margin-top: 12px; } }

@@ -318,6 +318,23 @@
     } });
   });
 
+  /* ---------- ATTO I — lo scudetto si inclina verso il cursore, con un riflesso che lo segue ---------- */
+  const crest = $('#sfidaCrest'), crestIn = $('#sfidaCrestIn');
+  if (crest && !reduce && matchMedia('(hover: hover)').matches) {
+    const rx = gsap.quickTo(crestIn, 'rotationX', { duration: .9, ease: 'power3.out' });
+    const ry = gsap.quickTo(crestIn, 'rotationY', { duration: .9, ease: 'power3.out' });
+    const sec = crest.closest('section');
+    sec.addEventListener('pointermove', (e) => {
+      const r = crest.getBoundingClientRect();
+      const x = gsap.utils.clamp(-1, 1, (e.clientX - (r.left + r.width / 2)) / (r.width * .9));
+      const y = gsap.utils.clamp(-1, 1, (e.clientY - (r.top + r.height / 2)) / (r.height * .9));
+      ry(x * 14); rx(-y * 10);
+      crestIn.style.setProperty('--gx', (50 + x * 40) + '%');
+      crestIn.style.setProperty('--gy', (40 + y * 35) + '%');
+    });
+    sec.addEventListener('pointerleave', () => { rx(0); ry(0); });
+  }
+
   /* ==========================================================
      ATTO III — il monogramma si disegna con lo scroll
      ========================================================== */

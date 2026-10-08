@@ -803,3 +803,8 @@ b, strong { font-weight: 500; }
   -webkit-mask: url('../brand/scudetto.svg') center / 100% 100% no-repeat; mask: url('../brand/scudetto.svg') center / 100% 100% no-repeat; }
 .sfida__crest:hover .sfida__glare { opacity: 1; }
 @media (max-width: 900px) { .sfida__crest { width: min(72%, 320px); margin-top: 12px; } }
+
+/* titoli dei blocchi maglie: più piccoli, così "CATEGORIA" sta nella colonna senza spezzarsi */
+.soc__intro .display--l { font-size: clamp(40px, 4.6vw, 84px); }
+.soc__intro--solo { display: block; }
+.soc__intro--solo > div { max-width: 40em; }

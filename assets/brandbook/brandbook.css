@@ -348,9 +348,9 @@ b, strong { font-weight: 500; }
 .tcard__nameimg--caps { height: .56em; max-width: 100%; object-fit: contain; object-position: left; margin: .3em 0 .66em; }  /* stessa riga di "RECTOR" e "PIVS" */  /* tracciato tagliato all'altezza delle maiuscole */
 .tcard__abcimg { display: block; width: min(100%, 250px); height: auto; margin: 24px 0 0; opacity: .85; }
 .tcard p:not(.tcard__role):not(.tcard__abc) { margin: 0; max-width: 26em; }
-.type__film { display: grid; grid-template-columns: 1fr min(42%, 460px); gap: 28px; align-items: end; margin-top: var(--head-gap); padding-top: 28px; border-top: 1px solid var(--line-l); }
+.type__film { display: grid; grid-template-columns: 1fr 2fr; gap: 28px; align-items: end; margin-top: var(--head-gap); padding-top: 28px; border-top: 1px solid var(--line-l); }
 .type__filmtext p:not(.tcard__role) { margin: 12px 0 0; max-width: 26em; }
-.type__filmframe { position: relative; aspect-ratio: 3 / 4; background: var(--bosco); overflow: hidden; }
+.type__filmframe { position: relative; aspect-ratio: 16 / 9; background: var(--bosco); overflow: hidden; }
 .tcard__abc { font-size: 22px; line-height: 1.3; margin: 24px 0 0; opacity: .85; letter-spacing: .02em; word-break: break-all; }
 
 /* ==========================================================

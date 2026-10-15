@@ -38,3 +38,14 @@
   for = "/assets/site.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# Informativa privacy e cookie (pagina del CMS in content/pagine/privacy.md)
+[[redirects]]
+  from = "/privacy"
+  to = "/pagine/privacy"
+  status = 301
+
+[[headers]]
+  for = "/assets/consent.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

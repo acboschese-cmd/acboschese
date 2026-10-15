@@ -510,3 +510,7 @@ footer { border-top: 1px solid var(--line-d); padding: 40px var(--pad); display:
 .foot__legal a { color: inherit; text-decoration: none; transition: color .3s var(--ease); }
 .foot__legal a:hover { color: var(--gold); }
 :focus-visible { outline: 2px solid var(--oro); outline-offset: 3px; }
+
+/* nota privacy sotto i moduli */
+.form__privacy { grid-column: 1 / -1; margin: 6px 0 0; font-size: 12px; line-height: 1.6; color: var(--cream-dim); }
+.form__privacy a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(189,163,96,.4); }

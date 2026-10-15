@@ -820,3 +820,5 @@ b, strong { font-weight: 500; }
 /* legature facoltative: niente spaziatura tra le lettere, altrimenti il browser non le applica */
 .pivs__chars--liga { letter-spacing: 0; word-spacing: .45em; font-feature-settings: "dlig" 1; font-variant-ligatures: discretionary-ligatures; }
 .compare__hint { margin: 16px 0 0; }
+.outro__foot a { color: inherit; text-decoration: none; }
+.outro__foot a:hover { color: var(--oro); }

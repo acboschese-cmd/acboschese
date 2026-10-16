@@ -49,3 +49,8 @@
   for = "/assets/consent.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/tokens.css"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

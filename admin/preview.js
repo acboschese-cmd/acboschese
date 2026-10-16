@@ -116,6 +116,7 @@
     }
   });
 
+  CMS.registerPreviewStyle('/assets/tokens.css');
   CMS.registerPreviewStyle('/assets/site.css');
   CMS.registerPreviewTemplate('club', ClubPreview);
 })();

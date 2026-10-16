@@ -1,0 +1,46 @@
+/* ACB Icons — font di icone dell'Audace Club Boschese 1928 (uso come Font Awesome).
+   <i class="acb-i acb-i-monogram" aria-hidden="true"></i>
+   Il glifo di ogni icona è un token (--icon-*) definito qui sotto e in tokens.css / tokens.json. */
+@font-face { font-family: 'ACB Icons'; src: url('fonts/ACB-Icons-v1.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+:root {
+  --icon-monogram: "\e001";
+  --icon-seal: "\e002";
+  --icon-wordmark: "\e003";
+  --icon-centenary: "\e004";
+  --icon-societas: "\e005";
+  --icon-crest: "\e006";
+  --icon-arrow-right: "\e007";
+  --icon-arrow-left: "\e008";
+  --icon-arrow-up: "\e009";
+  --icon-arrow-down: "\e00a";
+  --icon-arrow-up-right: "\e00b";
+  --icon-menu: "\e00c";
+  --icon-close: "\e00d";
+  --icon-plus: "\e00e";
+  --icon-minus: "\e00f";
+  --icon-play: "\e010";
+  --icon-check: "\e011";
+  --icon-download: "\e012";
+}
+.acb-i { font-family: 'ACB Icons'; font-style: normal; font-weight: 400; font-variant: normal; text-transform: none; line-height: 1;
+  display: inline-block; vertical-align: -.125em; speak: never; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.acb-i-fw { width: 1.25em; text-align: center; }          /* larghezza fissa, per gli elenchi */
+.acb-i-lg { font-size: 1.333em; } .acb-i-2x { font-size: 2em; } .acb-i-3x { font-size: 3em; }
+.acb-i-monogram::before { content: var(--icon-monogram); }
+.acb-i-seal::before { content: var(--icon-seal); }
+.acb-i-wordmark::before { content: var(--icon-wordmark); }
+.acb-i-centenary::before { content: var(--icon-centenary); }
+.acb-i-societas::before { content: var(--icon-societas); }
+.acb-i-crest::before { content: var(--icon-crest); }
+.acb-i-arrow-right::before { content: var(--icon-arrow-right); }
+.acb-i-arrow-left::before { content: var(--icon-arrow-left); }
+.acb-i-arrow-up::before { content: var(--icon-arrow-up); }
+.acb-i-arrow-down::before { content: var(--icon-arrow-down); }
+.acb-i-arrow-up-right::before { content: var(--icon-arrow-up-right); }
+.acb-i-menu::before { content: var(--icon-menu); }
+.acb-i-close::before { content: var(--icon-close); }
+.acb-i-plus::before { content: var(--icon-plus); }
+.acb-i-minus::before { content: var(--icon-minus); }
+.acb-i-play::before { content: var(--icon-play); }
+.acb-i-check::before { content: var(--icon-check); }
+.acb-i-download::before { content: var(--icon-download); }

@@ -335,49 +335,40 @@
   }
 
   /* ==========================================================
-     00 HERO — il sigillo diventa un portale
+     00 HERO — Sempre Audaci in PIVS sopra la squadra
      ========================================================== */
-  const hero = $('#top'), portal = $('#heroPortal'), seal = $('#heroSeal'), sealIn = $('#heroSealIn');
-  function portalStart() {
-    const r = seal.getBoundingClientRect();
-    return { rx: r.width * 0.326, ry: r.height * 0.358 };
-  }
-  const p0 = portalStart();
-  gsap.set(portal, { '--rx': p0.rx + 'px', '--ry': p0.ry + 'px' });
+  const hero = $('#top'), pic = $('#heroPic');
+  // la foto piccola: un rettangolo 4:3 al centro con tutta la squadra; con lo scroll cresce fino a riempire lo schermo
+  const picSmall = () => {
+    const w = Math.max(220, Math.min(innerWidth * .3, innerHeight * .42 * 4 / 3));
+    return { width: w, height: w * .75 };
+  };
+  if (!reduce) gsap.set(pic, picSmall());
 
   function heroIntro() {
     if (reduce) return;
     gsap.from('.hero__line', { yPercent: 60, opacity: 0, duration: 1.4, ease: 'power4.out', stagger: .12 });
-    gsap.from(seal, { scale: .6, opacity: 0, duration: 1.6, ease: 'power4.out', delay: .1 });
+    gsap.from(pic, { clipPath: 'inset(50% 50%)', duration: 1.6, ease: 'power4.out', delay: .15, clearProps: 'clipPath' });
     gsap.from('.hero__hint, .hero__meta', { opacity: 0, duration: 1, delay: .6 });
   }
 
   if (!reduce) {
-    const diag = () => Math.hypot(innerWidth, innerHeight) * 0.75;
+    // le righe si aprono in direzioni opposte, la foto piccola si allarga a tutto schermo
     const htl = gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom bottom', scrub: .8, invalidateOnRefresh: true },
     });
-    htl.to('.hero__line--a', { x: () => -innerWidth * .4, opacity: 0, duration: .5, ease: 'power1.in' }, 0)
-       .to('.hero__line--b', { x: () => innerWidth * .4, opacity: 0, duration: .5, ease: 'power1.in' }, 0)
-       .to('.hero__hint, .hero__meta', { opacity: 0, duration: .12 }, 0)
-       .to(seal, { scale: 5, opacity: 0, duration: .55, ease: 'power2.in' }, 0)
-       .fromTo(portal, { '--rx': () => portalStart().rx + 'px', '--ry': () => portalStart().ry + 'px' },
-                       { '--rx': () => diag() + 'px', '--ry': () => diag() + 'px', duration: .62, ease: 'power2.in' }, 0)
-       .to('#heroPortal img', { scale: 1, duration: .8 }, 0)
-       .to(portal, { '--shade': 1, duration: .2 }, .5)
-       .fromTo('#heroIntro', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .22, ease: 'power2.out' }, .64)
-       .to({}, { duration: .14 });
-
-    if (finePointer) {
-      const rx = gsap.quickTo(sealIn, 'rotationX', { duration: .9, ease: 'power3' });
-      const ry = gsap.quickTo(sealIn, 'rotationY', { duration: .9, ease: 'power3' });
-      hero.addEventListener('pointermove', (e) => {
-        ry((e.clientX / innerWidth - .5) * 34);
-        rx(-(e.clientY / innerHeight - .5) * 24);
-      });
-    }
+    htl.to('.hero__hint, .hero__meta', { opacity: 0, duration: .08 }, 0)
+       .to('.hero__line--a', { x: () => -innerWidth * .9, opacity: 0, duration: .5, ease: 'power1.in' }, 0)
+       .to('.hero__line--b', { x: () => innerWidth * .9, opacity: 0, duration: .5, ease: 'power1.in' }, 0)
+       .fromTo(pic, { width: () => picSmall().width, height: () => picSmall().height }, { width: () => innerWidth, height: () => innerHeight, duration: .6, ease: 'power2.inOut' }, .05)
+       .to('#heroPic img', { scale: 1, duration: .7 }, 0)
+       .to(pic, { '--shade': 1, duration: .15 }, .5)
+       .fromTo('#heroIntro', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .2, ease: 'power2.out' }, .62)
+       .to({}, { duration: .18 });
   } else {
+    gsap.set(pic, { '--shade': 1 });
+    gsap.set('.hero__title', { autoAlpha: 0 });
     gsap.set('#heroIntro', { autoAlpha: 1 });
   }
 

@@ -160,16 +160,14 @@ b, strong { font-weight: 500; }
    ========================================================== */
 .hero { height: 340vh; position: relative; background: var(--bosco); }
 .hero__stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
-.hero__portal { position: absolute; inset: 0; clip-path: ellipse(var(--rx, 120px) var(--ry, 150px) at 50% 50%); will-change: clip-path; }
-.hero__portal img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 40%; filter: saturate(.95) brightness(.9); transform: scale(1.35); }
-.hero__portal::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(var(--ink-rgb) / .55), rgb(var(--ink-rgb) / .2) 40%, rgb(var(--ink-rgb) / .75)); opacity: var(--shade, 0); }
-.hero__title { position: absolute; inset: 0; margin: 0; pointer-events: none; font: 500 clamp(56px, min(15.5vw, 23vh), 300px)/.82 var(--f-display); letter-spacing: -.02em; }
+.hero__pic { position: absolute; left: 50%; top: 50%; width: 100%; height: 100%; translate: -50% -50%; overflow: hidden; }
+.hero__pic img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; transform: scale(1.12); filter: saturate(.95); }
+.hero__pic::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(var(--ink-rgb) / .55), rgb(var(--ink-rgb) / .2) 40%, rgb(var(--ink-rgb) / .78)); opacity: var(--shade, 0); }
+/* Sempre Audaci in PIVS sopra la foto: con lo scroll SEMPRE esce a sinistra, AUDACI a destra */
+.hero__title { position: absolute; inset: 0; margin: 0; pointer-events: none; font-size: clamp(110px, min(30vw, 38vh), 440px); line-height: .9; color: var(--avorio); text-transform: none; z-index: 2; }
 .hero__line { position: absolute; white-space: nowrap; }
-.hero__line--a { left: var(--edge); top: 13vh; }
-.hero__line--b { right: var(--edge); bottom: 14vh; }
-.hero__seal { position: relative; width: clamp(130px, min(18vw, 29vh), 300px); aspect-ratio: 356 / 422; perspective: 900px; z-index: 2; }
-.hero__sealIn { width: 100%; height: 100%; color: var(--avorio); transform-style: preserve-3d; }
-.hero__sealIn svg { width: 100%; height: 100%; display: block; }
+.hero__line--a { left: var(--edge); top: 9vh; }
+.hero__line--b { right: var(--edge); bottom: 11vh; }
 .hero__hint { position: absolute; bottom: 29px; left: 50%; transform: translateX(-50%); font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .7; margin: 0; white-space: nowrap; }
 .hero__hint::before { content: ""; display: block; width: 1px; height: 28px; margin: 0 auto 10px; background: currentColor; animation: hint 2.2s var(--ease) infinite; transform-origin: top; }
 @keyframes hint { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
@@ -637,11 +635,11 @@ b, strong { font-weight: 500; }
   .hud__chapter { display: none; }
   .index__list { columns: 1; }
   .index { padding-top: 76px; }
-  .hero__line--a { top: 18vh; }
-  .hero__line--b { bottom: 22vh; }
   .hero__meta { display: none; }
   .hero__intro { bottom: 9vh; }
-  .hero__portal img { object-position: 62% 50%; }
+  .hero__title { font-size: min(36vw, 24vh); }
+  .hero__line--a { top: 24vh; }
+  .hero__line--b { bottom: 26vh; }
   .radici__stick { grid-template-columns: 1fr; grid-template-rows: auto auto auto 1fr; align-content: start; padding-top: 72px; gap: 12px; }
   .radici__steps { gap: 18px; }
   .radici__year { grid-row: 2; }

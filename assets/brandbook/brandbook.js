@@ -286,11 +286,15 @@
     stage.addEventListener('pointerup', (e) => { if (e.pointerType !== 'mouse' && !full) setTimeout(() => { if (!inside) startWander(); }, 1800); });
     stage.addEventListener('click', (e) => {
       full = !full; lens.classList.toggle('is-full', full);
+      lens.classList.remove('is-done');               // il disco verde torna visibile mentre si allarga o si stringe
       if (full) stopWander();
       const r = stage.getBoundingClientRect(), R = Math.hypot(r.width, r.height);
       const from = st.r || baseR();
       gsap.fromTo(st, { r: from }, { r: full ? R : baseR(), duration: reduce ? 0 : .9, ease: 'power3.inOut', onUpdate: apply,
-        onComplete: () => { if (!full) { st.r = 0; apply(); if (!inside) startWander(); } } });
+        onComplete: () => {
+          if (full) lens.classList.add('is-done');      // a lente aperta il verde sfuma: resta l'Inline sul fondo
+          else { st.r = 0; apply(); if (!inside) startWander(); }
+        } });
     });
     // la lente gira solo quando la sezione è in vista
     ScrollTrigger.create({ trigger: lens, start: 'top bottom', end: 'bottom top',

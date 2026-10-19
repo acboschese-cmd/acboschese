@@ -251,6 +251,16 @@
   const lens = $('#pivsLens');
   if (lens) {
     const stage = $('.plens__stage', lens);
+    // la parola occupa sempre tutta la larghezza, senza uscire (su mobile va su due righe, ci pensa il CSS)
+    const fit = () => {
+      stage.style.removeProperty('--lfs');
+      if (innerWidth <= 700) return;
+      const w = $('.plens__word', stage), cur = parseFloat(getComputedStyle(w).fontSize);
+      const r = document.createRange(); r.selectNodeContents(w);   // larghezza vera del testo, non del paragrafo
+      const need = stage.clientWidth / r.getBoundingClientRect().width;
+      stage.style.setProperty('--lfs', Math.floor(cur * need * .98) + 'px');
+    };
+    document.fonts.ready.then(fit); addEventListener('resize', fit);
     const st = { x: .5, y: .5, r: 0 };                 // x, y in frazioni del riquadro; r in px (0 = misura del CSS)
     const baseR = () => parseFloat(getComputedStyle($('.plens__ring', lens)).width) / 2 || 120;
     const apply = () => {

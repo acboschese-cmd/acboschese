@@ -246,6 +246,67 @@
     gsap.fromTo('.scl__bg img', { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: scl, start: 'top bottom', end: 'bottom bottom', scrub: 1 } });
   }
 
+  /* ---------- PIVS: lente sull'Inline. Il cursore porta la lente; fermo o su touch, la lente gira da sola;
+     clic (o tap) e la lente si allarga su tutta la parola ---------- */
+  const lens = $('#pivsLens');
+  if (lens) {
+    const stage = $('.plens__stage', lens);
+    const st = { x: .5, y: .5, r: 0 };                 // x, y in frazioni del riquadro; r in px (0 = misura del CSS)
+    const baseR = () => parseFloat(getComputedStyle($('.plens__ring', lens)).width) / 2 || 120;
+    const apply = () => {
+      stage.style.setProperty('--x', (st.x * 100) + '%');
+      stage.style.setProperty('--y', (st.y * 100) + '%');
+      if (st.r) stage.style.setProperty('--r', st.r + 'px'); else stage.style.removeProperty('--r');
+    };
+    let wander = null, inside = false, full = false;
+    const startWander = () => {
+      if (reduce || wander) return;
+      // giro lento lungo la parola, come uno sguardo che legge
+      wander = gsap.timeline({ repeat: -1, defaults: { duration: 2.4, ease: 'sine.inOut' }, onUpdate: apply })
+        .to(st, { x: .22, y: .42 }).to(st, { x: .5, y: .62 }).to(st, { x: .8, y: .4 }).to(st, { x: .5, y: .5 });
+    };
+    const stopWander = () => { if (wander) { wander.kill(); wander = null; } };
+    const moveTo = (e) => {
+      const r = stage.getBoundingClientRect();
+      gsap.to(st, { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height, duration: reduce ? 0 : .35, ease: 'power3.out', overwrite: 'auto', onUpdate: apply });
+    };
+    stage.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { inside = true; stopWander(); moveTo(e); } });
+    stage.addEventListener('pointermove', (e) => { if (inside || e.pointerType !== 'mouse') { stopWander(); moveTo(e); } });
+    stage.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { inside = false; if (!full) startWander(); } });
+    stage.addEventListener('pointerup', (e) => { if (e.pointerType !== 'mouse' && !full) setTimeout(() => { if (!inside) startWander(); }, 1800); });
+    stage.addEventListener('click', (e) => {
+      full = !full; lens.classList.toggle('is-full', full);
+      if (full) stopWander();
+      const r = stage.getBoundingClientRect(), R = Math.hypot(r.width, r.height);
+      const from = st.r || baseR();
+      gsap.fromTo(st, { r: from }, { r: full ? R : baseR(), duration: reduce ? 0 : .9, ease: 'power3.inOut', onUpdate: apply,
+        onComplete: () => { if (!full) { st.r = 0; apply(); if (!inside) startWander(); } } });
+    });
+    // la lente gira solo quando la sezione è in vista
+    ScrollTrigger.create({ trigger: lens, start: 'top bottom', end: 'bottom top',
+      onToggle: (self) => { if (self.isActive && !inside && !full) startWander(); else if (!self.isActive) stopWander(); } });
+    apply();
+  }
+
+  /* ---------- PIVS: tester ---------- */
+  const test = $('#pivsTest');
+  if (test) {
+    const out = $('.ptest__out', test), range = $('.ptest__size input', test), val = $('.ptest__size output', test);
+    if (out.contentEditable !== 'plaintext-only') out.contentEditable = 'true';   // Firefox vecchi
+    const pick = (group, btn) => $$('button', group).forEach((b) => { const on = b === btn; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on); });
+    $$('[data-style]', test).forEach((b) => b.addEventListener('click', () => { pick(b.parentElement, b); out.dataset.style = b.dataset.style; }));
+    $$('[data-case]', test).forEach((b) => b.addEventListener('click', () => { pick(b.parentElement, b); out.style.textTransform = b.dataset.case; }));
+    const liga = $('[data-liga]', test);
+    liga.addEventListener('click', () => { const on = liga.getAttribute('aria-pressed') !== 'true'; liga.setAttribute('aria-pressed', on); out.toggleAttribute('data-liga', on); });
+    const size = () => { out.style.setProperty('--fs', range.value + 'px'); val.textContent = range.value; };
+    range.addEventListener('input', size); size();
+    $$('.ptest__samples button', test).forEach((b) => b.addEventListener('click', () => {
+      out.textContent = b.textContent;
+      if (b.textContent.startsWith('ACB') && liga.getAttribute('aria-pressed') !== 'true') liga.click();   // ACB: si vede subito il monogramma
+    }));
+    out.addEventListener('paste', (e) => { e.preventDefault(); document.execCommand('insertText', false, (e.clipboardData || window.clipboardData).getData('text/plain')); });
+  }
+
   /* ---------- video (costruzione del marchio, PIVS): partono quando sono in vista, si fermano quando escono ---------- */
   $$('video[data-autoplay]').forEach((film) => {
     film.muted = true;                       // alcuni browser vogliono la proprietà, non solo l'attributo, per l'autoplay

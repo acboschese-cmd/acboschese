@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/brand/monogram-green.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/Rector-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/tokens.css?v=1" />
-<link rel="stylesheet" href="assets/brandbook/brandbook.css?v=122">
+<link rel="stylesheet" href="assets/brandbook/brandbook.css?v=123">
 </head>
 <body>
 <a class="skip" href="#contenuto">Salta al contenuto</a>
@@ -403,14 +403,45 @@
       <p class="lead" data-reveal>Dalle tre lettere del monogramma a un alfabeto completo.</p>
       <p data-reveal>Le misure della A, della C e della B sono diventate un sistema: lo spessore delle aste, lo spazio interno delle lettere, i filetti e i tagli a 45°. Con le stesse misure sono state disegnate le altre lettere, i numeri e i segni, come poligoni su una griglia comune.</p>
       <p data-reveal>Il disegno è stato poi convertito in un font completo, nei formati OTF, TTF e WOFF2, con una spaziatura ottica molto stretta e correzioni tra alcune coppie di lettere.</p>
+      <p data-reveal>Dalla versione 0.17 l'alfabeto ha anche le minuscole, più strette e spezzate come una textura, e una variante Inline con un filetto inciso al centro di ogni asta.</p>
       <p data-reveal>Una legatura facoltativa riporta all'origine: scrivendo A, C e B, le tre lettere si incastrano e tornano a formare il monogramma.</p>
     </div>
   </div>
+  <!-- lente: sotto il Regular c'è l'Inline, la lente lo scopre dove passa il cursore (clic: tutta la parola) -->
+  <div class="plens" id="pivsLens" data-reveal>
+    <p class="plens__meta"><span>PIVS Regular</span><span class="plens__hint">Passa sopra con la lente · clic per l'Inline intero</span><span>PIVS Inline</span></p>
+    <div class="plens__stage" aria-label="Sempre Audaci, scritto in PIVS Regular e in PIVS Inline" role="img">
+      <p class="plens__word" aria-hidden="true">Sempre Audaci</p>
+      <p class="plens__word plens__word--in" aria-hidden="true">Sempre Audaci</p>
+      <span class="plens__ring" aria-hidden="true"><span>Inline</span></span>
+    </div>
+  </div>
   <div class="pivs__set">
-    <div class="pivs__row" data-reveal><p class="pivs__label">Alfabeto</p><p class="pivs__chars f-pivs">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p></div>
+    <div class="pivs__row" data-reveal><p class="pivs__label">Maiuscole</p><p class="pivs__chars f-pivs">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p></div>
+    <div class="pivs__row" data-reveal><p class="pivs__label">Minuscole</p><p class="pivs__chars pivs__chars--lc">abcdefghijklmnopqrstuvwxyz</p></div>
     <div class="pivs__row" data-reveal><p class="pivs__label">Glifi</p><p class="pivs__chars f-pivs">ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞĀĂĆČĎĐĒĖĚĞĪİŁŃŇŌŐŒŘŚŞŠŤŪŮŰŸŹŻŽẞ</p></div>
     <div class="pivs__row" data-reveal><p class="pivs__label">Legature</p><p class="pivs__chars pivs__chars--liga f-pivs" aria-label="Legature facoltative: ACB, AR, AN, HE, MP, NE">ACB AR AN HE MP NE</p></div>
     <div class="pivs__row" data-reveal><p class="pivs__label">Numeri</p><p class="pivs__chars f-pivs">0123456789</p></div>
+  </div>
+  <!-- tester: si scrive dentro, con i comandi per variante, maiuscole, legature e corpo -->
+  <div class="ptest" id="pivsTest" data-reveal>
+    <div class="ptest__bar">
+      <div class="ptest__seg" role="group" aria-label="Variante">
+        <button type="button" class="is-on" data-style="regular" aria-pressed="true">Regular</button>
+        <button type="button" data-style="inline" aria-pressed="false">Inline</button>
+      </div>
+      <div class="ptest__seg" role="group" aria-label="Maiuscole e minuscole">
+        <button type="button" data-case="none" class="is-on" aria-pressed="true" title="Come scritto">Aa</button>
+        <button type="button" data-case="uppercase" aria-pressed="false" title="Tutto maiuscolo">AA</button>
+        <button type="button" data-case="lowercase" aria-pressed="false" title="Tutto minuscolo">aa</button>
+      </div>
+      <button type="button" class="ptest__toggle" data-liga aria-pressed="false"><span class="ptest__knob" aria-hidden="true"></span>Legature</button>
+      <label class="ptest__size"><span>Corpo</span><input type="range" min="40" max="260" value="150" aria-label="Corpo del testo"><output>150</output></label>
+    </div>
+    <div class="ptest__out" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-multiline="true" aria-label="Scrivi qui per provare PIVS">Sempre Audaci</div>
+    <div class="ptest__samples" aria-label="Esempi">
+      <button type="button">Sempre Audaci</button><button type="button">ACB 1928</button><button type="button">Bosco Marengo</button><button type="button">Pius V Pont Max</button><button type="button">Forza Boschese</button>
+    </div>
   </div>
   <div class="type__film" data-reveal>
     <div class="type__filmtext">
@@ -621,7 +652,7 @@
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/vendor/lenis.min.js"></script>
-<script src="assets/brandbook/brandbook.js?v=50"></script>
+<script src="assets/brandbook/brandbook.js?v=51"></script>
 <script src="/assets/consent.js?v=1" defer></script>
 </body>
 </html>

@@ -6,7 +6,8 @@
    ========================================================== */
 
 /* PIVS: il nostro carattere, ricavato dalle lettere del monogramma (solo maiuscole) */
-@font-face { font-family: 'PIVS'; src: url('../fonts/PIVS-Regular-016.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'PIVS'; src: url('../fonts/PIVS-Regular-017.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'PIVS Inline'; src: url('../fonts/PIVS-Inline-017.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 @font-face { font-family: 'Rector'; src: url('../fonts/Rector-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
 /* PIVS (le lettere del monogramma) e Antarctica sono solo immagini SVG (tracciati generati dai font): i file dei font non vanno online. */
 
@@ -828,3 +829,43 @@ b, strong { font-weight: 500; }
 .compare__hint { margin: 16px 0 0; }
 .outro__foot a { color: inherit; text-decoration: none; }
 .outro__foot a:hover { color: var(--oro); }
+
+/* PIVS 0.17: minuscole, lente Inline, tester */
+.pivs__chars--lc { font-family: 'PIVS', var(--f-display); text-transform: none; letter-spacing: .1em; }
+
+.plens { margin-top: var(--head-gap); border-top: 1px solid var(--line-d); padding-top: 22px; }
+.plens__meta { display: flex; justify-content: space-between; gap: 16px; margin: 0; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
+.plens__stage { --x: 50%; --y: 50%; --r: clamp(70px, 11vw, 190px); position: relative; margin-top: clamp(16px, 3vh, 40px); cursor: none; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.plens__word { margin: 0; font: 400 clamp(56px, 25.5vw, 380px)/1 'PIVS', var(--f-display); text-align: center; color: var(--avorio); padding: .04em 0 .12em; white-space: nowrap; }
+.plens__word--in { position: absolute; inset: 0; font-family: 'PIVS Inline', 'PIVS', var(--f-display); color: var(--avorio); background: var(--verde); clip-path: circle(var(--r) at var(--x) var(--y)); }
+.plens__ring { position: absolute; left: var(--x); top: var(--y); width: calc(var(--r) * 2); aspect-ratio: 1; translate: -50% -50%; border: 1px solid rgb(var(--avorio-rgb) / .7); border-radius: 50%; pointer-events: none; }
+.plens__ring span { position: absolute; left: 50%; top: 100%; translate: -50% 10px; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+.plens.is-full .plens__ring { opacity: 0; transition: opacity .3s; }
+@media (hover: none) { .plens__stage { cursor: auto; } .plens__hint { display: none; } }
+
+.ptest { margin-top: var(--sec-y); border-top: 1px solid var(--line-d); padding-top: 22px; }
+.ptest__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.ptest__seg { display: inline-flex; border: 1px solid var(--line-ctl); border-radius: var(--r-pill); padding: 3px; }
+.ptest__seg button, .ptest__toggle, .ptest__samples button { font: inherit; font-size: var(--fs-meta); letter-spacing: .14em; text-transform: uppercase; color: inherit; background: none; border: 0; border-radius: var(--r-pill); padding: 9px 14px; min-height: 36px; cursor: pointer; }
+.ptest__seg button[data-case] { letter-spacing: .04em; text-transform: none; font-size: var(--fs-s); }
+.ptest__seg button.is-on { background: var(--avorio); color: var(--bosco); }
+.ptest__toggle { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--line-ctl); }
+.ptest__knob { width: 30px; height: 16px; border: 1px solid currentColor; border-radius: 9px; position: relative; }
+.ptest__knob::after { content: ''; position: absolute; top: 2px; left: 2px; width: 10px; height: 10px; border-radius: 50%; background: currentColor; transition: translate .3s var(--ease); }
+.ptest__toggle[aria-pressed="true"] { background: var(--oro); border-color: var(--oro); color: var(--bosco); }
+.ptest__toggle[aria-pressed="true"] .ptest__knob::after { translate: 14px 0; }
+.ptest__size { display: inline-flex; align-items: center; gap: 12px; margin-left: auto; font-size: var(--fs-meta); letter-spacing: .14em; text-transform: uppercase; }
+.ptest__size input { width: clamp(120px, 14vw, 200px); accent-color: var(--oro); }
+.ptest__size output { min-width: 3ch; font-variant-numeric: tabular-nums; opacity: .7; }
+.ptest__out { --fs: 150px; margin: clamp(24px, 5vh, 56px) 0 0; font: 400 min(var(--fs), 22vw)/1.02 'PIVS', var(--f-display); color: var(--oro); outline: none; overflow-wrap: anywhere; min-height: 1.1em; caret-color: var(--avorio); font-feature-settings: "liga" 0, "dlig" 0; }
+.ptest__out[data-style="inline"] { font-family: 'PIVS Inline', 'PIVS', var(--f-display); }
+.ptest__out[data-liga] { font-feature-settings: "dlig" 1; font-variant-ligatures: discretionary-ligatures; }
+.ptest__out:focus-visible { box-shadow: 0 1px 0 0 rgb(var(--avorio-rgb) / .3); }
+.ptest__samples { display: flex; flex-wrap: wrap; gap: 8px; margin-top: clamp(20px, 4vh, 40px); }
+.ptest__samples button { border: 1px solid var(--line-d); opacity: .75; transition: opacity .2s, border-color .2s; }
+.ptest__samples button:hover { opacity: 1; border-color: var(--line-ctl); }
+@media (max-width: 900px) { .ptest__size { margin-left: 0; } }
+@media (max-width: 700px) {
+  .plens__word { white-space: normal; font-size: 40vw; line-height: .95; }
+  .plens__stage { --r: clamp(56px, 21vw, 100px); }
+}

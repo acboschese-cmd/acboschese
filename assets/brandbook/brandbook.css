@@ -389,40 +389,75 @@ b, strong { font-weight: 500; }
 /* ==========================================================
    01 SANTA CROCE
    ========================================================== */
-.sc { background: var(--bosco); padding: var(--sec-y) var(--edge); position: relative; overflow: hidden; }
+.sc { background: var(--bosco); position: relative; overflow: clip; }
+.sc__body { position: relative; z-index: 2; margin-top: -100svh; background: var(--bosco); padding: var(--sec-y) var(--edge); box-shadow: 0 -40px 80px rgb(0 0 0 / .25); }
 .sc__head { margin-bottom: var(--head-gap); }
 .sc__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 var(--gut); align-items: start; }
-.sc__img { margin: 0; overflow: hidden; }
-.sc__img img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
-.sc__img--main { grid-column: 1 / span 7; aspect-ratio: 4 / 3; }
-.sc__copy { grid-column: 9 / span 4; padding-top: 6vh; }
+.sc__copy { grid-column: 1 / span 5; }
 .sc__copy .lead { margin-top: 0; }
 .sc__copy p:not(.lead) { margin: 22px 0 0; opacity: .85; }
-.sc__img--cloister { grid-column: 6 / span 7; aspect-ratio: 16 / 9; margin-top: 8vh; }
-.sc__img--pio { grid-column: 2 / span 3; grid-row: 2; aspect-ratio: 3 / 2; margin-top: 22vh; }
+.vas__copy { grid-column: 7 / span 6; }
+.vas__copy p:not(.lead):not(.eyebrow) { margin: 22px 0 0; opacity: .85; max-width: 34em; }
+
+/* collage: la scena resta ferma, le foto arrivano una per passo di scroll, poi il testo le copre */
+.scl { --step: 55svh; position: relative; height: calc(100svh + var(--steps) * var(--step) + 100svh); }
+.scl__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.scl__bg { position: absolute; inset: 0; }
+.scl__bg img { width: 100%; height: 100%; object-fit: cover; scale: 1.12; }
+.scl__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(var(--bosco-rgb) / .55), rgb(var(--bosco-rgb) / .25) 40%, rgb(var(--bosco-rgb) / .6)); }
+.scl__stage { --u: min(1vw, 1.72svh); position: absolute; inset: 0; margin: auto; width: calc(100 * var(--u)); height: calc(56 * var(--u)); }
+.scl__p { --pw: calc(var(--w) * var(--u)); position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); width: var(--pw); margin: 0; --rot: var(--r); transform: rotate(var(--rot)); }
+.scl__p:nth-child(odd) { --dr: -5deg; }
+.scl__p:nth-child(even) { --dr: 6deg; }
+.scl.is-staged .scl__p { opacity: 0; transform: translate3d(0, calc(-6 * var(--u)), 0) scale(1.22) rotate(calc(var(--rot) + var(--dr))); transition: opacity .22s linear, transform .6s cubic-bezier(.2, 1.45, .35, 1); }
+.scl.is-staged .scl__p.is-in { opacity: 1; transform: rotate(var(--rot)); }
+
+/* nastro adesivo: carta semitrasparente con i bordi strappati */
+.scl__p::before, .scl__photo--corners::after { content: ''; position: absolute; z-index: 3; left: 50%; top: calc(-1.3 * var(--u)); width: 38%; height: calc(2.6 * var(--u)); min-height: 12px; translate: -50% 0; rotate: -2deg; background: linear-gradient(90deg, rgb(244 238 214 / .7), rgb(236 228 200 / .58) 50%, rgb(244 238 214 / .68)); box-shadow: 0 1px 2px rgb(0 0 0 / .14); clip-path: polygon(0 6%, 3% 22%, 0 40%, 3% 58%, 0 76%, 3% 92%, 1% 100%, 99% 100%, 97% 82%, 100% 64%, 97% 46%, 100% 28%, 97% 10%, 100% 0, 2% 0); pointer-events: none; }
+.scl__photo--corners::before { left: 0; width: 34%; translate: -28% 0; rotate: -38deg; top: calc(.4 * var(--u)); }
+.scl__photo--corners::after { left: auto; right: 0; width: 34%; translate: 28% 0; rotate: 38deg; top: calc(.4 * var(--u)); }
+
+/* foto stampata: bordo bianco, didascalia sotto */
+.scl__photo { background: #F7F4E8; padding: calc(var(--pw) * .035) calc(var(--pw) * .035) 0; box-shadow: 0 calc(1.2 * var(--u)) calc(3 * var(--u)) rgb(0 0 0 / .35), 0 1px 2px rgb(0 0 0 / .2); }
+.scl__photo img { display: block; width: 100%; height: auto; object-fit: cover; }
+.scl__photo figcaption { color: var(--bosco); font-size: max(10px, calc(var(--pw) * .042)); letter-spacing: .14em; text-transform: uppercase; padding: .9em 0 1em; }
+
+/* lo scontrino con il bollino, come il "03 days" */
+.scl__ticket { isolation: isolate; color: var(--bosco); font-size: max(9px, calc(var(--pw) * .046)); padding: 2.2em 1.6em 1.8em; }
+.scl__ticket::after { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--avorio); filter: drop-shadow(0 calc(1.2 * var(--u)) calc(2 * var(--u)) rgb(0 0 0 / .35));
+  -webkit-mask: radial-gradient(circle .45em at 50% 0, #0000 97%, #000) 50% 0 / 1.3em 51% repeat-x, radial-gradient(circle .45em at 50% 100%, #0000 97%, #000) 50% 100% / 1.3em 51% repeat-x;
+          mask: radial-gradient(circle .45em at 50% 0, #0000 97%, #000) 50% 0 / 1.3em 51% repeat-x, radial-gradient(circle .45em at 50% 100%, #0000 97%, #000) 50% 100% / 1.3em 51% repeat-x; }
+.scl__ticket p { margin: 0; }
+.scl__ticket-top, .scl__ticket-rows li { display: flex; justify-content: space-between; gap: 1em; }
+.scl__ticket-top, .scl__ticket-foot { font-size: .78em; letter-spacing: .16em; text-transform: uppercase; }
+.scl__ticket-big { font-family: var(--f-pivs); font-size: 3.6em; line-height: .92; margin: .5em 0 .45em !important; letter-spacing: .01em; }
+.scl__ticket-rows { list-style: none; margin: 0; padding: .6em 0; border-block: 1px dashed rgb(var(--bosco-rgb) / .5); }
+.scl__ticket-rows li { padding: .32em 0; font-variant-numeric: tabular-nums; }
+.scl__ticket-rows li span:last-child { font-family: var(--f-display); letter-spacing: .06em; }
+.scl__ticket-foot { margin-top: 1em !important; opacity: .7; }
+.scl__sticker { position: absolute; right: -2.4em; top: -2.6em; width: 7.4em; aspect-ratio: 1; border-radius: 50%; background: var(--verde); color: var(--avorio); display: grid; place-content: center; text-align: center; gap: .2em; box-shadow: 0 .3em .8em rgb(0 0 0 / .3); transform: rotate(14deg); }
+.scl__sticker b { font-family: var(--f-display); font-weight: 500; font-size: 1.45em; letter-spacing: .04em; line-height: 1; }
+.scl__sticker small { font-size: .62em; letter-spacing: .18em; text-transform: uppercase; }
+.scl.is-staged .scl__sticker { opacity: 0; transform: rotate(-10deg) scale(1.7); transition: opacity .18s linear .32s, transform .55s cubic-bezier(.2, 1.45, .35, 1) .32s; }
+.scl.is-staged .is-in .scl__sticker { opacity: 1; transform: rotate(14deg) scale(1); }
+
+@media (max-width: 900px) {
+  .scl { --step: 48svh; }
+  .scl__stage { --u: min(1vw, .54svh); height: calc(178 * var(--u)); }
+  .scl__p { --pw: calc(var(--mw) * var(--u)); left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); --rot: var(--mr, var(--r)); }
+  .sc__grid { grid-template-columns: 1fr; gap: 12vh; }
+  .sc__copy, .vas__copy { grid-column: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scl { height: auto; }
+  .scl__pin { position: relative; }
+  .sc__body { margin-top: 0; }
+}
 
 .radici__media figure { overflow: hidden; }
 .radici__credit { position: absolute; right: 10px; bottom: 8px; font-size: 10px; letter-spacing: .04em; color: var(--avorio); opacity: .75; text-shadow: 0 1px 6px rgba(0,0,0,.4); }
 
-/* Vasari */
-.vas { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 var(--gut); margin-top: var(--sec-y); align-items: start; }
-.vas__img { margin: 0; }
-.vas__frame { overflow: hidden; }
-.vas__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.vas__img figcaption { font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .6; margin-top: 12px; }
-.vas__img--giudizio { grid-column: 1 / span 5; grid-row: 1 / span 2; }
-.vas__img--giudizio img { aspect-ratio: 2 / 3; }
-.vas__copy { grid-column: 7 / span 6; grid-row: 1; padding-top: 4vh; }
-.vas__copy p:not(.lead):not(.eyebrow) { margin: 22px 0 0; opacity: .85; max-width: 34em; }
-.vas__img--magi { grid-column: 8 / span 4; grid-row: 2; margin-top: 10vh; }
-.vas__img--magi img { aspect-ratio: 4 / 5; }
-.vas__img--vite { grid-column: 3 / span 7; grid-row: 3; margin-top: 26vh; }
-.vas__img--vite img { aspect-ratio: 800 / 618; filter: sepia(.15); }
-@media (max-width: 900px) {
-  .vas { grid-template-columns: 1fr; gap: 28px; margin-top: 12vh; }
-  .vas__img--giudizio, .vas__copy, .vas__img--magi, .vas__img--vite { grid-column: 1; grid-row: auto; margin-top: 0; padding-top: 0; }
-  .vas__img--magi { width: 78%; justify-self: end; }
-}
+
 
 /* ==========================================================
    08 IN CAMPO
@@ -439,11 +474,8 @@ b, strong { font-weight: 500; }
 .ci--e { grid-column: 8 / span 5; aspect-ratio: 4 / 5; margin-top: 10vh; }
 
 @media (max-width: 900px) {
-  .sc__grid, .campo__grid { grid-template-columns: 1fr; gap: 24px; }
-  .sc__img--main, .sc__copy, .sc__img--cloister, .sc__img--pio, .ci--a, .ci--b, .ci--c, .ci--e { grid-column: 1; margin-top: 0; }
-  .sc__copy { padding-top: 0; }
-  .sc__img--pio { grid-row: auto; }
-  .sc__img--pio { width: 70%; justify-self: end; }
+  .campo__grid { grid-template-columns: 1fr; gap: 24px; }
+  .ci--a, .ci--b, .ci--c, .ci--e { grid-column: 1; margin-top: 0; }
   .ci--b, .ci--e { width: 78%; }
   .ci--e { justify-self: end; }
 }

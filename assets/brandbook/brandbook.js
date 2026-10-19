@@ -228,6 +228,24 @@
     });
   }
 
+  /* ---------- Atto II: il collage di Santa Croce. La scena resta ferma e a ogni passo di scroll
+     arriva un pezzo (scontrino, foto col nastro); il rimbalzo è la transizione CSS di .is-in ---------- */
+  const scl = $('#scLand');
+  if (scl && !reduce) {
+    const pieces = $$('[data-step]', scl);
+    scl.classList.add('is-staged');
+    const stepPx = () => parseFloat(getComputedStyle(scl).getPropertyValue('--step')) / 100 * innerHeight || innerHeight * .55;
+    ScrollTrigger.create({
+      trigger: scl, start: 'top top', end: 'bottom top',
+      onUpdate: () => {
+        const y = -scl.getBoundingClientRect().top, st = stepPx();
+        pieces.forEach((p) => p.classList.toggle('is-in', y >= (+p.dataset.step - .35) * st));
+      },
+      onRefresh: (self) => self.vars.onUpdate(self),
+    });
+    gsap.fromTo('.scl__bg img', { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: scl, start: 'top bottom', end: 'bottom bottom', scrub: 1 } });
+  }
+
   /* ---------- video (costruzione del marchio, PIVS): partono quando sono in vista, si fermano quando escono ---------- */
   $$('video[data-autoplay]').forEach((film) => {
     film.muted = true;                       // alcuni browser vogliono la proprietà, non solo l'attributo, per l'autoplay
@@ -252,10 +270,6 @@
       // su mobile la fluttuazione è più contenuta: le sezioni sono più strette in verticale
       const a = (+el.dataset.float || 50) * (innerWidth <= 900 ? .4 : 1);
       gsap.fromTo(el, { y: a }, { y: -a, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
-    });
-    // foto di storia (Santa Croce, Vasari): l'immagine scorre dentro la cornice, con inerzia
-    $$('.sc__img img, .vas__frame img').forEach((img) => {
-      gsap.fromTo(img, { yPercent: -7, scale: 1.16 }, { yPercent: 7, scale: 1.16, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1.4 } });
     });
   }
 

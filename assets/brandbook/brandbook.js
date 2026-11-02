@@ -85,8 +85,9 @@
   function hudTheme(el) {
     const m = getComputedStyle(el).backgroundColor.match(/\d+(\.\d+)?/g);
     if (!m) return;
-    const [r, g, b] = m.map(Number);
+    const [r, g, b, a = 1] = m.map(Number);
     hudEl.classList.toggle('is-light', (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 > 0.5);
+    hudEl.style.setProperty('--hud-bg', a > 0 ? `rgb(${r} ${g} ${b})` : 'transparent');
   }
   function setHud(el) {
     const name = el.dataset.chapter;
@@ -422,7 +423,7 @@
   const ldPaths = $$('#drawMono .draw__ld');
   if (!reduce) {
     // autoRound: false — GSAP arrotonda i valori in px e il tratto (pathLength = 1) salterebbe da 1 a 0 senza disegnarsi
-    const ftl = gsap.timeline({ defaults: { autoRound: false }, scrollTrigger: { trigger: '#monogramma', start: 'top top', end: 'bottom bottom', scrub: .6 } });
+    const ftl = gsap.timeline({ defaults: { autoRound: false }, scrollTrigger: { trigger: '#monogramma', start: 'top 65%', end: 'bottom bottom', scrub: .6 } });
     ftl.fromTo(ldPaths[0], { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.5, ease: 'power3.out' }, 0)
        .fromTo(ldPaths[1], { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.5, ease: 'power3.out' }, .2)
        .fromTo(ldPaths[0], { fillOpacity: 0, strokeWidth: .7 }, { fillOpacity: 1, strokeWidth: 0, duration: .5, ease: 'none' }, 1.3)
@@ -436,8 +437,8 @@
   /* ==========================================================
      01 RADICI — il contatore degli anni
      ========================================================== */
-  const YEARS = [1566, 1928, 2025, 2028];
-  const THEMES = [[C.pietra, C.bosco], [C.verde, C.avorio], [C.bosco, C.avorio], [C.oro, C.bosco]];
+  const YEARS = [1566, 1928];
+  const THEMES = [[C.pietra, C.bosco], [C.verde, C.avorio]];
   const odo = $('#odo');
   const cols = String(YEARS[0]).split('').map((d) => {
     const w = document.createElement('span'); w.className = 'odo__d';
@@ -671,7 +672,7 @@
   const bars = $('#palBars');
   PAL.forEach((p, i) => {
     const b = document.createElement('button');
-    b.className = 'bar'; b.style.setProperty('--c', p.hex); b.style.setProperty('--t', p.t);
+    b.className = p.hex === '#FFFDE9' ? 'bar bar--light' : 'bar'; b.style.setProperty('--c', p.hex); b.style.setProperty('--t', p.t);
     b.setAttribute('aria-expanded', 'false');
     b.setAttribute('aria-label', `${p.n}. ${p.role}`);
     b.innerHTML = `<span class="bar__idx">0${i + 1}</span><span class="bar__hex">${p.hex.slice(1)}</span>
@@ -708,8 +709,9 @@
     } })
       .fromTo('#n19', { x: () => -innerWidth * .42, yPercent: 22 }, { x: 0, yPercent: 0, duration: 1, ease: 'power3.inOut' }, 0)
       .fromTo('#n28', { x: () => innerWidth * .42, yPercent: -22 }, { x: 0, yPercent: 0, duration: 1, ease: 'power3.inOut' }, 0)
-      .to('.cent__num', { scale: .72, duration: .6, ease: 'power2.inOut' }, 1.05)          // resta al centro: sotto non c'è più il testo
-      .to({}, { duration: .3 });
+      .to('.cent__num', { scale: .72, duration: .6, ease: 'power2.inOut' }, 1.05)
+      .fromTo('#centCopy', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .4, ease: 'power2.out' }, 1.3)
+      .to({}, { duration: .4 });
     gsap.fromTo('.fullbleed__img', { yPercent: -7 }, { yPercent: 7, ease: 'none', scrollTrigger: { trigger: '.fullbleed', start: 'top bottom', end: 'bottom top', scrub: true } });
   }
 

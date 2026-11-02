@@ -102,9 +102,12 @@ b, strong { font-weight: 500; }
   position: fixed; inset: 0 0 auto; z-index: 50;
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   padding: 6px var(--gut);
-  color: var(--avorio); mix-blend-mode: difference;
+  color: var(--avorio);
+  background: linear-gradient(var(--hud-bg, transparent) 62%, transparent);
+  transition: color var(--dur-400), background var(--dur-400);
   pointer-events: none;
 }
+.hud.is-light { color: var(--bosco); }
 .hud > * { pointer-events: auto; }
 .hud__brand { display: inline-flex; align-items: center; min-height: 44px; gap: 12px; text-decoration: none; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; }
 .hud__brand svg { width: 20px; height: 23px; color: currentColor; }
@@ -114,10 +117,6 @@ b, strong { font-weight: 500; }
 .hud__menu { justify-self: end; display: inline-flex; align-items: center; min-height: 44px; padding-left: 12px; gap: 12px; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; }
 .hud__menu i { width: 22px; height: 8px; border-block: 1px solid currentColor; transition: transform var(--dur-400) var(--ease), height var(--dur-400) var(--ease); }
 .hud__menu[aria-expanded="true"] i { height: 0; border-bottom: 0; transform: rotate(45deg); }
-@media (hover: none), (max-width: 900px) {
-  .hud { mix-blend-mode: normal; color: var(--avorio); transition: color var(--dur-400); }
-  .hud.is-light { color: var(--bosco); }
-}
 .progress { position: fixed; left: 0; top: 0; bottom: 0; width: 3px; z-index: 51; background: rgb(var(--avorio-rgb) / .06); }
 .progress i { position: absolute; inset: 0; background: var(--oro); transform-origin: top; transform: scaleY(0); }
 
@@ -158,7 +157,7 @@ b, strong { font-weight: 500; }
 /* ==========================================================
    00 HERO
    ========================================================== */
-.hero { height: 340vh; position: relative; background: var(--bosco); }
+.hero { height: 260vh; position: relative; background: var(--bosco); }
 .hero__stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
 .hero__pic { position: absolute; left: 50%; top: 50%; width: 100%; height: 100%; translate: -50% -50%; overflow: hidden; }
 .hero__pic img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; transform: scale(1.12); filter: saturate(.95); }
@@ -183,7 +182,7 @@ b, strong { font-weight: 500; }
 /* ==========================================================
    01 RADICI
    ========================================================== */
-.radici { height: 520vh; position: relative; background: var(--pietra); color: var(--bosco); }
+.radici { height: 260vh; position: relative; background: var(--pietra); color: var(--bosco); }
 .radici__stick {
   position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
   display: grid; grid-template-columns: 1.1fr 1fr; grid-template-rows: auto 1fr auto;
@@ -294,6 +293,7 @@ b, strong { font-weight: 500; }
 }
 .bar:hover, .bar:focus-visible, .bar.is-open { flex-grow: 3.4; }
 .bar:focus-visible { outline-offset: -4px; }
+.bar--light { box-shadow: inset 0 0 0 1px rgb(var(--bosco-rgb) / .16); }
 .bar__hex { position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%) rotate(-90deg); transform-origin: center; font: 500 clamp(14px, 1.3vw, 19px)/1 var(--f-body); letter-spacing: .08em; white-space: nowrap; transition: opacity var(--dur-300); }
 .bar__info { position: absolute; left: 28px; right: 28px; bottom: 32px; opacity: 0; transform: translateY(16px); transition: opacity var(--dur-400), transform var(--dur-600) var(--ease); min-width: 220px; }
 .bar:hover .bar__info, .bar:focus-visible .bar__info, .bar.is-open .bar__info { opacity: 1; transform: none; transition-delay: .15s; }
@@ -325,15 +325,12 @@ b, strong { font-weight: 500; }
 .tcard__nameimg--caps { height: .56em; max-width: 100%; object-fit: contain; object-position: left; margin: .3em 0 .66em; }  /* stessa riga di "RECTOR" e "PIVS" */  /* tracciato tagliato all'altezza delle maiuscole */
 .tcard__abcimg { display: block; width: min(100%, 250px); height: auto; margin: 24px 0 0; opacity: .85; }
 .tcard p:not(.tcard__role):not(.tcard__abc) { margin: 0; max-width: 26em; }
-.type__film { display: grid; grid-template-columns: 1fr 2fr; gap: 28px; align-items: end; margin-top: var(--head-gap); padding-top: 28px; border-top: 1px solid var(--line-l); }
-.type__filmtext p:not(.tcard__role) { margin: 12px 0 0; max-width: 26em; }
-.type__filmframe { position: relative; aspect-ratio: 16 / 9; background: var(--bosco); overflow: hidden; }
 .tcard__abc { font-size: 22px; line-height: 1.3; margin: 24px 0 0; opacity: .85; letter-spacing: .02em; word-break: break-all; }
 
 /* ==========================================================
    07 CENTENARIO
    ========================================================== */
-.cent { height: 330vh; position: relative; background: var(--oro); color: var(--bosco); }
+.cent { height: 240vh; position: relative; background: var(--oro); color: var(--bosco); }
 .cent__stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
 .cent__num { position: relative; width: clamp(200px, 30vw, 520px); aspect-ratio: 147 / 160; color: var(--avorio); }
 .cent__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; will-change: transform; }
@@ -399,7 +396,7 @@ b, strong { font-weight: 500; }
 .vas__copy p:not(.lead):not(.eyebrow) { margin: 22px 0 0; opacity: .85; max-width: 34em; }
 
 /* collage: la scena resta ferma, le foto arrivano una per passo di scroll, poi il testo le copre */
-.scl { --step: 55svh; position: relative; height: calc(100svh + var(--steps) * var(--step) + 100svh); }
+.scl { --step: 40svh; position: relative; height: calc(100svh + var(--steps) * var(--step) + 100svh); }
 .scl__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; }
 .scl__bg { position: absolute; inset: 0; }
 .scl__bg img { width: 100%; height: 100%; object-fit: cover; scale: 1.12; }
@@ -441,7 +438,7 @@ b, strong { font-weight: 500; }
 .scl.is-staged .is-in .scl__sticker { opacity: 1; transform: rotate(14deg) scale(1); }
 
 @media (max-width: 900px) {
-  .scl { --step: 48svh; }
+  .scl { --step: 38svh; }
   .scl__stage { --u: min(1vw, .54svh); height: calc(178 * var(--u)); }
   .scl__p { --pw: calc(var(--mw) * var(--u)); left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); --rot: var(--mr, var(--r)); }
   .sc__grid { grid-template-columns: 1fr; gap: 12vh; }
@@ -533,7 +530,7 @@ b, strong { font-weight: 500; }
 /* ==========================================================
    ATTO III — IL MONOGRAMMA DISEGNATO
    ========================================================== */
-.draw { height: 220vh; position: relative; background: var(--avorio); color: var(--bosco); }
+.draw { height: 180vh; position: relative; background: var(--avorio); color: var(--bosco); }
 .draw__stick { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: var(--gut); padding: 0 var(--edge); overflow: hidden; }
 .draw__mono { width: min(100%, 46vh); height: auto; justify-self: center; overflow: visible; }
 .draw__ld { fill: var(--verde); fill-opacity: 0; stroke: var(--verde); stroke-width: .7; stroke-dasharray: 1; stroke-dashoffset: 1; }  /* stesso tratto del preloader */
@@ -560,11 +557,6 @@ b, strong { font-weight: 500; }
 .soc__credit { margin: var(--head-gap) 0 0; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .7; }
 
 /* Atto IV: i partner, la notizia, i dettagli */
-.collab { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); margin-top: var(--sec-y); border-top: 1px solid var(--line-l); }
-.collab__card { padding-top: 34px; }
-.collab__card > p:not(.eyebrow) { margin: 22px 0 0; max-width: 32em; }
-.collab__link { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; min-height: 44px; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; color: var(--verde); text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 calc(100% - 10px) / 0 1px no-repeat; transition: background-size var(--dur-500) var(--ease); }
-.collab__link:hover { background-size: 100% 1px; }
 .hero__credit a { color: inherit; text-decoration: none; }
 .hero__credit a:hover b { text-decoration: underline; text-underline-offset: 4px; }
 .notizia { margin-top: var(--sec-y); max-width: 1180px; }
@@ -573,10 +565,6 @@ b, strong { font-weight: 500; }
 .hero__credit { margin: 22px 0 0; font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .85; line-height: 1.7; }
 .hero__credit b { font-weight: 400; color: var(--oro); }
 .dettagli { margin-top: var(--sec-y); }
-.dettagli__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); align-items: start; }
-.dettaglio { margin: 0; }
-.dettaglio:nth-child(2) { margin-top: 10vh; }
-.dettaglio__img { position: relative; overflow: hidden; aspect-ratio: 4 / 5; }
 /* la maglia punto per punto: i punti solo su desktop, l'elenco sempre */
 .anatomia { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gut); align-items: center; margin-bottom: var(--sec-y); }
 /* scheda tecnica: la maglia scontornata su una griglia sottile */
@@ -609,9 +597,6 @@ b, strong { font-weight: 500; }
 @media (hover: hover) and (pointer: fine) and (min-width: 901px) { .hs { display: grid; } }
 @media (hover: none), (max-width: 900px) { .anatomia__hint { display: none; } }
 @media (prefers-reduced-motion: reduce) { .hs::before { animation: none; opacity: 0; } }
-.dettaglio__img img { width: 100%; height: 100%; object-fit: cover; }
-.dettaglio figcaption { margin-top: 16px; font-size: var(--fs-sm); max-width: 26em; }
-.dettaglio figcaption b { display: block; font-size: var(--fs-meta); letter-spacing: .16em; color: var(--verde); margin-bottom: 6px; font-weight: 400; }
 .soc .soc__body { margin-top: var(--sec-y); }
 
 /* ==========================================================
@@ -620,6 +605,7 @@ b, strong { font-weight: 500; }
 .credits { background: var(--bosco); padding: var(--sec-y) var(--edge); text-align: center; }
 .credits__list { margin: var(--head-gap) auto 0; max-width: 760px; display: grid; gap: 34px; }
 .credits__list dt { font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
+.credits__list dd.credits__bio { font: 400 var(--fs-sm)/1.5 var(--f-body); text-transform: none; max-width: 34em; margin: 12px auto 0; opacity: .7; }
 .credits__list dd { margin: 10px 0 0; font: 500 clamp(22px, 2.2vw, 32px)/1.1 var(--f-display); text-transform: uppercase; }
 .credits__list a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size var(--dur-500) var(--ease), color var(--dur-300); }
 .credits__list a:hover { color: var(--oro); background-size: 100% 1px; }
@@ -663,7 +649,6 @@ b, strong { font-weight: 500; }
   .type__cards { grid-template-columns: 1fr; }
   .tcard, .tcard + .tcard { padding: 26px 0; border-right: 0; border-bottom: 1px solid var(--line-l); }
   .tcard__glyph { font-size: 120px; }
-  .type__film { grid-template-columns: 1fr; border-top: 0; padding-top: 0; }
   
   
   .cent__copy { bottom: clamp(20px, 3vh, 32px); right: var(--edge); }
@@ -718,9 +703,7 @@ b, strong { font-weight: 500; }
   .draw__mono { width: min(56vw, 34vh); }
   .lab__progress { display: none; }
   .credits__list { gap: 32px; }
-  .collab, .dettagli__grid { grid-template-columns: 1fr; }
   .anatomia { grid-template-columns: 1fr; }
-  .dettaglio:nth-child(2) { margin-top: 0; }
   }
 
 @media (prefers-reduced-motion: reduce) {
@@ -731,8 +714,8 @@ b, strong { font-weight: 500; }
    Usa la proprietà `scale`, separata da `transform`: non litiga con parallasse e scrub di GSAP */
 .evo__crest { overflow: hidden; }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .dettaglio__img, .soc__f, .ci, .app, .radici__media figure) img { transition: scale 1.2s var(--ease); }
-  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .dettaglio__img, .soc__f, .ci, .app, .radici__media figure):hover img { scale: 1.04; }
+  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .soc__f, .ci, .app, .radici__media figure) img { transition: scale 1.2s var(--ease); }
+  :is(.sc__img, .vas__frame, .gelso__media, .evo__crest, .soc__f, .ci, .app, .radici__media figure):hover img { scale: 1.04; }
 }
 
 /* testi che si compongono con lo scroll (vedi splitText in brandbook.js) */
@@ -784,8 +767,6 @@ b, strong { font-weight: 500; }
 .pivs__liga figcaption { font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
 .pivs__sample { margin: 24px 0 0; font-size: clamp(110px, 15vw, 260px); line-height: .85; }
 .pivs__sample--dlig { font-feature-settings: "dlig" 1; font-variant-ligatures: discretionary-ligatures; color: var(--oro); }
-.pivs .type__film { border-top-color: var(--line-d); margin-top: var(--sec-y); }
-.pivs .type__filmframe { background: var(--ink); }
 @media (max-width: 900px) {
   .pivs__grid, .pivs__liga { grid-template-columns: 1fr; }
   .pivs__facts { grid-template-columns: 1fr 1fr; }
@@ -896,7 +877,7 @@ b, strong { font-weight: 500; }
 .md__altrow img { box-shadow: 0 18px 36px -22px rgb(var(--bosco-rgb) / .55); }
 
 /* ---------- Atto VI — Sticker ---------- */
-.stk { background: var(--verde); color: var(--avorio); padding: var(--sec-y) var(--edge); overflow: hidden; }
+.stk { background: var(--avorio); color: var(--bosco); padding: var(--sec-y) var(--edge); overflow: hidden; }
 .stk__sheet { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 5vh var(--gut); align-items: center; }
 .stk__s { margin: 0; }
 .stk__s img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 14px rgb(var(--bosco-rgb) / .35)); }
@@ -926,6 +907,7 @@ b, strong { font-weight: 500; }
   .stk__s--gagliardetto, .stk__s--scudetto { order: 3; }
   .stk__s--boschese-ultras { order: 4; }
   .stk__s--b-gotica, .stk__s--rettangolo { order: 5; }
+  .stk__s--b-gotica { width: 52%; justify-self: center; }
   .stk__campo { grid-template-columns: 1fr 1fr; }
 }
 .stk__s--boschese-veloce img { transform: rotate(-4deg); }

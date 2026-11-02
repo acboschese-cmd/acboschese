@@ -871,3 +871,46 @@ b, strong { font-weight: 500; }
   .plens__word { white-space: normal; --lfs: 40vw; line-height: .95; }
   .plens__stage { --r: clamp(56px, 21vw, 100px); }
 }
+
+/* ---------- Atto VI — Matchday (il programma della partita) ---------- */
+.md { background: var(--pietra); color: var(--bosco); padding: var(--sec-y) var(--edge); overflow: hidden; }
+.md__head, .stk__head { margin-bottom: var(--head-gap); max-width: 1100px; }
+.md__hero { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gut); align-items: start; }
+.md__hero figure { margin: 0; }
+.md__hero img, .md__spreads img, .md__altrow img, .stk__campo img { display: block; width: 100%; height: auto; }
+.md__cover { grid-column: 1 / span 6; box-shadow: 0 30px 60px -30px rgb(var(--bosco-rgb) / .55); }
+.md__scene { grid-column: 8 / span 5; margin-top: 18vh !important; aspect-ratio: 4 / 5; overflow: hidden; }
+.md__scene img { height: 100%; object-fit: cover; }
+.md__spreads { display: grid; gap: 7vh; margin-top: 14vh; }
+.md__spreads figure { margin: 0; }
+.md__spreads figure:nth-child(2) { width: 88%; margin-left: auto; }
+.md__spreads img { box-shadow: 0 30px 60px -34px rgb(var(--bosco-rgb) / .5); }
+.md figcaption, .stk figcaption { font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; margin-top: 14px; opacity: .75; }
+.md__alt { margin-top: 14vh; }
+.md__altrow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--gut); margin-top: 24px; }
+.md__altrow figure { margin: 0; }
+.md__altrow img { box-shadow: 0 18px 36px -22px rgb(var(--bosco-rgb) / .55); }
+
+/* ---------- Atto VI — Sticker ---------- */
+.stk { background: var(--verde); color: var(--avorio); padding: var(--sec-y) var(--edge); overflow: hidden; }
+.stk__sheet { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 5vh var(--gut); align-items: center; }
+.stk__s { margin: 0; }
+.stk__s img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 14px rgb(var(--bosco-rgb) / .35)); }
+.stk__s--boschese-veloce { grid-column: 1 / span 5; transform: rotate(-4deg); }
+.stk__s--sempre-audaci { grid-column: 6 / span 4; transform: rotate(3deg); }
+.stk__s--gagliardetto { grid-column: 10 / span 3; grid-row: span 2; transform: rotate(6deg); }
+.stk__s--1928 { grid-column: 2 / span 4; transform: rotate(2deg); }
+.stk__s--scudetto { grid-column: 7 / span 3; grid-row: span 2; transform: rotate(-5deg); }
+.stk__s--boschese-ultras { grid-column: 1 / span 5; transform: rotate(-2deg); }
+.stk__campo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); margin-top: 14vh; }
+.stk__campo figure { margin: 0; }
+@media (max-width: 900px) {
+  .md__hero, .stk__sheet { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .md__cover { grid-column: 1 / -1; }
+  .md__scene { grid-column: 1 / -1; margin-top: 0 !important; }
+  .md__spreads figure:nth-child(2) { width: 100%; }
+  .md__altrow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stk__s { grid-column: auto !important; grid-row: auto !important; }
+  .stk__s--boschese-veloce, .stk__s--boschese-ultras, .stk__s--1928 { grid-column: 1 / -1 !important; }
+  .stk__campo { grid-template-columns: 1fr 1fr; }
+}

@@ -219,7 +219,7 @@
         scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 58%', scrub: .8 },
       });
     });
-    $$('.lead[data-reveal], .notizia__quote[data-reveal], .outro__lead[data-reveal]').forEach((el) => {
+    $$('.lead[data-reveal], .outro__lead[data-reveal]').forEach((el) => {
       if (el.querySelector('a')) return;   // i link devono restare cliccabili
       const vis = splitText(el, false);
       gsap.fromTo($$('.st__w', vis), { opacity: .14 }, {

@@ -693,14 +693,6 @@
   }
 
   /* ==========================================================
-     I CARATTERI
-     ========================================================== */
-  // la riga in Rector attraversa lo schermo mentre scorri
-  if (!reduce) {
-    gsap.fromTo('#typeBig', { xPercent: 8 }, { xPercent: -38, ease: 'none', scrollTrigger: { trigger: '#typeBig', start: 'top bottom', end: 'bottom top', scrub: 1 } });
-  }
-
-  /* ==========================================================
      07 CENTENARIO — 19 e 28 si incontrano
      ========================================================== */
   if (!reduce) {

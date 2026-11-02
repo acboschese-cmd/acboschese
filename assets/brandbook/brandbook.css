@@ -887,7 +887,7 @@ b, strong { font-weight: 500; }
 .md__spreads img { box-shadow: 0 30px 60px -34px rgb(var(--bosco-rgb) / .5); }
 .md figcaption, .stk figcaption { font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; margin-top: 14px; opacity: .75; }
 .md__alt { margin-top: 12vh; }
-.md__altrow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--gut); margin-top: 24px; }
+.md__altrow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gut); margin-top: 24px; }
 .md__altrow figure { margin: 0; }
 .md__altrow img { box-shadow: 0 18px 36px -22px rgb(var(--bosco-rgb) / .55); }
 

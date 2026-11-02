@@ -886,7 +886,7 @@ b, strong { font-weight: 500; }
 .md__spreads figure:nth-child(2) { width: 88%; margin-left: auto; }
 .md__spreads img { box-shadow: 0 30px 60px -34px rgb(var(--bosco-rgb) / .5); }
 .md figcaption, .stk figcaption { font-size: var(--fs-meta); letter-spacing: .16em; text-transform: uppercase; margin-top: 14px; opacity: .75; }
-.md__alt { margin-top: 14vh; }
+.md__alt { margin-top: 12vh; }
 .md__altrow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--gut); margin-top: 24px; }
 .md__altrow figure { margin: 0; }
 .md__altrow img { box-shadow: 0 18px 36px -22px rgb(var(--bosco-rgb) / .55); }
@@ -896,12 +896,13 @@ b, strong { font-weight: 500; }
 .stk__sheet { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 5vh var(--gut); align-items: center; }
 .stk__s { margin: 0; }
 .stk__s img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 14px rgb(var(--bosco-rgb) / .35)); }
-.stk__s--boschese-veloce { grid-column: 1 / span 5; transform: rotate(-4deg); }
-.stk__s--sempre-audaci { grid-column: 6 / span 4; transform: rotate(3deg); }
-.stk__s--gagliardetto { grid-column: 10 / span 3; grid-row: span 2; transform: rotate(6deg); }
-.stk__s--1928 { grid-column: 2 / span 4; transform: rotate(2deg); }
-.stk__s--scudetto { grid-column: 7 / span 3; grid-row: span 2; transform: rotate(-5deg); }
-.stk__s--boschese-ultras { grid-column: 1 / span 5; transform: rotate(-2deg); }
+.stk__s--boschese-veloce { grid-column: 1 / span 5; }
+.stk__s--sempre-audaci { grid-column: 6 / span 4; }
+.stk__s--gagliardetto { grid-column: 10 / span 3; grid-row: span 2; }
+.stk__s--1928 { grid-column: 2 / span 4; }
+.stk__s--scudetto { grid-column: 7 / span 3; grid-row: span 2; }
+.stk__s--boschese-ultras { grid-column: 1 / span 5; }
+.stk__s--monogramma { grid-column: 10 / span 2; }
 .stk__campo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); margin-top: 14vh; }
 .stk__campo figure { margin: 0; }
 @media (max-width: 900px) {
@@ -914,3 +915,10 @@ b, strong { font-weight: 500; }
   .stk__s--boschese-veloce, .stk__s--boschese-ultras, .stk__s--1928 { grid-column: 1 / -1 !important; }
   .stk__campo { grid-template-columns: 1fr 1fr; }
 }
+.stk__s--boschese-veloce img { transform: rotate(-4deg); }
+.stk__s--sempre-audaci img { transform: rotate(3deg); }
+.stk__s--gagliardetto img { transform: rotate(6deg); }
+.stk__s--1928 img { transform: rotate(2deg); }
+.stk__s--scudetto img { transform: rotate(-5deg); }
+.stk__s--boschese-ultras img { transform: rotate(-2deg); }
+.stk__s--monogramma img { transform: rotate(8deg); }

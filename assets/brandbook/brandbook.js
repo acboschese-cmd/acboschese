@@ -702,25 +702,15 @@
   /* ==========================================================
      07 CENTENARIO — 19 e 28 si incontrano
      ========================================================== */
-  const years = $('#centYears');
   if (!reduce) {
-    const countUp = () => {
-      const p = gsap.utils.clamp(0, 1, (ctl.time() - 1.25) / .6);
-      years.textContent = Math.round(100 * (1 - (1 - p) * (1 - p)));
-    };
-    const ctl = gsap.timeline({ defaults: { ease: 'none' }, onUpdate: countUp, scrollTrigger: {
-      trigger: '#centenario', start: 'top top', end: 'bottom bottom', scrub: .8, invalidateOnRefresh: true, onUpdate: countUp,
-    } });
-    ctl.fromTo('#n19', { x: () => -innerWidth * .42, yPercent: 22 }, { x: 0, yPercent: 0, duration: 1, ease: 'power3.inOut' }, 0)
-       .fromTo('#n28', { x: () => innerWidth * .42, yPercent: -22 }, { x: 0, yPercent: 0, duration: 1, ease: 'power3.inOut' }, 0)
-       .to('.cent__num', { scale: .72, yPercent: -12, duration: .6, ease: 'power2.inOut' }, 1.05)
-       .to('#centCopy', { opacity: 1, duration: .4 }, 1.3)
-       .fromTo('#centCount', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .3 }, 1.2)
-       .to({}, { duration: .3 });
+    gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: {
+      trigger: '#centenario', start: 'top top', end: 'bottom bottom', scrub: .8, invalidateOnRefresh: true,
+    } })
+      .fromTo('#n19', { x: () => -innerWidth * .42, yPercent: 22 }, { x: 0, yPercent: 0, duration: 1, ease: 'power3.inOut' }, 0)
+      .fromTo('#n28', { x: () => innerWidth * .42, yPercent: -22 }, { x: 0, yPercent: 0, duration: 1, ease: 'power3.inOut' }, 0)
+      .to('.cent__num', { scale: .72, duration: .6, ease: 'power2.inOut' }, 1.05)          // resta al centro: sotto non c'è più il testo
+      .to({}, { duration: .3 });
     gsap.fromTo('.fullbleed__img', { yPercent: -7 }, { yPercent: 7, ease: 'none', scrollTrigger: { trigger: '.fullbleed', start: 'top bottom', end: 'bottom top', scrub: true } });
-  } else {
-    years.textContent = '100';
-    gsap.set('#centCopy, #centCount', { opacity: 1 });
   }
 
   /* ==========================================================

@@ -148,38 +148,6 @@
     });
   }
 
-  /* ---------- la maglia punto per punto: punti sulla foto ↔ voci dell'elenco ---------- */
-  const anat = $('.anatomia');
-  if (anat) {
-    const dots = $$('.hs', anat), items = $$('.anatomia__list li', anat), qs = $$('.anatomia__q', anat);
-    let open = -1;
-    // evidenzia punto e voce (passaggio del mouse o voce aperta)
-    const mark = (i) => {
-      anat.classList.toggle('is-active', i >= 0);
-      dots.forEach((d, k) => d.classList.toggle('is-on', k === i));
-      items.forEach((li, k) => li.classList.toggle('is-on', k === i));
-    };
-    // accordion: si apre una voce alla volta, al click sul punto o sul titolo
-    const toggle = (i) => {
-      open = open === i ? -1 : i;
-      items.forEach((li, k) => li.classList.toggle('is-open', k === open));
-      qs.forEach((q, k) => q.setAttribute('aria-expanded', k === open));
-      dots.forEach((d, k) => d.setAttribute('aria-expanded', k === open));
-      mark(open);
-      setTimeout(safeRefresh, 500);
-    };
-    dots.forEach((d, i) => {
-      d.setAttribute('aria-expanded', 'false');
-      d.addEventListener('pointerenter', () => mark(i));
-      d.addEventListener('pointerleave', () => mark(open));
-      d.addEventListener('click', () => toggle(i));
-    });
-    qs.forEach((q, i) => q.addEventListener('click', () => toggle(i)));
-    items.forEach((li, i) => {
-      li.addEventListener('pointerenter', () => mark(i));
-      li.addEventListener('pointerleave', () => mark(open));
-    });
-  }
 
   /* ---------- testi che si compongono con lo scroll ----------
      I titoli si compongono lettera per lettera, i testi lunghi si "scrivono" parola per parola.
@@ -399,22 +367,6 @@
     } });
   });
 
-  /* ---------- ATTO I — lo scudetto si inclina verso il cursore, con un riflesso che lo segue ---------- */
-  const crest = $('#sfidaCrest'), crestIn = $('#sfidaCrestIn');
-  if (crest && !reduce && matchMedia('(hover: hover)').matches) {
-    const rx = gsap.quickTo(crestIn, 'rotationX', { duration: .9, ease: 'power3.out' });
-    const ry = gsap.quickTo(crestIn, 'rotationY', { duration: .9, ease: 'power3.out' });
-    const sec = crest.closest('section');
-    sec.addEventListener('pointermove', (e) => {
-      const r = crest.getBoundingClientRect();
-      const x = gsap.utils.clamp(-1, 1, (e.clientX - (r.left + r.width / 2)) / (r.width * .9));
-      const y = gsap.utils.clamp(-1, 1, (e.clientY - (r.top + r.height / 2)) / (r.height * .9));
-      ry(x * 14); rx(-y * 10);
-      crestIn.style.setProperty('--gx', (50 + x * 40) + '%');
-      crestIn.style.setProperty('--gy', (40 + y * 35) + '%');
-    });
-    sec.addEventListener('pointerleave', () => { rx(0); ry(0); });
-  }
 
   /* ==========================================================
      ATTO III — il monogramma si disegna con lo scroll
@@ -435,56 +387,7 @@
   }
 
   /* ==========================================================
-     01 RADICI — il contatore degli anni
-     ========================================================== */
-  const YEARS = [1566, 1928];
-  const THEMES = [[C.pietra, C.bosco], [C.verde, C.avorio]];
-  const odo = $('#odo');
-  const cols = String(YEARS[0]).split('').map((d) => {
-    const w = document.createElement('span'); w.className = 'odo__d';
-    const col = document.createElement('span'); col.className = 'odo__col';
-    col.innerHTML = Array.from({ length: 10 }, (_, i) => `<span>${i}</span>`).join('');
-    w.appendChild(col); odo.appendChild(w);
-    gsap.set(col, { yPercent: -d * 10 });
-    return col;
-  });
-  const radici = $('#radici');
-  const steps = $$('#radiciSteps li');
-  const figs = $$('.radici__media figure');
-  const arts = $$('.radici__copy article');
-  let curStep = 0;
-  function setStep(i) {
-    if (i === curStep) return;
-    curStep = i; steps.forEach((s, k) => s.classList.toggle('is-on', k === i));
-    setTimeout(() => hudTheme(radici), 450);
-  }
-  if (!reduce) {
-    const rtl = gsap.timeline({
-      defaults: { ease: 'power2.inOut' },
-      scrollTrigger: {
-        trigger: radici, start: 'top top', end: 'bottom bottom', scrub: .7,
-        onUpdate: () => {
-          const t = rtl.time(); let i = 0;
-          for (let k = 1; k < YEARS.length; k++) if (t >= .3 + (k - 1) * 1.25 + .5) i = k;
-          setStep(i);
-        },
-      },
-    });
-    rtl.to({}, { duration: .3 });
-    for (let i = 1; i < YEARS.length; i++) {
-      const at = .3 + (i - 1) * 1.25;
-      String(YEARS[i]).split('').forEach((d, k) => rtl.to(cols[k], { yPercent: -d * 10, duration: 1 }, at + k * .04));
-      rtl.to(radici, { backgroundColor: THEMES[i][0], color: THEMES[i][1], duration: .8 }, at + .1)
-         .fromTo(figs[i], { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .9, ease: 'power3.inOut' }, at)
-         .fromTo(figs[i].querySelector('img'), { scale: 1.25 }, { scale: 1, duration: 1.1, ease: 'power2.out' }, at)
-         .to(arts[i - 1], { autoAlpha: 0, y: -30, duration: .35, ease: 'power2.in' }, at)
-         .fromTo(arts[i], { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .45, ease: 'power2.out' }, at + .5);
-    }
-    rtl.to({}, { duration: .4 });
-  }
-
-  /* ==========================================================
-     02 GELSO — il vento piega le parole
+     LE PAROLE — il vento piega la frase
      ========================================================== */
   const quote = $('#windQuote');
   function splitWords(node) {
@@ -509,15 +412,13 @@
   if (!reduce) {
     gsap.fromTo(words, { opacity: .14 }, { opacity: 1, stagger: .12, ease: 'none', scrollTrigger: { trigger: quote, start: 'top 82%', end: 'bottom 50%', scrub: true } });
     let wind = 0, inView = false;
-    const gimg = $('#gelsoImg');
-    ScrollTrigger.create({ trigger: '#gelso', start: 'top bottom', end: 'bottom top', onToggle: (s) => { inView = s.isActive; } });
+    ScrollTrigger.create({ trigger: '#wind', start: 'top bottom', end: 'bottom top', onToggle: (s) => { inView = s.isActive; } });
     addEventListener('pointermove', (e) => { if (inView) wind = gsap.utils.clamp(-30, 30, wind + e.movementX * .12); }, { passive: true });
     gsap.ticker.add(() => {
       if (!inView) return;
       wind *= .92;
       if (Math.abs(wind) < .01) wind = 0;
       for (const w of words) w.style.transform = `rotate(${wind * w._k * .5}deg)`;
-      gimg.style.transform = `rotate(${wind * .05}deg) scale(1.04)`;
     });
   }
 

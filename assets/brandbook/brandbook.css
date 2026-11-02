@@ -896,13 +896,14 @@ b, strong { font-weight: 500; }
 .stk__sheet { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 5vh var(--gut); align-items: center; }
 .stk__s { margin: 0; }
 .stk__s img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 14px rgb(var(--bosco-rgb) / .35)); }
-.stk__s--boschese-veloce { grid-column: 1 / span 5; }
-.stk__s--sempre-audaci { grid-column: 6 / span 4; }
-.stk__s--gagliardetto { grid-column: 10 / span 3; grid-row: span 2; }
-.stk__s--1928 { grid-column: 2 / span 4; }
-.stk__s--scudetto { grid-column: 7 / span 3; grid-row: span 2; }
-.stk__s--boschese-ultras { grid-column: 1 / span 5; }
-.stk__s--tondo { grid-column: 10 / span 3; }
+/* tre righe piene: in alto i tre più larghi che alti; sotto, gagliardetto e scudetto ai lati delle due scritte */
+.stk__s--boschese-veloce { grid-column: 1 / span 5; grid-row: 1; }
+.stk__s--sempre-audaci { grid-column: 6 / span 4; grid-row: 1; }
+.stk__s--tondo { grid-column: 10 / span 3; grid-row: 1; }
+.stk__s--gagliardetto { grid-column: 1 / span 3; grid-row: 2 / span 2; }
+.stk__s--1928 { grid-column: 4 / span 6; grid-row: 2; }
+.stk__s--boschese-ultras { grid-column: 4 / span 6; grid-row: 3; }
+.stk__s--scudetto { grid-column: 10 / span 3; grid-row: 2 / span 2; }
 .stk__campo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); margin-top: 14vh; }
 .stk__campo figure { margin: 0; }
 @media (max-width: 900px) {
@@ -913,6 +914,10 @@ b, strong { font-weight: 500; }
   .md__altrow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stk__s { grid-column: auto !important; grid-row: auto !important; }
   .stk__s--boschese-veloce, .stk__s--boschese-ultras, .stk__s--1928 { grid-column: 1 / -1 !important; }
+  .stk__s--sempre-audaci, .stk__s--tondo { order: 1; }
+  .stk__s--1928 { order: 2; }
+  .stk__s--gagliardetto, .stk__s--scudetto { order: 3; }
+  .stk__s--boschese-ultras { order: 4; }
   .stk__campo { grid-template-columns: 1fr 1fr; }
 }
 .stk__s--boschese-veloce img { transform: rotate(-4deg); }

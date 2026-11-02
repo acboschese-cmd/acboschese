@@ -896,10 +896,13 @@ b, strong { font-weight: 500; }
 .stk__sheet { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 5vh var(--gut); align-items: center; }
 .stk__s { margin: 0; }
 .stk__s img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 14px rgb(var(--bosco-rgb) / .35)); }
-/* tre righe piene: in alto i tre più larghi che alti; sotto, gagliardetto e scudetto ai lati delle due scritte */
-.stk__s--boschese-veloce { grid-column: 1 / span 5; grid-row: 1; }
-.stk__s--sempre-audaci { grid-column: 6 / span 4; grid-row: 1; }
-.stk__s--tondo { grid-column: 10 / span 3; grid-row: 1; }
+/* quattro righe piene: in alto le due scritte larghe; poi gagliardetto e scudetto ai lati di 1928 e BOSCHESE;
+   in fondo la B, il rettangolo e il tondo */
+.stk__s--boschese-veloce { grid-column: 1 / span 6; grid-row: 1; }
+.stk__s--sempre-audaci { grid-column: 8 / span 4; grid-row: 1; }
+.stk__s--b-gotica { grid-column: 1 / span 2; grid-row: 4; }
+.stk__s--rettangolo { grid-column: 4 / span 5; grid-row: 4; }
+.stk__s--tondo { grid-column: 10 / span 3; grid-row: 4; }
 .stk__s--gagliardetto { grid-column: 1 / span 3; grid-row: 2 / span 2; }
 .stk__s--1928 { grid-column: 4 / span 6; grid-row: 2; }
 .stk__s--boschese-ultras { grid-column: 4 / span 6; grid-row: 3; }
@@ -918,6 +921,7 @@ b, strong { font-weight: 500; }
   .stk__s--1928 { order: 2; }
   .stk__s--gagliardetto, .stk__s--scudetto { order: 3; }
   .stk__s--boschese-ultras { order: 4; }
+  .stk__s--b-gotica, .stk__s--rettangolo { order: 5; }
   .stk__campo { grid-template-columns: 1fr 1fr; }
 }
 .stk__s--boschese-veloce img { transform: rotate(-4deg); }
@@ -927,3 +931,5 @@ b, strong { font-weight: 500; }
 .stk__s--scudetto img { transform: rotate(-5deg); }
 .stk__s--boschese-ultras img { transform: rotate(-2deg); }
 .stk__s--tondo img { transform: rotate(8deg); }
+.stk__s--b-gotica img { transform: rotate(-6deg); }
+.stk__s--rettangolo img { transform: rotate(2deg); }

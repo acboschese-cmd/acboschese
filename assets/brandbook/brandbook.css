@@ -902,7 +902,7 @@ b, strong { font-weight: 500; }
 .stk__s--1928 { grid-column: 2 / span 4; }
 .stk__s--scudetto { grid-column: 7 / span 3; grid-row: span 2; }
 .stk__s--boschese-ultras { grid-column: 1 / span 5; }
-.stk__s--monogramma { grid-column: 10 / span 2; }
+.stk__s--tondo { grid-column: 10 / span 3; }
 .stk__campo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gut); margin-top: 14vh; }
 .stk__campo figure { margin: 0; }
 @media (max-width: 900px) {
@@ -921,4 +921,4 @@ b, strong { font-weight: 500; }
 .stk__s--1928 img { transform: rotate(2deg); }
 .stk__s--scudetto img { transform: rotate(-5deg); }
 .stk__s--boschese-ultras img { transform: rotate(-2deg); }
-.stk__s--monogramma img { transform: rotate(8deg); }
+.stk__s--tondo img { transform: rotate(8deg); }

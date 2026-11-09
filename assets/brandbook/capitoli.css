@@ -258,9 +258,7 @@ html[data-tone="oro"] .more i { background: var(--oro); color: var(--bosco); }
 .tray__i:focus-visible { outline: 1px solid var(--oro); outline-offset: 4px; }
 /* desktop: tre file da cinque, ogni adesivo nella sua casella (si stringe se la colonna è stretta) */
 @media (min-width: 901px) {
-  .tray__row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); justify-items: center; gap: 8px 12px; }
-  .tray__br { display: none; }
-  .tray__i { width: min(100%, calc(var(--h) * var(--r, 1))); height: auto; aspect-ratio: var(--r, 1); }
+  .tray__row { gap: 2px 4px; }
 }
 .peel { position: fixed; left: 0; top: 0; z-index: 40; pointer-events: none; translate: -50% -50%; filter: drop-shadow(0 18px 18px rgb(0 0 0 / .35)); transition: left .45s cubic-bezier(.2,.8,.2,1), top .45s cubic-bezier(.2,.8,.2,1), opacity .45s, scale .2s; }
 .peel.is-back { opacity: 0; }

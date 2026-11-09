@@ -185,7 +185,8 @@
     balQ = 0; rowW = row.clientWidth;
     $$('.tray__br', row).forEach((br) => br.remove());
     const items = $$('.tray__i', row), gap = parseFloat(getComputedStyle(row).columnGap) || 0;
-    if (!narrow.matches) return; /* su desktop la fila è una griglia da cinque (capitoli.css) */
+    /* su desktop tre file da cinque, strette (capitoli.css) */
+    if (!narrow.matches) { items.forEach((b, i) => { if (i && i % 5 === 0) { const br = document.createElement('i'); br.className = 'tray__br'; b.before(br); } }); return; }
     const ws =items.map((b) => b.getBoundingClientRect().width + gap);
     const total = ws.reduce((a, w) => a + w, 0) - gap, rows = Math.ceil(total / rowW);
     if (!rowW || rows < 2) return;

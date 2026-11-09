@@ -130,6 +130,7 @@ html[data-tone="oro"] .top__n { background: var(--bosco); color: var(--oro); }
 .pair__ph .ph { aspect-ratio: 4 / 5; }
 .pair__ph .ph:nth-child(2) { translate: 0 10%; }
 .pair__ph .ph:nth-child(2) img { transition-delay: .25s; }
+.ph--vid video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .pair__t p { font-size: clamp(16px, 1.15vw, 19px); max-width: 30em; }
 .pair__t .more { margin-top: 26px; }
 .keep { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(28px, 5vw, 96px); align-items: center; padding: 18vh var(--gap); margin-top: 8vh; }

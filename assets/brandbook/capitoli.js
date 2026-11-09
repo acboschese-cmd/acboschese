@@ -165,8 +165,7 @@
   const STK = [['bb5-sticker-sempre-audaci', 1.15, 'Sempre Audaci'], ['bb5-sticker-scudetto', .62, 'Scudetto'], ['bb5-sticker-1928', 1.3, '1928'], ['bb13-sticker-tondo', .82, 'Audace Club'],
     ['bb5-sticker-gagliardetto', .66, 'Gagliardetto'], ['bb10-sticker-b-gotica', .32, 'B'], ['bb5-sticker-boschese-veloce', 1.7, 'Boschese'], ['bb10-sticker-rettangolo', .95, 'Audace Club Boschese'],
     ['bb5-sticker-boschese-ultras', 1.3, 'Boschese Ultras'],
-    ['bb14-sticker-bollino', .82, 'Bollino Bosco Marengo'], ['bb14-sticker-boschese-corsivo', 1.25, 'Boschese corsivo'], ['bb14-sticker-gagliardetto', 1.15, 'Gagliardetto Sempre Audaci'],
-    ['bb14-sticker-quadrifoglio', .85, 'Quadrifoglio'], ['bb14-sticker-scudo-100', .62, 'Cento'], ['bb14-sticker-sempre-audaci', 1.1, 'Sempre Audaci anni Novanta'],
+    ['bb14-sticker-boschese-corsivo', 1.25, 'Boschese corsivo'], ['bb14-sticker-scudo-100', .62, 'Cento'], ['bb14-sticker-sempre-audaci', 1.1, 'Sempre Audaci anni Novanta'],
     ['bb14-sticker-tondo-righe', .8, 'ACB a righe'], ['bb14-sticker-verdi-bianchi', 1.0, 'Verdi Bianchi']].map(([f, k, n]) => ({ src: `assets/brandbook/${f}.webp`, k: k * .7, n }));
   const fs = () => parseFloat(getComputedStyle(title).fontSize);
   const size = (s) => s.k * (narrow.matches ? .8 : 1); /* sul telefono il motto prende quasi tutta la larghezza: gli adesivi un po' meno */

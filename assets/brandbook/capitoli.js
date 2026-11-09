@@ -185,7 +185,8 @@
     balQ = 0; rowW = row.clientWidth;
     $$('.tray__br', row).forEach((br) => br.remove());
     const items = $$('.tray__i', row), gap = parseFloat(getComputedStyle(row).columnGap) || 0;
-    const ws = items.map((b) => b.getBoundingClientRect().width + gap);
+    if (!narrow.matches) return; /* su desktop la fila è una griglia da cinque (capitoli.css) */
+    const ws =items.map((b) => b.getBoundingClientRect().width + gap);
     const total = ws.reduce((a, w) => a + w, 0) - gap, rows = Math.ceil(total / rowW);
     if (!rowW || rows < 2) return;
     const target = total / rows; let acc = 0, n = 1;
